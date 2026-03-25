@@ -1,0 +1,92 @@
+within DataCentersConfigurations.Controls.CHW;
+model IntegratedChiWSE
+  Buildings.Applications.DataCenters.ChillerCooled.Controls.CoolingMode
+    coolingMode(
+    tWai=120,
+    deaBan1=1.1,
+    deaBan2=0.5,
+    deaBan3=1.1,
+    deaBan4=0.5)
+    annotation (Placement(transformation(extent={{-54,-18},{-18,18}})));
+  Modelica.Blocks.Math.IntegerToReal integerToReal
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}})));
+  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(table=[1,0,1; 2,1,1; 3,1,0])
+    annotation (Placement(transformation(extent={{16,-10},{36,10}})));
+  Modelica.Blocks.Math.RealToBoolean ChiOn(threshold=0.5)
+    annotation (Placement(transformation(extent={{54,16},{62,24}})));
+  Modelica.Blocks.Math.Feedback ChiBypass
+    annotation (Placement(transformation(extent={{42,24},{54,36}})));
+  Modelica.Blocks.Sources.Constant const(k=1)
+    annotation (Placement(transformation(extent={{24,26},{32,34}})));
+  Modelica.Blocks.Math.Feedback WSEBypass
+    annotation (Placement(transformation(extent={{42,-14},{54,-26}})));
+  Modelica.Blocks.Sources.Constant const1(k=1)
+    annotation (Placement(transformation(extent={{24,-24},{32,-16}})));
+  Modelica.Blocks.Interfaces.RealOutput ChillerBypass annotation (Placement(
+        transformation(extent={{96,50},{116,70}}), iconTransformation(extent={{
+            96,50},{116,70}})));
+  Modelica.Blocks.Interfaces.RealOutput WSEbypass annotation (Placement(
+        transformation(extent={{96,-70},{116,-50}}), iconTransformation(extent=
+            {{96,-70},{116,-50}})));
+  Modelica.Blocks.Interfaces.RealOutput CHWSupSet annotation (Placement(
+        transformation(extent={{96,-100},{116,-80}}), iconTransformation(extent
+          ={{96,-100},{116,-80}})));
+  Modelica.Blocks.Interfaces.RealOutput ValveWSE annotation (Placement(
+        transformation(extent={{96,-40},{116,-20}}), iconTransformation(extent=
+            {{96,-40},{116,-20}})));
+  Modelica.Blocks.Interfaces.RealOutput ValveChi annotation (Placement(
+        transformation(extent={{96,20},{116,40}}), iconTransformation(extent={{
+            96,20},{116,40}})));
+  Modelica.Blocks.Interfaces.BooleanOutput Chion annotation (Placement(
+        transformation(extent={{96,80},{116,100}}), iconTransformation(extent={
+            {96,80},{116,100}})));
+  Modelica.Blocks.Interfaces.RealInput TCHWSupSet annotation (Placement(
+        transformation(extent={{-140,60},{-100,100}}), iconTransformation(
+          extent={{-140,60},{-100,100}})));
+  Modelica.Blocks.Interfaces.RealInput TWetBulb annotation (Placement(
+        transformation(extent={{-140,20},{-100,60}}), iconTransformation(extent
+          ={{-140,20},{-100,60}})));
+  Modelica.Blocks.Interfaces.RealInput TApp
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+  Modelica.Blocks.Interfaces.RealInput TCHWSupWSE
+    annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
+  Modelica.Blocks.Interfaces.RealInput TCHWRetWSE
+    annotation (Placement(transformation(extent={{-140,-100},{-100,-60}})));
+equation
+  connect(coolingMode.y, integerToReal.u)
+    annotation (Line(points={{-16.2,0},{-7.2,0}}, color={255,127,0}));
+  connect(integerToReal.y, combiTable1Ds.u)
+    annotation (Line(points={{6.6,0},{14,0}}, color={0,0,127}));
+  connect(combiTable1Ds.y[1], ChiOn.u) annotation (Line(points={{37,0},{48,0},{
+          48,20},{53.2,20}}, color={0,0,127}));
+  connect(ChiBypass.u2, combiTable1Ds.y[1])
+    annotation (Line(points={{48,25.2},{48,0},{37,0}}, color={0,0,127}));
+  connect(const.y, ChiBypass.u1)
+    annotation (Line(points={{32.4,30},{43.2,30}}, color={0,0,127}));
+  connect(combiTable1Ds.y[2], WSEBypass.u2)
+    annotation (Line(points={{37,0},{48,0},{48,-15.2}}, color={0,0,127}));
+  connect(const1.y, WSEBypass.u1)
+    annotation (Line(points={{32.4,-20},{43.2,-20}}, color={0,0,127}));
+  connect(ChiBypass.y, ChillerBypass) annotation (Line(points={{53.4,30},{68,30},
+          {68,60},{106,60}}, color={0,0,127}));
+  connect(WSEBypass.y, WSEbypass) annotation (Line(points={{53.4,-20},{72,-20},
+          {72,-60},{106,-60}}, color={0,0,127}));
+  connect(combiTable1Ds.y[2], ValveWSE) annotation (Line(points={{37,0},{90,0},
+          {90,-30},{106,-30}}, color={0,0,127}));
+  connect(ValveChi, combiTable1Ds.y[1]) annotation (Line(points={{106,30},{90,
+          30},{90,0},{37,0}}, color={0,0,127}));
+  connect(ChiOn.y, Chion) annotation (Line(points={{62.4,20},{80,20},{80,90},{
+          106,90}}, color={255,0,255}));
+  connect(TCHWSupSet, coolingMode.TCHWSupSet) annotation (Line(points={{-120,80},
+          {-66,80},{-66,14.4},{-57.6,14.4}}, color={0,0,127}));
+  connect(TWetBulb, coolingMode.TWetBul) annotation (Line(points={{-120,40},{
+          -68,40},{-68,7.2},{-57.6,7.2}}, color={0,0,127}));
+  connect(TApp, coolingMode.TApp)
+    annotation (Line(points={{-120,0},{-57.6,0}}, color={0,0,127}));
+  connect(TCHWSupWSE, coolingMode.TCHWSupWSE) annotation (Line(points={{-120,
+          -40},{-68,-40},{-68,-7.2},{-57.6,-7.2}}, color={0,0,127}));
+  connect(TCHWRetWSE, coolingMode.TCHWRetWSE) annotation (Line(points={{-120,
+          -80},{-66,-80},{-66,-14.4},{-57.6,-14.4}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
+end IntegratedChiWSE;

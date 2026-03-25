@@ -1,0 +1,705 @@
+within DataCentersConfigurations.Architecture.obsolete;
+model Simplified
+  import Buildings;
+  parameter Real tcwsupset  = 273.15 + 6 "Condensor Water Supply Setpoint Temperature";
+  parameter Real tchwsupset = 273.15 + 12 "Chilled Water Supply Setpoint Temperature";
+  parameter Real tairsupset = 273.15 + 18 "Air Supply Setpoint Temperature";
+  parameter Real tairretset = 273.15 + 25 "Air Return Setpoint Temperature";
+  parameter Real tcdusupset = 273.15 + 32 "CDU Supply Setpoint Temperature";
+  parameter Real tcduretset = 273.15 + 55 "CDU Return Setpoint Temperature";
+  parameter Modelica.Units.SI.MassFlowRate mAir_flow_nominal=roo.QRoo_flow/(
+      1005*15) "Nominal mass flow rate at fan";
+  parameter Modelica.Units.SI.Power P_nominal=80E3
+    "Nominal compressor power (at y=1)";
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=10
+    "Temperature difference evaporator inlet-outlet";
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
+    "Temperature difference condenser outlet-inlet";
+  parameter Real COPc_nominal=3 "Chiller COP";
+  parameter Modelica.Units.SI.MassFlowRate mCHW_flow_nominal=2*roo.QRoo_flow/(
+      4200*20) "Nominal mass flow rate at chilled water";
+
+  parameter Modelica.Units.SI.MassFlowRate mCW_flow_nominal=2*roo.QRoo_flow/(
+      4200*6) "Nominal mass flow rate at condenser water";
+
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=500;
+
+ package MediumW = Buildings.Media.Water "Medium model";
+   parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=10.35
+    "Nominal mass flow rate at evaporator";
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=19.24
+    "Nominal mass flow rate at condenser";
+  parameter Modelica.Units.SI.Pressure dp1_nominal=60000
+    "Nominal pressure difference on medium 1 side";
+  parameter Modelica.Units.SI.Pressure dp2_nominal=60000
+    "Nominal pressure difference on medium 2 side";
+    // Chiller parameters
+  parameter Integer numChi=1 "Number of chillers";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_chi_nominal=34.7
+    "Nominal mass flow rate at condenser water in the chillers";
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_chi_nominal=18.3
+    "Nominal mass flow rate at evaporator water in the chillers";
+  parameter Modelica.Units.SI.PressureDifference dp1_chi_nominal=46.2*1000
+    "Nominal pressure";
+  parameter Modelica.Units.SI.PressureDifference dp2_chi_nominal=44.8*1000
+    "Nominal pressure";
+  parameter Modelica.Units.SI.Power QEva_nominal=m2_flow_chi_nominal*4200*(6.67
+       - 18.56) "Nominal cooling capaciaty(Negative means cooling)";
+ // WSE parameters
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_wse_nominal=34.7
+    "Nominal mass flow rate at condenser water in the chillers";
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_wse_nominal=35.3
+    "Nominal mass flow rate at condenser water in the chillers";
+  parameter Modelica.Units.SI.PressureDifference dp1_wse_nominal=33.1*1000
+    "Nominal pressure";
+  parameter Modelica.Units.SI.PressureDifference dp2_wse_nominal=34.5*1000
+    "Nominal pressure";
+  parameter Buildings.Fluid.Movers.Data.Generic[numChi] perPum(
+    each pressure=
+          Buildings.Fluid.Movers.BaseClasses.Characteristics.flowParameters(
+          V_flow=m1_flow_chi_nominal/1000*{0.2,0.6,1.0,1.2},
+          dp=(dp1_chi_nominal+60000+6000)*{1.2,1.1,1.0,0.6}))
+    "Performance data for condenser water pumps";
+  parameter Modelica.Units.SI.Time tWai=1200 "Waiting time";
+// AHU
+  parameter Modelica.Units.SI.ThermalConductance UA_nominal=numChi*QEva_nominal
+      /Buildings.Fluid.HeatExchangers.BaseClasses.lmtd(
+      6.67,
+      11.56,
+      12,
+      25)
+    "Thermal conductance at nominal flow for sensible heat, used to compute time constant";
+  parameter Modelica.Units.SI.MassFlowRate mAir_flow_nominal=161.35
+    "Nominal air mass flowrate";
+  parameter Real yValMinAHU(min=0,max=1,unit="1")=0.1
+    "Minimum valve openning position";
+
+  Buildings.Fluid.HeatExchangers.CoolingTowers.YorkCalc WCT(redeclare package
+      Medium = Buildings.Media.Water "Water", allowFlowReversal=false,
+    m_flow_nominal=mCW_flow_nominal,
+    dp_nominal=14930 + 14930 + 74650,
+    TAirInWB_nominal=283.15,
+    PFan_nominal(displayUnit="kW") = 6000,
+    TApp_nominal=6)
+    annotation (Placement(transformation(extent={{48,22},{28,42}})));
+  Buildings.BoundaryConditions.WeatherData.Bus weaBus
+    annotation (Placement(transformation(extent={{142,86},{164,108}}),
+        iconTransformation(extent={{122,86},{142,106}})));
+  Buildings.Fluid.HeatExchangers.DryCoilEffectivenessNTU
+    DCT(
+    redeclare package Medium1 = Buildings.Media.Air "Moist air",
+    redeclare package Medium2 = Buildings.Media.Water "Water",
+    allowFlowReversal1=true,
+    allowFlowReversal2=true,
+    m1_flow_nominal=mCW_flow_nominal,
+    m2_flow_nominal=mCW_flow_nominal,
+    dp1_nominal=0,
+    dp2_nominal=14930 + 14930 + 74650,
+    configuration=Buildings.Fluid.Types.HeatExchangerConfiguration.CounterFlow,
+    use_Q_flow_nominal=false,
+    eps_nominal=0.8)
+    annotation (Placement(transformation(extent={{28,48},{48,68}})));
+  Buildings.Applications.DataCenters.ChillerCooled.Equipment.IntegratedPrimaryLoadSide
+    integratedPrimaryLoadSide(
+    redeclare package Medium1 = Buildings.Media.Water "Water",
+    redeclare package Medium2 = Buildings.Media.Water "Water",
+    m1_flow_chi_nominal=mCW_flow_nominal,
+    m2_flow_chi_nominal=mCHW_flow_nominal,
+    m1_flow_wse_nominal=mCW_flow_nominal,
+    m2_flow_wse_nominal=mCHW_flow_nominal,
+    dp1_chi_nominal=0,
+    dp1_wse_nominal=0,
+    dp2_chi_nominal=0,
+    dp2_wse_nominal=0,
+    numChi=numChi,
+    redeclare
+      Buildings.Fluid.Chillers.Data.ElectricEIR.ElectricEIRChiller_Carrier_19XR_742kW_5_42COP_VSD
+      perChi,
+    perPum=perPum)
+              annotation (Placement(transformation(extent={{28,-64},{48,-44}})));
+  Buildings.Fluid.Movers.FlowControlled_m_flow mov(
+      redeclare package Medium = Buildings.Media.Water "Water",
+    redeclare Buildings.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 per,
+    addPowerToMedium=false,
+    nominalValuesDefineDefaultPressureCurve=false,
+    m_flow_nominal=mCW_flow_nominal)                            annotation (
+      Placement(transformation(
+        extent={{6,6},{-6,-6}},
+        rotation=90,
+        origin={-42,-34})));
+  DataCentersConfigurations.Components.CDU CDU(
+    redeclare package Medium1 = Buildings.Media.Water "Water",
+    redeclare package Medium2 = Buildings.Media.Water "Water",
+    allowFlowReversal1=false,
+    allowFlowReversal2=false,
+    m1_flow_nominal=m1_flow_nominal,
+    m2_flow_nominal=m1_flow_nominal,
+    dp1_nominal=12000,
+    dp2_nominal=6000,
+    eta=0.8,
+    v8(m_flow_nominal=m2_flow_nominal))
+    annotation (Placement(transformation(extent={{54,-132},{74,-116}})));
+  Buildings.Fluid.Sources.Boundary_pT bou(
+    redeclare package Medium = Buildings.Media.Air "Moist air",
+    use_T_in=true,
+    nPorts=1) annotation (Placement(transformation(extent={{-24,70},{-4,90}})));
+  Buildings.Fluid.Sources.Boundary_pT bou1(
+    redeclare package Medium = Buildings.Media.Air "Moist air",
+    use_T_in=false,
+    nPorts=1) annotation (Placement(transformation(extent={{100,70},{80,90}})));
+  Components.D2C d2C
+    annotation (Placement(transformation(extent={{54,-180},{74,-160}})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tcdusup(
+      redeclare package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        m1_flow_nominal)                                        annotation (
+      Placement(transformation(
+        extent={{6,6},{-6,-6}},
+        rotation=90,
+        origin={42,-144})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tcduret(
+      redeclare package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        m1_flow_nominal)                                        annotation (
+      Placement(transformation(
+        extent={{-6,6},{6,-6}},
+        rotation=90,
+        origin={88,-152})));
+
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tairsup(
+      redeclare package Medium = Buildings.Media.Air "Moist air",
+      m_flow_nominal=mAir_flow_nominal)                           annotation (
+      Placement(transformation(
+        extent={{6,6},{-6,-6}},
+        rotation=180,
+        origin={-28,-170})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tairret(
+      redeclare package Medium = Buildings.Media.Air "Moist air",
+      m_flow_nominal=mAir_flow_nominal)                           annotation (
+      Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={14,-144})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tchwsup(redeclare package Medium
+      = Buildings.Media.Water "Water",                        m_flow_nominal=
+        m1_flow_nominal)                                      annotation (
+      Placement(transformation(
+        extent={{6,6},{-6,-6}},
+        rotation=90,
+        origin={-42,-82})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tchwret(redeclare package Medium
+      = Buildings.Media.Water "Water",                        m_flow_nominal=
+        m1_flow_nominal)                                      annotation (
+      Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={118,-82})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tcwret(
+      redeclare package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        mCW_flow_nominal)                                       annotation (
+      Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={118,-6})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tcwsup(
+      redeclare package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        mCW_flow_nominal)                                       annotation (
+      Placement(transformation(
+        extent={{6,6},{-6,-6}},
+        rotation=90,
+        origin={-42,-10})));
+  Buildings.Fluid.Sensors.RelativePressure senRelPre(redeclare replaceable
+      package Medium = Buildings.Media.Water "Water")
+    "Differential pressure"
+    annotation (Placement(transformation(extent={{28,-64},{42,-76}})));
+  Modelica.Blocks.Sources.Constant tcdusup(k=tcdusupset)
+    annotation (Placement(transformation(extent={{42,-126},{46,-122}})));
+  Modelica.Blocks.Interfaces.RealInput CTFan annotation (Placement(
+        transformation(extent={{-108,72},{-94,86}}), iconTransformation(extent={
+            {-108,72},{-94,86}})));
+  Modelica.Blocks.Interfaces.RealInput CTBypass annotation (Placement(
+        transformation(extent={{-108,56},{-94,70}}), iconTransformation(extent={
+            {-108,72},{-94,86}})));
+  Modelica.Blocks.Interfaces.RealInput WCTv annotation (Placement(
+        transformation(extent={{-108,44},{-94,58}}), iconTransformation(extent={
+            {-108,72},{-94,86}})));
+  Modelica.Blocks.Interfaces.RealInput DCTv annotation (Placement(
+        transformation(extent={{-108,32},{-94,46}}), iconTransformation(extent={
+            {-108,72},{-94,86}})));
+  Modelica.Blocks.Interfaces.RealInput AHUbypass annotation (Placement(
+        transformation(extent={{-108,-104},{-94,-90}}), iconTransformation(
+          extent={{-108,-108},{-94,-94}})));
+  Modelica.Blocks.Interfaces.RealInput v4 annotation (Placement(transformation(
+          extent={{-108,-6},{-94,8}}), iconTransformation(extent={{-108,-6},{-94,
+            8}})));
+  Modelica.Blocks.Interfaces.RealInput ITAir annotation (Placement(
+        transformation(extent={{-108,-168},{-94,-154}}), iconTransformation(
+          extent={{-108,-154},{-94,-140}})));
+  Modelica.Blocks.Interfaces.RealInput ITLiquid annotation (Placement(
+        transformation(extent={{-108,-178},{-94,-164}}), iconTransformation(
+          extent={{-108,-154},{-94,-140}})));
+  Modelica.Blocks.Interfaces.RealInput CDUactivate annotation (Placement(
+        transformation(extent={{-108,-158},{-94,-144}}), iconTransformation(
+          extent={{-108,-154},{-94,-140}})));
+  Modelica.Blocks.Interfaces.RealInput WSEbypass annotation (Placement(
+        transformation(extent={{-108,-66},{-94,-52}}), iconTransformation(
+          extent={{-108,-66},{-94,-52}})));
+  Modelica.Blocks.Interfaces.RealInput Chibypass annotation (Placement(
+        transformation(extent={{-108,-76},{-94,-62}}), iconTransformation(
+          extent={{-108,-66},{-94,-52}})));
+  Modelica.Blocks.Interfaces.RealInput CHWpump annotation (Placement(
+        transformation(extent={{-108,-86},{-94,-72}}), iconTransformation(
+          extent={{-108,-66},{-94,-52}})));
+  Modelica.Blocks.Interfaces.RealInput Tset annotation (Placement(
+        transformation(extent={{-108,-54},{-94,-40}}), iconTransformation(
+          extent={{-108,-66},{-94,-52}})));
+  Modelica.Blocks.Interfaces.BooleanInput ChiOn annotation (Placement(
+        transformation(extent={{-108,-32},{-98,-22}}), iconTransformation(
+          extent={{-108,-32},{-98,-22}})));
+  Modelica.Blocks.Interfaces.BooleanInput WSEOn annotation (Placement(
+        transformation(extent={{-108,-40},{-98,-30}}), iconTransformation(
+          extent={{-108,-32},{-98,-22}})));
+  Modelica.Blocks.Interfaces.RealOutput tcwsup annotation (Placement(
+        transformation(extent={{172,0},{192,20}}),  iconTransformation(extent={{172,0},
+            {192,20}})));
+  Modelica.Blocks.Interfaces.RealOutput tcwret annotation (Placement(
+        transformation(extent={{156,22},{176,42}}), iconTransformation(extent={{172,-40},
+            {192,-20}})));
+  Modelica.Blocks.Interfaces.RealOutput tairsup annotation (Placement(
+        transformation(extent={{156,6},{176,26}}), iconTransformation(extent={{172,-80},
+            {192,-60}})));
+  Modelica.Blocks.Interfaces.RealOutput tairret annotation (Placement(
+        transformation(extent={{172,-120},{192,-100}}),
+                                                    iconTransformation(extent={{172,
+            -120},{192,-100}})));
+  Modelica.Blocks.Interfaces.RealOutput dp annotation (Placement(transformation(
+          extent={{172,-160},{192,-140}}),
+                                        iconTransformation(extent={{172,-160},{192,
+            -140}})));
+  Components.SimplifiedRoom simplifiedRoom(mrack_flow_nominal=mAir_flow_nominal)
+    annotation (Placement(transformation(extent={{-18,-178},{-2,-162}})));
+  Buildings.Fluid.Sources.Boundary_pT expVesChi(redeclare replaceable package
+      Medium = Buildings.Media.Water "Water", nPorts=1)
+    "Expansion tank"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={188,-117})));
+  Buildings.Fluid.Sources.Boundary_pT expVesChi1(redeclare replaceable package
+      Medium = Buildings.Media.Water "Water", nPorts=1)
+    "Expansion tank"
+    annotation (Placement(transformation(extent={{-10,-9.5},{10,9.5}},
+        rotation=180,
+        origin={182,6.5})));
+  Buildings.Fluid.Sources.Boundary_pT expVesChi2(redeclare replaceable package
+      Medium = Buildings.Media.Water "Water", nPorts=1)
+    "Expansion tank"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={190,-170})));
+  Buildings.Fluid.HeatExchangers.DryCoilCounterFlow cooCoi(
+    redeclare package Medium1 = Buildings.Media.Water "Water",
+    redeclare package Medium2 = Buildings.Media.Air "Moist air",
+    m2_flow_nominal=mAir_flow_nominal,
+    m1_flow_nominal=m2_flow_chi_nominal,
+    m1_flow(start=m2_flow_chi_nominal),
+    m2_flow(start=mAir_flow_nominal),
+    dp2_nominal=249*3,
+    UA_nominal=mAir_flow_nominal*1006*5,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    dp1_nominal(displayUnit="Pa") = 1000 + 89580)
+    "Cooling coil"
+    annotation (Placement(transformation(extent={{-24,-134},{-4,-114}})));
+  Buildings.Fluid.Actuators.Valves.TwoWayLinear v2(
+    redeclare each package Medium = Buildings.Media.Water "Water",
+    each m_flow_nominal=mCW_flow_nominal,
+    each dpValve_nominal=6000,
+    each use_strokeTime=false) "Shutoff valves"
+    annotation (Placement(transformation(extent={{44,0},{32,12}})));
+  Buildings.Fluid.Actuators.Valves.TwoWayLinear v1(
+    redeclare each package Medium = Buildings.Media.Water "Water",
+    each m_flow_nominal=mCW_flow_nominal,
+    each dpValve_nominal=6000,
+    each use_strokeTime=false) "Shutoff valves"
+    annotation (Placement(transformation(extent={{84,26},{72,38}})));
+  Buildings.Fluid.Actuators.Valves.TwoWayLinear v3(
+    redeclare each package Medium = Buildings.Media.Water "Water",
+    each m_flow_nominal=mCW_flow_nominal,
+    each dpValve_nominal=6000,
+    each use_strokeTime=false) "Shutoff valves"
+    annotation (Placement(transformation(extent={{84,46},{72,58}})));
+  Buildings.Fluid.Actuators.Valves.TwoWayLinear v7(
+    redeclare each package Medium = Buildings.Media.Water "Water",
+    each m_flow_nominal=m2_flow_nominal,
+    each dpValve_nominal=6000,
+    each use_strokeTime=false) "Shutoff valves"
+    annotation (Placement(transformation(extent={{-20,-106},{-8,-94}})));
+  Buildings.Fluid.Actuators.Valves.TwoWayLinear v8(
+    redeclare each package Medium = Buildings.Media.Water "Water",
+    each m_flow_nominal=m2_flow_nominal,
+    each dpValve_nominal=6000,
+    each use_strokeTime=false) "Shutoff valves"
+    annotation (Placement(transformation(extent={{56,-106},{68,-94}})));
+  Modelica.Blocks.Math.Feedback feedback1
+    annotation (Placement(transformation(extent={{28,-96},{40,-84}})));
+  Modelica.Blocks.Sources.Constant const(k=1)
+    annotation (Placement(transformation(extent={{16,-92},{20,-88}})));
+  Buildings.Fluid.Movers.FlowControlled_m_flow fan(
+    redeclare package Medium = Buildings.Media.Air "Moist air",
+    addPowerToMedium=false,
+    m_flow_nominal=mAir_flow_nominal,
+    dp(start=249),
+    m_flow(start=mAir_flow_nominal),
+    nominalValuesDefineDefaultPressureCurve=true,
+    use_riseTime=false,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    T_start=293.15,
+    dp_nominal=750) "Fan for air flow through the data center"
+    annotation (Placement(transformation(extent={{6.25,-5.75},{-6.25,5.75}},
+        rotation=90,
+        origin={-41.75,-160.25})));
+  Modelica.Blocks.Math.Gain gain(k=mAir_flow_nominal)
+    annotation (Placement(transformation(extent={{-60,-162},{-56,-158}})));
+  Modelica.Blocks.Interfaces.RealInput AHUfan annotation (Placement(
+        transformation(extent={{-108,-142},{-94,-128}}), iconTransformation(
+          extent={{-108,-142},{-94,-128}})));
+  Modelica.Blocks.Interfaces.RealOutput tchwret
+                                               annotation (Placement(
+        transformation(extent={{156,-24},{176,-4}}),iconTransformation(extent={{172,30},
+            {192,50}})));
+  Modelica.Blocks.Sources.RealExpression Power(y=WCT.PFan + mov.P +
+        integratedPrimaryLoadSide.powChi[1] + integratedPrimaryLoadSide.powPum[1]
+         + fan.P + d2C.pum.P)
+    annotation (Placement(transformation(extent={{140,-90},{160,-70}})));
+  Modelica.Blocks.Sources.RealExpression PUE(y=(1000000 + Power.y)/1000000)
+    annotation (Placement(transformation(extent={{140,-106},{160,-86}})));
+  Buildings.Fluid.Sources.Outside out(redeclare package Medium =
+        Buildings.Media.Air "Moist air", nPorts=2)
+    "Boundary conditions for outside air"
+    annotation (Placement(transformation(extent={{-3,-3},{3,3}},
+        rotation=90,
+        origin={-17,-149})));
+  Buildings.Fluid.Actuators.Dampers.MixingBox eco(
+    redeclare package Medium = Buildings.Media.Air "Moist air",
+    mOut_flow_nominal=mAir_flow_nominal,
+    mRec_flow_nominal=mAir_flow_nominal,
+    mExh_flow_nominal=mAir_flow_nominal,
+    use_strokeTime=false,
+    dpDamExh_nominal=0.27,
+    dpDamOut_nominal=0.27,
+    dpDamRec_nominal=0.27,
+    dpFixExh_nominal=20,
+    dpFixOut_nominal=20,
+    dpFixRec_nominal=20) "Airside economizer"
+    annotation (Placement(transformation(extent={{-3,-3},{3,3}},
+        rotation=90,
+        origin={-19,-139})));
+  Buildings.BoundaryConditions.WeatherData.Bus weaBus1
+    annotation (Placement(transformation(extent={{-64,-154},{-42,-132}}),
+        iconTransformation(extent={{122,86},{142,106}})));
+  Modelica.Blocks.Interfaces.RealOutput tdb annotation (Placement(
+        transformation(extent={{172,48},{192,68}}), iconTransformation(extent={{
+            172,56},{192,76}})));
+  Modelica.Blocks.Interfaces.RealInput ASE annotation (Placement(transformation(
+          extent={{-108,-114},{-94,-100}}), iconTransformation(extent={{-108,-90},
+            {-94,-76}})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort Tmix(redeclare package Medium =
+        Buildings.Media.Air "Moist air", m_flow_nominal=mAir_flow_nominal)
+    annotation (Placement(transformation(
+        extent={{-2,-2},{2,2}},
+        rotation=90,
+        origin={-28,-134})));
+  Modelica.Blocks.Interfaces.RealOutput tmix annotation (Placement(
+        transformation(extent={{176,-222},{196,-202}}), iconTransformation(
+          extent={{172,-160},{192,-140}})));
+  Modelica.Blocks.Sources.Constant const1(k=0)
+    annotation (Placement(transformation(extent={{-70,-130},{-62,-122}})));
+  Modelica.Blocks.Sources.Constant const2(k=mCW_flow_nominal)
+    annotation (Placement(transformation(extent={{-24,-36},{-28,-32}})));
+equation
+  connect(weaBus.TWetBul, WCT.TAir) annotation (Line(
+      points={{153.055,97.055},{153.055,36},{50,36}},
+      color={255,204,51},
+      thickness=0.5,
+      pattern=LinePattern.Dash),
+                      Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(mov.port_b, integratedPrimaryLoadSide.port_a1) annotation (Line(
+      points={{-42,-40},{-42,-48},{28,-48}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(DCT.port_b2, WCT.port_b) annotation (Line(
+      points={{28,52},{-42,52},{-42,32},{28,32}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(DCT.port_b1, bou1.ports[1]) annotation (Line(
+      points={{48,64},{58,64},{58,80},{80,80}},
+      color={0,140,72},
+      thickness=0.5));
+  connect(weaBus.TDryBul, bou.T_in) annotation (Line(
+      points={{153.055,97.055},{138,97.055},{138,98},{-42,98},{-42,84},{-26,84}},
+      color={255,204,51},
+      thickness=0.5,
+      pattern=LinePattern.Dash),
+                      Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(Tcdusup.port_b, d2C.port_a) annotation (Line(
+      points={{42,-150},{42,-170},{54,-170}},
+      color={0,128,255},
+      thickness=0.5));
+  connect(CDU.port_b2, Tcdusup.port_a) annotation (Line(
+      points={{54,-130},{42,-130},{42,-138}},
+      color={0,128,255},
+      thickness=0.5));
+  connect(d2C.port_b, Tcduret.port_a) annotation (Line(
+      points={{74,-170},{88,-170},{88,-158}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(Tcduret.port_b, CDU.port_a2) annotation (Line(
+      points={{88,-146},{88,-130},{74,-130}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(Tchwsup.port_a, integratedPrimaryLoadSide.port_b2) annotation (Line(
+      points={{-42,-76},{-42,-60},{28,-60}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(integratedPrimaryLoadSide.port_a2, Tchwret.port_b) annotation (Line(
+      points={{48,-60},{118,-60},{118,-76}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(Tcwsup.port_b, mov.port_a) annotation (Line(
+      points={{-42,-16},{-42,-28}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(Tcwsup.port_a, WCT.port_b) annotation (Line(
+      points={{-42,-4},{-42,32},{28,32}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(tcdusup.y, CDU.TSet) annotation (Line(points={{46.2,-124},{48,-124},{48,
+          -120},{52,-120}},                      color={0,0,127}));
+  connect(integratedPrimaryLoadSide.port_b1, Tcwret.port_a) annotation (Line(
+      points={{48,-48},{118,-48},{118,-12}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(senRelPre.p_rel, dp) annotation (Line(
+      points={{35,-64.6},{35,-150},{182,-150}},
+      color={238,46,47},
+      pattern=LinePattern.Dot));
+  connect(WCT.TLvg, tcwsup) annotation (Line(
+      points={{27,26},{20,26},{20,20},{98,20},{98,10},{182,10}},
+      color={238,46,47},
+      pattern=LinePattern.Dot));
+  connect(Tcwret.T, tcwret) annotation (Line(
+      points={{111.4,-6},{108,-6},{108,32},{166,32}},
+      color={238,46,47},
+      pattern=LinePattern.Dot));
+  connect(tairret, Tairret.T) annotation (Line(
+      points={{182,-110},{182,-184},{8,-184},{8,-144},{7.4,-144}},
+      color={238,46,47},
+      pattern=LinePattern.Dot));
+  connect(tairsup, Tairsup.T) annotation (Line(
+      points={{166,16},{94,16},{94,-134},{78,-134},{78,-156},{-28,-156},{-28,-163.4}},
+      color={238,46,47},
+      pattern=LinePattern.Dot));
+  connect(Tairsup.port_b, simplifiedRoom.port_a) annotation (Line(
+      points={{-22,-170},{-18,-170}},
+      color={0,128,255},
+      thickness=0.5));
+  connect(simplifiedRoom.port_b, Tairret.port_a) annotation (Line(
+      points={{-2,-170},{14,-170},{14,-150}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(expVesChi2.ports[1], Tcduret.port_a) annotation (Line(points={{180,-170},
+          {88,-170},{88,-158}},                       color={238,46,47},
+      thickness=0.5));
+  connect(bou.ports[1], DCT.port_a1) annotation (Line(points={{-4,80},{6,80},{6,
+          64},{28,64}},      color={0,127,255}));
+  connect(Tchwret.port_a, CDU.port_b1) annotation (Line(points={{118,-88},{118,-118},
+          {74,-118}}, color={238,46,47},
+      thickness=0.5));
+  connect(senRelPre.port_a, integratedPrimaryLoadSide.port_b2) annotation (Line(
+        points={{28,-70},{-42,-70},{-42,-60},{28,-60}},
+        color={0,127,255},
+      thickness=0.5));
+  connect(senRelPre.port_b, Tchwret.port_b) annotation (Line(points={{42,-70},{118,
+          -70},{118,-76}},                  color={238,46,47},
+      thickness=0.5));
+  connect(cooCoi.port_a1, Tchwsup.port_b) annotation (Line(points={{-24,-118},{-42,
+          -118},{-42,-88}},     color={0,127,255},
+      thickness=0.5));
+  connect(cooCoi.port_b1, CDU.port_a1)
+    annotation (Line(points={{-4,-118},{54,-118}},  color={0,127,255},
+      thickness=0.5));
+  connect(cooCoi.port_a2, Tairret.port_b) annotation (Line(points={{-4,-130},{14,
+          -130},{14,-138}},    color={238,46,47},
+      thickness=0.5));
+  connect(v2.port_b, WCT.port_b) annotation (Line(points={{32,6},{-42,6},{-42,32},
+          {28,32}},     color={0,127,255},
+      thickness=0.5));
+  connect(v1.port_b, WCT.port_a) annotation (Line(
+      points={{72,32},{48,32}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(v3.port_b, DCT.port_a2) annotation (Line(
+      points={{72,52},{48,52}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(v2.port_a, Tcwret.port_b) annotation (Line(
+      points={{44,6},{118,6},{118,0}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(v1.port_a, Tcwret.port_b) annotation (Line(
+      points={{84,32},{118,32},{118,0}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(v3.port_a, Tcwret.port_b) annotation (Line(
+      points={{84,52},{118,52},{118,0}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(DCTv, v3.y) annotation (Line(
+      points={{-101,39},{-80,39},{-80,40},{-62,40},{-62,66},{78,66},{78,59.2}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(WCTv, v1.y) annotation (Line(
+      points={{-101,51},{-62,51},{-62,46},{78,46},{78,39.2}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(CTBypass, v2.y) annotation (Line(
+      points={{-101,63},{-62,63},{-62,16},{38,16},{38,13.2}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(CTFan, WCT.y) annotation (Line(
+      points={{-101,79},{-62,79},{-62,44},{60,44},{60,40},{50,40}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(v7.port_a, Tchwsup.port_b) annotation (Line(
+      points={{-20,-100},{-42,-100},{-42,-88}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(v7.port_b, CDU.port_a1) annotation (Line(
+      points={{-8,-100},{14,-100},{14,-118},{54,-118}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(v8.port_a, CDU.port_a1) annotation (Line(
+      points={{56,-100},{42,-100},{42,-118},{54,-118}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(const.y,feedback1. u1)
+    annotation (Line(points={{20.2,-90},{29.2,-90}}, color={0,0,127}));
+  connect(feedback1.y, v8.y) annotation (Line(
+      points={{39.4,-90},{62,-90},{62,-92.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(CDU.activate, feedback1.u2) annotation (Line(
+      points={{52,-114.6},{34,-114.6},{34,-94.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(CDUactivate, feedback1.u2) annotation (Line(
+      points={{-101,-151},{-80,-151},{-80,-182},{32,-182},{32,-124},{34,-124},{34,
+          -94.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(fan.port_b, Tairsup.port_a) annotation (Line(
+      points={{-41.75,-166.5},{-41.75,-170},{-34,-170}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(ITAir, simplifiedRoom.u) annotation (Line(
+      points={{-101,-161},{-80,-161},{-80,-176},{-18.4,-176}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(ITLiquid, d2C.u) annotation (Line(
+      points={{-101,-171},{-80,-171},{-80,-182},{48,-182},{48,-177.5},{53.5,-177.5}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(AHUbypass, v7.y) annotation (Line(
+      points={{-101,-97},{-80,-97},{-80,-98},{-78,-98},{-78,-96},{-62,-96},{-62,
+          -90},{-14,-90},{-14,-92.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(CHWpump, integratedPrimaryLoadSide.yPum[1]) annotation (Line(
+      points={{-101,-79},{-62,-79},{-62,-58.4},{26.4,-58.4}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(Chibypass, integratedPrimaryLoadSide.yVal6) annotation (Line(
+      points={{-101,-69},{-62,-69},{-62,-54.2},{26.4,-54.2}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(WSEbypass, integratedPrimaryLoadSide.yVal5) annotation (Line(
+      points={{-101,-59},{-62,-59},{-62,-51},{26.4,-51}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(Tset, integratedPrimaryLoadSide.TSet) annotation (Line(
+      points={{-101,-47},{-80,-47},{-80,-48},{-62,-48},{-62,-43.2},{26.4,-43.2}},
+      color={0,0,127},
+      pattern=LinePattern.Dot));
+  connect(ChiOn, integratedPrimaryLoadSide.on[1]) annotation (Line(
+      points={{-103,-27},{-62,-27},{-62,-46.4},{26.4,-46.4}},
+      color={255,0,255},
+      pattern=LinePattern.Dot));
+  connect(WSEOn, integratedPrimaryLoadSide.on[2]) annotation (Line(
+      points={{-103,-35},{-62,-35},{-62,-46.4},{26.4,-46.4}},
+      color={255,0,255},
+      pattern=LinePattern.Dot));
+  connect(expVesChi.ports[1], CDU.port_b1) annotation (Line(
+      points={{178,-117},{178,-118},{74,-118}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(v8.port_b, CDU.port_b1) annotation (Line(
+      points={{68,-100},{88,-100},{88,-118},{74,-118}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(gain.y, fan.m_flow_in) annotation (Line(points={{-55.8,-160},{-55.8,-160.25},
+          {-48.65,-160.25}},          color={0,0,127}));
+  connect(expVesChi1.ports[1], Tcwret.port_b) annotation (Line(
+      points={{172,6.5},{154,6.5},{154,6},{118,6},{118,0}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(Tchwret.T, tchwret) annotation (Line(points={{111.4,-82},{108,-82},{108,
+          -50},{166,-50},{166,-14}},
+                                color={0,0,127}));
+  connect(cooCoi.port_b2, fan.port_a) annotation (Line(points={{-24,-130},{-42,-130},
+          {-42,-148},{-41.75,-148},{-41.75,-154}}, color={0,127,255}));
+  connect(weaBus1, weaBus) annotation (Line(
+      points={{-53,-143},{-54,-143},{-54,-110},{-114,-110},{-114,114},{153,114},
+          {153,97}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(eco.port_Out, out.ports[1]) annotation (Line(points={{-20.8,-142},{-24,
+          -142},{-24,-146},{-16.7,-146}}, color={0,127,255}));
+  connect(eco.port_Exh, out.ports[2]) annotation (Line(points={{-17.2,-142},{-17.3,
+          -142},{-17.3,-146}}, color={0,127,255}));
+  connect(eco.port_Ret, Tairret.port_b) annotation (Line(points={{-17.2,-136},{0,
+          -136},{0,-130},{14,-130},{14,-138}}, color={0,127,255}));
+  connect(AHUfan, gain.u) annotation (Line(points={{-101,-135},{-66,-135},{-66,-160},
+          {-60.4,-160}}, color={0,0,127}));
+  connect(weaBus1, out.weaBus) annotation (Line(
+      points={{-53,-143},{-26,-143},{-26,-152},{-17.06,-152}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(tdb, weaBus.TDryBul) annotation (Line(points={{182,58},{164,58},{164,80},
+          {170,80},{170,97.055},{153.055,97.055}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cooCoi.port_b2, Tmix.port_b) annotation (Line(points={{-24,-130},{-24,
+          -132},{-28,-132}}, color={0,127,255}));
+  connect(eco.port_Sup, Tmix.port_a)
+    annotation (Line(points={{-20.8,-136},{-28,-136}}, color={0,127,255}));
+  connect(Tmix.T, tmix) annotation (Line(points={{-30.2,-134},{62,-134},{62,-194},
+          {186,-194},{186,-212}}, color={0,0,127}));
+  connect(ASE, eco.y) annotation (Line(points={{-101,-107},{-44,-107},{-44,-126},
+          {-36,-126},{-36,-139},{-22.6,-139}}, color={0,0,127}));
+  connect(const2.y, mov.m_flow_in)
+    annotation (Line(points={{-28.2,-34},{-34.8,-34}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-220},
+            {180,100}})),       Diagram(coordinateSystem(preserveAspectRatio=
+            false, extent={{-100,-220},{180,100}})));
+end Simplified;

@@ -1,0 +1,8 @@
+compareVars :=
+  {
+    "checkValve.dp",
+    "checkValve_m_flow.dp",
+    "checkValve.m_flow",
+    "checkValveDpFix.m_flow",
+    "checkValve_m_flow.m_flow"
+  };

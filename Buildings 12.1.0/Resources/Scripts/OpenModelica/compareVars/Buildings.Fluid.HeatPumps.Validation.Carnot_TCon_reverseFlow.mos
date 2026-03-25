@@ -1,0 +1,14 @@
+compareVars :=
+  {
+    "senTConEnt.T",
+    "senTConLvg.T",
+    "senTEvaEnt.T",
+    "senTEvaLvg.T",
+    "heaPum.QCon_flow",
+    "heaPum.QEva_flow",
+    "heaPum.P",
+    "heaPum.dp1",
+    "heaPum.dp2",
+    "heaPum.COP_nominal",
+    "heaPum.COP"
+  };

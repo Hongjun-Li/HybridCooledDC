@@ -1,0 +1,15 @@
+compareVars :=
+  {
+    "senTConEnt.T",
+    "senTConLvg.T",
+    "senTEvaEnt.T",
+    "senTEvaLvg.T",
+    "chi.TSet",
+    "chi.QEva_flow",
+    "chi.QCon_flow",
+    "chi.P",
+    "chi.dp1",
+    "chi.dp2",
+    "chi.COP_nominal",
+    "chi.COP"
+  };

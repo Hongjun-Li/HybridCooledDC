@@ -1,0 +1,196 @@
+within DataCentersConfigurations.Controls.TrimandResponse;
+model Control_Updated
+  parameter Real TAirset = 273.15 + 18 "[K]";
+  parameter Real TFreeze=273.15 + 3 "[K]";
+  parameter Real TCWHsupset = 273.15 + 14 "[K]";
+  parameter Real TAppNominal = 6 "[K]";
+  parameter Real ITLoad = 500000 "[W]";
+
+parameter Modelica.Units.SI.MassFlowRate mAir_flow_nominal=ITLoad/(
+      1005*15) "Nominal mass flow rate at fan";
+  parameter Modelica.Units.SI.Power P_nominal=80E3
+    "Nominal compressor power (at y=1)";
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=10
+    "Temperature difference evaporator inlet-outlet";
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
+    "Temperature difference condenser outlet-inlet";
+  parameter Real COPc_nominal=3 "Chiller COP";
+  parameter Modelica.Units.SI.MassFlowRate mCHW_flow_nominal=2*ITLoad/(
+      4200*20) "Nominal mass flow rate at chilled water";
+
+  parameter Modelica.Units.SI.MassFlowRate mCW_flow_nominal=2*ITLoad/(
+      4200*6) "Nominal mass flow rate at condenser water";
+
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=500
+    "Nominal pressure difference";
+  Buildings.BoundaryConditions.WeatherData.Bus
+                                     weaBus
+    annotation (Placement(transformation(extent={{-110,84},{-90,104}}),
+        iconTransformation(extent={{-110,84},{-90,104}})));
+  Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus Control
+    annotation (Placement(transformation(extent={{80,-20},{120,20}}),
+        iconTransformation(extent={{92,-8},{112,12}})));
+  Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus Temperature
+    annotation (Placement(transformation(extent={{-20,-140},{20,-100}}),
+        iconTransformation(extent={{-10,-112},{10,-92}})));
+  DataCentersConfigurations.Controls.CW.CW CW(CW_flownominal=mCW_flow_nominal)
+    annotation (Placement(transformation(extent={{-10,64},{12,88}})));
+  Modelica.Blocks.Interfaces.RealInput u
+    annotation (Placement(transformation(extent={{-126,-20},{-86,20}}),
+        iconTransformation(extent={{-126,-20},{-86,20}})));
+  Modelica.Blocks.Sources.Constant const2(k=TCWsupset)
+    annotation (Placement(transformation(extent={{-38,78},{-32,84}})));
+  Modelica.Blocks.Sources.Constant const3(k=TFreeze)
+    annotation (Placement(transformation(extent={{-38,68},{-32,74}})));
+  IT.ITSplit iTSplit
+    annotation (Placement(transformation(extent={{-10,-100},{10,-80}})));
+  AHU_CDU.AHU_CDU aHU_CDU
+    annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
+  Buildings.Controls.Continuous.LimPID
+                             conFan(
+    k=1,
+    Ti=60,
+    Td=10,
+    initType=Modelica.Blocks.Types.Init.InitialState,
+    reverseActing=false)
+    "Controller for tower fan"
+    annotation (Placement(transformation(extent={{-76,106},{-68,114}})));
+  Modelica.Blocks.Sources.Constant const4(k=273.15 + 18)
+    annotation (Placement(transformation(extent={{-90,108},{-84,114}})));
+  Modelica.Blocks.Sources.Constant TAppTow(k=TAppNominal)
+                                                "Cooling tower approach"
+    annotation (Placement(transformation(extent={{-28,0},{-24,4}})));
+  Modelica.Blocks.Sources.Constant CHWSupSet(k=TCWHsupset)
+    "Chilled Water Supply SetPoint"
+    annotation (Placement(transformation(extent={{-28,8},{-24,12}})));
+  CHW.ChiWSE chiWSE
+    annotation (Placement(transformation(extent={{-10,-8},{10,12}})));
+equation
+  connect(weaBus.TWetBul, Control.Wetbulb) annotation (Line(
+      points={{-99.95,94.05},{-99.95,0},{-100,0},{-100,-114},{100,-114},{100,0}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(bypassConContrinuosModular.TCWRet, Temperature.TCWRet) annotation (
+      Line(points={{-12.2,65.08},{-12.2,64},{-92,64},{-92,-120},{0,-120}},
+                                                                       color={0,
+          0,127},
+      pattern=LinePattern.Dash));
+  connect(bypassConContrinuosModular.TCWSup, Temperature.TCWSup) annotation (
+      Line(points={{-12.2,76.12},{-92,76.12},{-92,-120},{0,-120}},
+                                                                color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(u, bypassConContrinuosModular.Archi_Selection) annotation (Line(
+        points={{-106,0},{-96,0},{-96,87.64},{-12.2,87.64}},
+        color={217,67,180},
+      thickness=0.5));
+  connect(const2.y, bypassConContrinuosModular.TCWSupSet) annotation (Line(
+        points={{-31.7,81},{-31.7,81.64},{-12.2,81.64}},                  color
+        ={0,0,127}));
+  connect(const3.y, bypassConContrinuosModular.TCWRetSet) annotation (Line(
+        points={{-31.7,71},{-22,71},{-22,70.36},{-12.2,70.36}},
+        color={0,0,127}));
+  connect(iTSplit.y[1], Control.ITLoadAir) annotation (Line(
+      points={{10.6,-90.25},{80,-90.25},{80,0},{100,0}},
+      color={0,140,72}));
+  connect(iTSplit.u, u) annotation (Line(points={{-10,-81},{-96,-81},{-96,0},{-106,
+          0}},        color={217,67,180},
+      thickness=0.5));
+  connect(weaBus.TDryBul, Control.Drybulb) annotation (Line(
+      points={{-99.95,94.05},{-100,94.05},{-100,-114},{100,-114},{100,0}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(aHU_CDU.u, u) annotation (Line(
+      points={{-10.6,-60},{-96,-60},{-96,0},{-106,0}},
+      color={217,67,180},
+      thickness=0.5));
+  connect(aHU_CDU.CDU_Bypass, Control.CDUBypass) annotation (Line(points={{10.6,
+          -66},{80,-66},{80,0},{100,0}}, color={0,140,72}));
+  connect(aHU_CDU.CDU_Activate, Control.CDUActivate) annotation (Line(points={{10.6,
+          -64},{80,-64},{80,0},{100,0}},      color={0,140,72}));
+  connect(iTSplit.y[2], Control.ITLoadCDU) annotation (Line(points={{10.6,-89.75},
+          {80,-89.75},{80,0},{100,0}},         color={0,140,72}));
+  connect(conFan.y, Control.AHUFan) annotation (Line(points={{-67.6,110},{80,
+          110},{80,0},{100,0}}, color={0,140,72}));
+  connect(const4.y, conFan.u_s) annotation (Line(points={{-83.7,111},{-83.7,110},
+          {-76.8,110}}, color={0,0,127}));
+  connect(conFan.u_m, Temperature.TAirRet) annotation (Line(
+      points={{-72,105.2},{-72,102},{-92,102},{-92,-120},{0,-120}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(aHU_CDU.AHU_Bypass, Control.AHUBypass) annotation (Line(points={{10.6,
+          -54},{80,-54},{80,0},{100,0}}, color={0,140,72}));
+  connect(aHU_CDU.AHU_Activate, Control.AHUActivate) annotation (Line(points={{10.6,
+          -56},{80,-56},{80,0},{100,0}},      color={0,140,72}));
+  connect(CW.CTFan, Control.CTFan) annotation (Line(
+      points={{13.1,85.6},{80,85.6},{80,0},{100,0}},
+      color={238,46,47},
+      pattern=LinePattern.Dash));
+  connect(CW.DCTFan, Control.DCTFan) annotation (Line(
+      points={{13.1,82},{80,82},{80,0},{100,0}},
+      color={238,46,47},
+      pattern=LinePattern.Dash));
+  connect(CW.DCT, Control.ValveDCT) annotation (Line(
+      points={{13.1,78.4},{80,78.4},{80,0},{100,0}},
+      color={238,46,47},
+      pattern=LinePattern.Dash));
+  connect(CW.WCT, Control.ValveWCT) annotation (Line(
+      points={{13.1,73.6},{80,73.6},{80,0},{100,0}},
+      color={238,46,47},
+      pattern=LinePattern.Dash));
+  connect(CW.bypass, Control.CWBypass) annotation (Line(
+      points={{13.1,70},{80,70},{80,0},{100,0}},
+      color={238,46,47},
+      pattern=LinePattern.Dash));
+  connect(CW.CWmassflow, Control.PumpCW) annotation (Line(
+      points={{13.1,66.4},{80,66.4},{80,0},{100,0}},
+      color={238,46,47},
+      pattern=LinePattern.Dash));
+  connect(CHWSupSet.y, chiWSE.TCHWSupSet) annotation (Line(points={{-23.8,10},{
+          -18,10},{-18,12},{-11.8,12}}, color={0,0,127}));
+  connect(weaBus.TWetBul, chiWSE.TWetBulb) annotation (Line(
+      points={{-99.95,94.05},{-100,94.05},{-100,8},{-11.8,8}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(TAppTow.y, chiWSE.TApp) annotation (Line(points={{-23.8,2},{-18,2},{
+          -18,4},{-11.8,4}}, color={0,0,127}));
+  connect(chiWSE.TCHWSupWSE, Temperature.TChiEnter) annotation (Line(
+      points={{-11.8,0},{-92,0},{-92,-120},{0,-120}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(chiWSE.TCHWRetWSE, Temperature.TCHWRet) annotation (Line(
+      points={{-11.8,-4},{-92,-4},{-92,-120},{0,-120}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(chiWSE.Chion, Control.ChiOn) annotation (Line(
+      points={{10.6,11},{10.6,12},{80,12},{80,0},{100,0}},
+      color={28,108,200},
+      pattern=LinePattern.Dash));
+  connect(chiWSE.ChillerBypass, Control.ChiBypass) annotation (Line(
+      points={{10.6,8},{80,8},{80,0},{100,0}},
+      color={28,108,200},
+      pattern=LinePattern.Dash));
+  connect(chiWSE.ValveChi, Control.ValveChi) annotation (Line(
+      points={{10.6,5},{80,5},{80,0},{100,0}},
+      color={28,108,200},
+      pattern=LinePattern.Dash));
+  connect(chiWSE.ValveWSE, Control.ValveWSE) annotation (Line(
+      points={{10.6,2},{80,2},{80,0},{100,0}},
+      color={28,108,200},
+      pattern=LinePattern.Dash));
+  connect(chiWSE.WSEbypass, Control.WSEBypass) annotation (Line(
+      points={{10.6,-1},{10.6,-2},{80,-2},{80,0},{100,0}},
+      color={28,108,200},
+      pattern=LinePattern.Dash));
+  connect(chiWSE.CHWSupSet, Control.CHWSupSet) annotation (Line(
+      points={{10.6,-4},{80,-4},{80,0},{100,0}},
+      color={28,108,200},
+      pattern=LinePattern.Dash));
+  connect(chiWSE.dp, Control.PumpCHW) annotation (Line(
+      points={{10.6,-7},{10.6,-8},{80,-8},{80,0},{100,0}},
+      color={28,108,200},
+      pattern=LinePattern.Dash));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -120},{100,120}})),                                  Diagram(
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{100,
+            120}})));
+end Control_Updated;

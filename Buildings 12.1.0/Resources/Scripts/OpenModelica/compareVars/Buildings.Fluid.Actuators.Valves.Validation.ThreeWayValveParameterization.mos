@@ -1,0 +1,7 @@
+compareVars :=
+  {
+    "senMasFloOpPoi.m_flow",
+    "senMasFloKv.m_flow",
+    "senMasFloCv.m_flow",
+    "senMasFloAv.m_flow"
+  };
