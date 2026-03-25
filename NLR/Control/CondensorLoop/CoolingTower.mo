@@ -38,7 +38,7 @@ equation
   connect(no.y,feedback. u1) annotation (Line(points={{1,-50},{22,-50}},
                           color={0,0,127}));
   connect(feedback.u2,Bypass. y)
-    annotation (Line(points={{30,-42},{30,-20},{0.8,-20}},  color={0,0,127}));
+    annotation (Line(points={{30,-42},{30,-20},{0.8,-20}},  color={217,67,180}));
   connect(Temperature.TCWSup, conFan.u_m) annotation (Line(
       points={{-60,0},{-8,0},{-8,10.4}},
       color={255,204,51},
@@ -49,15 +49,15 @@ equation
       thickness=0.5));
   connect(CTControl.ValveWCT, Bypass.y) annotation (Line(
       points={{60,-2},{60,-20},{0.8,-20}},
-      color={255,204,51},
+      color={217,67,180},
       thickness=0.5));
   connect(CTControl.CWBypass, feedback.y) annotation (Line(
       points={{60,-2},{60,-50},{39,-50}},
-      color={255,204,51},
+      color={217,67,180},
       thickness=0.5));
   connect(CTControl.CTFan, conFan.y) annotation (Line(
       points={{60,-2},{60,20},{0.8,20}},
-      color={255,204,51},
+      color={217,67,180},
       thickness=0.5));
   connect(ReturnSet.y, Bypass.u_s)
     annotation (Line(points={{-29,-20},{-17.6,-20}},

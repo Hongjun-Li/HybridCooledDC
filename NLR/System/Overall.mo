@@ -70,9 +70,8 @@ model Overall
     dp2_nominal=0)
     annotation (Placement(transformation(extent={{-10,16},{10,36}})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TCDUSup(redeclare replaceable
-      package Medium = Buildings.Media.Water "Water",
-                                                   m_flow_nominal=
-        mAir_flow_nominal) "Supply Fluid temperature" annotation (Placement(
+      package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        mCHW_flow_nominal) "Supply Fluid temperature" annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
@@ -130,14 +129,6 @@ model Overall
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={80,0})));
-  Buildings.Fluid.Movers.FlowControlled_dp pumCHW(
-    redeclare package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater
-        (property_T=293.15, X_a=0.40)
-      "Propylene glycol water, 40% mass fraction",
-    nominalValuesDefineDefaultPressureCurve=true,
-    m_flow_nominal=mCHW_flow_nominal,
-    dp_nominal=130000)
-    annotation (Placement(transformation(extent={{-32,28},{-48,12}})));
   Equipment.CDU CDU(redeclare package Medium1 =
         Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
           =0.40) "Propylene glycol water, 40% mass fraction", redeclare package
@@ -205,22 +196,21 @@ model Overall
         rotation=90,
         origin={-20,-64})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TCDURet(redeclare replaceable
-      package Medium = Buildings.Media.Water "Water",
-                                                   m_flow_nominal=
-        mAir_flow_nominal) "Return CDU temperature" annotation (Placement(
+      package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        mCHW_flow_nominal) "Return CDU temperature" annotation (Placement(
         transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={80,-64})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus controlBus
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
-        iconTransformation(extent={{-130,-10},{-110,10}})));
+    annotation (Placement(transformation(extent={{-144,-28},{-96,20}}),
+        iconTransformation(extent={{-134,-18},{-96,20}})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus Temperature
-    annotation (Placement(transformation(extent={{100,-20},{140,20}}),
-        iconTransformation(extent={{110,-10},{130,10}})));
+    annotation (Placement(transformation(extent={{90,-26},{138,22}}),
+        iconTransformation(extent={{100,-16},{138,22}})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus ITProfile
     annotation (Placement(transformation(extent={{-140,-130},{-100,-90}}),
-        iconTransformation(extent={{-130,-110},{-110,-90}})));
+        iconTransformation(extent={{-140,-110},{-102,-72}})));
   Buildings.Fluid.Storage.ExpansionVessel expVesCDU(redeclare package Medium =
         MediumW, V_start=1) "Expansion vessel" annotation (Placement(
         transformation(
@@ -238,6 +228,25 @@ model Overall
         extent={{-6,7},{6,-7}},
         rotation=90,
         origin={111,32})));
+  Buildings.Fluid.Movers.FlowControlled_m_flow pumCHW(
+    redeclare package Medium = Buildings.Media.Water "Water",
+    m_flow_nominal=mCHW_flow_nominal,
+    dp(start=214992),
+    nominalValuesDefineDefaultPressureCurve=true,
+    use_riseTime=false,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    dp_nominal=130000) "Chilled water pump"   annotation (Placement(
+        transformation(
+        extent={{8,8},{-8,-8}},
+        rotation=0,
+        origin={-40,20})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort TCDUEnt(redeclare replaceable
+      package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        mCHW_flow_nominal) "Supply Fluid temperature" annotation (Placement(
+        transformation(
+        extent={{5,6},{-5,-6}},
+        rotation=180,
+        origin={25,-28})));
 equation
   connect(AHU.port_b2, TAirSup.port_a) annotation (Line(
       points={{-60,-40},{-80,-40},{-80,-54}},
@@ -259,14 +268,6 @@ equation
       points={{-80,-10},{-80,-28},{-60,-28}},
       color={28,108,200},
       thickness=0.5));
-  connect(pumCHW.port_a, WSE.port_b2) annotation (Line(
-      points={{-32,20},{-10,20}},
-      color={28,108,200},
-      thickness=0.5));
-  connect(pumCHW.port_b, TCHWSup.port_a) annotation (Line(
-      points={{-48,20},{-80,20},{-80,10}},
-      color={28,108,200},
-      thickness=0.5));
   connect(WSE.port_a2, TCHWRet.port_a) annotation (Line(
       points={{10,20},{80,20},{80,10}},
       color={238,46,47},
@@ -274,10 +275,6 @@ equation
   connect(thrWayVal.port_3, AHU.port_a1) annotation (Line(
       points={{0,-18},{0,-14},{-80,-14},{-80,-28},{-60,-28}},
       color={28,108,200},
-      thickness=0.5));
-  connect(thrWayVal.port_2, CDU.port_a1) annotation (Line(
-      points={{10,-28},{40,-28}},
-      color={244,125,35},
       thickness=0.5));
   connect(CDU.port_b1, TCHWRet.port_b) annotation (Line(
       points={{60,-28},{80,-28},{80,-10}},
@@ -336,79 +333,75 @@ equation
       color={238,46,47},
       thickness=0.5));
   connect(TCWSup.T, Temperature.TCWSup) annotation (Line(
-      points={{-91,50},{-100,50},{-100,110},{100,110},{100,0},{120,0}},
+      points={{-91,50},{-100,50},{-100,110},{100,110},{100,-2},{114,-2}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCWRet.T, Temperature.TCWRet) annotation (Line(
-      points={{91,50},{100,50},{100,0},{120,0}},
+      points={{91,50},{100,50},{100,-2},{114,-2}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCHWSup.T, Temperature.TCHWSup) annotation (Line(
-      points={{-91,0},{-100,0},{-100,110},{100,110},{100,0},{120,0}},
+      points={{-91,0},{-100,0},{-100,110},{100,110},{100,-2},{114,-2}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCHWRet.T, Temperature.TCHWRet) annotation (Line(
-      points={{91,0},{120,0}},
+      points={{91,0},{106,0},{106,-2},{114,-2}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TAirSup.T, Temperature.TAirSup) annotation (Line(
-      points={{-91,-64},{-100,-64},{-100,-100},{100,-100},{100,0},{120,0}},
+      points={{-91,-64},{-100,-64},{-100,-100},{100,-100},{100,-2},{114,-2}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TAirRet.T, Temperature.TAirRet) annotation (Line(
-      points={{-9,-64},{-4,-64},{-4,-100},{100,-100},{100,0},{120,0}},
+      points={{-9,-64},{-4,-64},{-4,-100},{100,-100},{100,-2},{114,-2}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCDUSup.T, Temperature.TCDUSup) annotation (Line(
-      points={{9,-64},{4,-64},{4,-100},{100,-100},{100,0},{120,0}},
+      points={{9,-64},{4,-64},{4,-100},{100,-100},{100,-2},{114,-2}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCDURet.T, Temperature.TCDURet) annotation (Line(
-      points={{91,-64},{100,-64},{100,0},{120,0}},
+      points={{91,-64},{100,-64},{100,-2},{114,-2}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(controlBus.ValveMix, thrWayVal.y) annotation (Line(
-      points={{-120,0},{-120,-120},{0,-120},{0,-40}},
+      points={{-120,-4},{-120,-120},{0,-120},{0,-40}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.AHUValve, AHU.uVal) annotation (Line(
-      points={{-120,0},{-120,-30},{-61,-30}},
+      points={{-120,-4},{-120,-30},{-61,-30}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.AHUXSet, AHU.XSet_w) annotation (Line(
-      points={{-120,0},{-120,-33},{-61,-33}},
+      points={{-120,-4},{-120,-33},{-61,-33}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.TAirSupSet, AHU.TSet) annotation (Line(
-      points={{-120,0},{-120,-35},{-61,-35}},
+      points={{-120,-4},{-120,-35},{-61,-35}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.AHUFan, AHU.uFan) annotation (Line(
-      points={{-120,0},{-120,-38},{-61,-38}},
+      points={{-120,-4},{-120,-38},{-61,-38}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus, controlBus) annotation (Line(
-      points={{-120,0},{-120,0}},
+      points={{-120,-4},{-120,-4}},
       color={255,204,51},
       thickness=0.5));
-  connect(controlBus.PumpCHW, pumCHW.dp_in) annotation (Line(
-      points={{-120,0},{-120,6},{-40,6},{-40,10.4}},
-      color={255,204,51},
-      pattern=LinePattern.Dash));
   connect(controlBus.CWBypass, Bypass.y) annotation (Line(
-      points={{-120,0},{-120,70},{0,70},{0,67.2}},
+      points={{-120,-4},{-120,70},{0,70},{0,67.2}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.PumpCW, pumCW.m_flow_in) annotation (Line(
-      points={{-120,0},{-120,104},{-40,104},{-40,95.6}},
+      points={{-120,-4},{-120,104},{-40,104},{-40,95.6}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.CTFan, WCT.y) annotation (Line(
-      points={{-120,0},{-120,108},{20,108},{20,94},{12,94}},
+      points={{-120,-4},{-120,108},{20,108},{20,94},{12,94}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.ValveWCT, MainValve.y) annotation (Line(
-      points={{-120,0},{-120,70},{32,70},{32,78.8}},
+      points={{-120,-4},{-120,70},{32,70},{32,78.8}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(ITProfile.ITLoadAir, simplifiedRoom.u) annotation (Line(
@@ -431,6 +424,30 @@ equation
       points={{104,32},{80,32},{80,40}},
       color={238,46,47},
       thickness=0.5));
+  connect(pumCHW.port_a, WSE.port_b2) annotation (Line(
+      points={{-32,20},{-10,20}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(pumCHW.port_b, TCHWSup.port_a) annotation (Line(
+      points={{-48,20},{-80,20},{-80,10}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(controlBus.PumpCHW, pumCHW.m_flow_in) annotation (Line(
+      points={{-120,-4},{-120,10.4},{-40,10.4}},
+      color={255,204,51},
+      pattern=LinePattern.Dash));
+  connect(TCDUEnt.port_b, CDU.port_a1) annotation (Line(
+      points={{30,-28},{40,-28}},
+      color={244,125,35},
+      thickness=0.5));
+  connect(TCDUEnt.port_a, thrWayVal.port_2) annotation (Line(
+      points={{20,-28},{10,-28}},
+      color={244,125,35},
+      thickness=0.5));
+  connect(TCDUEnt.T, Temperature.TCDUEnt) annotation (Line(
+      points={{25,-21.4},{25,-16},{100,-16},{100,-2},{114,-2}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})));
