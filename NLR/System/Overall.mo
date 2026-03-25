@@ -2,13 +2,50 @@ within NLR.System;
 model Overall
   replaceable package MediumA = Buildings.Media.Air "Medium model";
   replaceable package MediumW = Buildings.Media.Water "Medium model";
+  parameter Modelica.Units.SI.MassFlowRate mAir_flow_nominal=roo.QRoo_flow/(
+      1005*15) "Nominal mass flow rate at fan";
+  parameter  Modelica.Units.SI.Power P_nominal=80E3
+    "Nominal compressor power (at y=1)";
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=10
+    "Temperature difference evaporator inlet-outlet";
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
+    "Temperature difference condenser outlet-inlet";
+  parameter Real COPc_nominal=8 "Chiller COP";
+  parameter Modelica.Units.SI.MassFlowRate mCHW_flow_nominal=24.23 "Nominal mass flow rate at chilled water";
+
+  parameter Modelica.Units.SI.MassFlowRate mCW_flow_nominal=30.28 "Nominal mass flow rate at condenser water";
+
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=500
+    "Nominal pressure difference";
+  parameter Real TApp_nominal = 6 "K";
+
+// Dry Cooling Tower
+  parameter Modelica.Units.SI.Temperature T_a1_nominal=30 + 273.15
+    "Temperature at nominal conditions as port a1";
+  parameter Modelica.Units.SI.Temperature T_b1_nominal=10 + 273.15
+    "Temperature at nominal conditions as port b1";
+  parameter Modelica.Units.SI.Temperature T_a2_nominal=10 + 273.15
+    "Temperature at nominal conditions as port a2";
+  parameter Modelica.Units.SI.Temperature T_b2_nominal=30 + 273.15
+    "Temperature at nominal conditions as port b2";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=mCW_flow_nominal
+    "Nominal mass flow rate medium 1";
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=m1_flow_nominal*4200
+      /1000*(T_a1_nominal - T_b1_nominal)/(T_b2_nominal - T_a2_nominal)
+    "Nominal mass flow rate medium 2";
   Equipment.AHU AHU(redeclare package Medium1 =
         Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
           =0.40) "Propylene glycol water, 40% mass fraction", redeclare package
-      Medium2 = Buildings.Media.Air "Moist air")
+      Medium2 = Buildings.Media.Air "Moist air",
+    m1_flow_nominal=mCHW_flow_nominal,
+    m2_flow_nominal=mAir_flow_nominal)
     annotation (Placement(transformation(extent={{-60,-44},{-40,-24}})));
   Equipment.SimplifiedRoom simplifiedRoom(redeclare package Medium = MediumA,
-                                          nPorts=2)
+    rooLen=50,
+    rooWid=30,
+    rooHei=3,
+    QRoo_flow=500000,
+    m_flow_nominal=mAir_flow_nominal,     nPorts=2)
     annotation (Placement(transformation(extent={{-60,-84},{-40,-64}})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TAirSup(redeclare replaceable
       package Medium = Buildings.Media.Air "Moist air", m_flow_nominal=
@@ -16,12 +53,21 @@ model Overall
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-80,-64})));
-  Equipment.CT WCT(redeclare package Medium = Buildings.Media.Water "Water")
+  Equipment.CT WCT(redeclare package Medium = Buildings.Media.Water "Water",
+    m_flow_nominal=mCW_flow_nominal,
+    dp_nominal=14930 + 14930 + 74650,
+    TAirInWB_nominal=283.15,
+    PFan_nominal=6000,
+    TApp_nominal=TApp_nominal)
     annotation (Placement(transformation(extent={{10,76},{-10,96}})));
   Equipment.WSE WSE(redeclare package Medium1 = Buildings.Media.Water "Water",
       redeclare package Medium2 =
         Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
-          =0.40) "Propylene glycol water, 40% mass fraction")
+          =0.40) "Propylene glycol water, 40% mass fraction",
+    m1_flow_nominal=mCW_flow_nominal,
+    m2_flow_nominal=mCHW_flow_nominal,
+    dp1_nominal=0,
+    dp2_nominal=0)
     annotation (Placement(transformation(extent={{-10,16},{10,36}})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TCDUSup(redeclare replaceable
       package Medium = Buildings.Media.Water "Water",
@@ -69,8 +115,8 @@ model Overall
   Buildings.Fluid.Sensors.TemperatureTwoPort TCHWSup(redeclare replaceable
       package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15, X_a=0.40)
-      "Propylene glycol water, 40% mass fraction",
-                                m_flow_nominal=mAir_flow_nominal)
+      "Propylene glycol water, 40% mass fraction", m_flow_nominal=
+        mCHW_flow_nominal)
     "Supply CHW temperature" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
@@ -78,8 +124,8 @@ model Overall
   Buildings.Fluid.Sensors.TemperatureTwoPort TCHWRet(redeclare replaceable
       package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15, X_a=0.40)
-      "Propylene glycol water, 40% mass fraction",
-                                m_flow_nominal=mAir_flow_nominal)
+      "Propylene glycol water, 40% mass fraction", m_flow_nominal=
+        mCHW_flow_nominal)
     "Return CHW temperature" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
@@ -95,8 +141,13 @@ model Overall
   Equipment.CDU CDU(redeclare package Medium1 =
         Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
           =0.40) "Propylene glycol water, 40% mass fraction", redeclare package
-      Medium2 = Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=
-            293.15, X_a=0.40) "Propylene glycol water, 40% mass fraction")
+      Medium2 = Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15,
+          X_a=0.40) "Propylene glycol water, 40% mass fraction",
+    m1_flow_nominal=mCHW_flow_nominal,
+    m2_flow_nominal=15,
+    dp1_nominal=6000,
+    dp2_nominal=249*3,
+    UA_nominal=15*4186*5)
     annotation (Placement(transformation(extent={{40,-44},{60,-24}})));
   Buildings.Fluid.Movers.FlowControlled_m_flow pumCW(
     redeclare package Medium = Buildings.Media.Water "Water",
@@ -111,15 +162,15 @@ model Overall
         rotation=0,
         origin={-40,86})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TCWSup(redeclare replaceable
-      package Medium = Buildings.Media.Water "Water",
-                                m_flow_nominal=mAir_flow_nominal)
+      package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        mCW_flow_nominal)
     "Supply CW temperature" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-80,50})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TCWRet(redeclare replaceable
-      package Medium = Buildings.Media.Water "Water",
-                                m_flow_nominal=mAir_flow_nominal)
+      package Medium = Buildings.Media.Water "Water", m_flow_nominal=
+        mCW_flow_nominal)
     "Return CW temperature" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
@@ -167,6 +218,26 @@ model Overall
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus Temperature
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
         iconTransformation(extent={{110,-10},{130,10}})));
+  Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus ITProfile
+    annotation (Placement(transformation(extent={{-140,-130},{-100,-90}}),
+        iconTransformation(extent={{-130,-110},{-110,-90}})));
+  Buildings.Fluid.Storage.ExpansionVessel expVesCDU(redeclare package Medium =
+        MediumW, V_start=1) "Expansion vessel" annotation (Placement(
+        transformation(
+        extent={{-6,7},{6,-7}},
+        rotation=90,
+        origin={111,-40})));
+  Buildings.Fluid.Storage.ExpansionVessel expVesCHW(redeclare package Medium =
+        MediumW, V_start=1) "Expansion vessel"
+    annotation (Placement(transformation(extent={{-6,7},{6,-7}},
+        rotation=90,
+        origin={111,-28})));
+  Buildings.Fluid.Storage.ExpansionVessel expVesCW(redeclare package Medium =
+        MediumW, V_start=1) "Expansion vessel" annotation (Placement(
+        transformation(
+        extent={{-6,7},{6,-7}},
+        rotation=90,
+        origin={111,32})));
 equation
   connect(AHU.port_b2, TAirSup.port_a) annotation (Line(
       points={{-60,-40},{-80,-40},{-80,-54}},
@@ -299,27 +370,22 @@ equation
   connect(controlBus.ValveMix, thrWayVal.y) annotation (Line(
       points={{-120,0},{-120,-120},{0,-120},{0,-40}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus.AHUValve, AHU.uVal) annotation (Line(
       points={{-120,0},{-120,-30},{-61,-30}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus.AHUXSet, AHU.XSet_w) annotation (Line(
       points={{-120,0},{-120,-33},{-61,-33}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus.TAirSupSet, AHU.TSet) annotation (Line(
       points={{-120,0},{-120,-35},{-61,-35}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus.AHUFan, AHU.uFan) annotation (Line(
       points={{-120,0},{-120,-38},{-61,-38}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus, controlBus) annotation (Line(
       points={{-120,0},{-120,0}},
@@ -328,30 +394,44 @@ equation
   connect(controlBus.PumpCHW, pumCHW.dp_in) annotation (Line(
       points={{-120,0},{-120,6},{-40,6},{-40,10.4}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus.CWBypass, Bypass.y) annotation (Line(
       points={{-120,0},{-120,70},{0,70},{0,67.2}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus.PumpCW, pumCW.m_flow_in) annotation (Line(
       points={{-120,0},{-120,104},{-40,104},{-40,95.6}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus.CTFan, WCT.y) annotation (Line(
       points={{-120,0},{-120,108},{20,108},{20,94},{12,94}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
   connect(controlBus.ValveWCT, MainValve.y) annotation (Line(
       points={{-120,0},{-120,70},{32,70},{32,78.8}},
       color={255,204,51},
-      thickness=0.5,
       pattern=LinePattern.Dash));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
-            -120},{120,120}})),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,
-            120}})));
+  connect(ITProfile.ITLoadAir, simplifiedRoom.u) annotation (Line(
+      points={{-120,-110},{-70,-110},{-70,-74},{-60,-74}},
+      color={217,67,180},
+      pattern=LinePattern.Dash));
+  connect(ITProfile.ITLoadCDU, D2C.u) annotation (Line(
+      points={{-120,-110},{32,-110},{32,-73.9375},{39.75,-73.9375}},
+      color={217,67,180},
+      pattern=LinePattern.Dash));
+  connect(expVesCDU.port_a, CDU.port_a2) annotation (Line(
+      points={{104,-40},{60,-40}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(expVesCHW.port_a, TCHWRet.port_b) annotation (Line(
+      points={{104,-28},{80,-28},{80,-10}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(expVesCW.port_a, TCWRet.port_b) annotation (Line(
+      points={{104,32},{80,32},{80,40}},
+      color={238,46,47},
+      thickness=0.5));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
+            {120,120}})),                                        Diagram(
+        coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})));
 end Overall;
