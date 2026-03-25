@@ -1,5 +1,5 @@
 within NLR.Equipment;
-model CoolingCoilHumidifyingHeating
+model AHU
   extends Buildings.Applications.DataCenters.ChillerCooled.Equipment.BaseClasses.PartialCoolingCoilHumidifyingHeating(
     redeclare Buildings.Fluid.Actuators.Valves.TwoWayEqualPercentage watVal(
       final R=R,
@@ -265,4 +265,4 @@ First implementation.
 </li>
 </ul>
 </html>"));
-end CoolingCoilHumidifyingHeating;
+end AHU;

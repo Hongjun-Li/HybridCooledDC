@@ -1,5 +1,5 @@
 within NLR.Equipment;
-model YorkCalc
+model CT
   "Cooling tower with variable speed using the York calculation for the approach temperature"
   extends
     Buildings.Fluid.HeatExchangers.CoolingTowers.BaseClasses.CoolingTowerVariableSpeed(
@@ -364,4 +364,4 @@ First implementation.
 </li>
 </ul>
 </html>"));
-end YorkCalc;
+end CT;

@@ -1,5 +1,5 @@
 within NLR.Equipment;
-model DryCoilCounterFlow
+model CDU
   "Counterflow coil with discretization along the flow paths and without humidity condensation"
   extends Buildings.Fluid.Interfaces.PartialFourPortInterface(show_T=false);
   extends Buildings.Fluid.Interfaces.FourPortFlowResistanceParameters(
@@ -425,4 +425,4 @@ First implementation.
           extent={{50,-32},{90,-38}},
           textColor={0,0,255},
           textString="air-side")}));
-end DryCoilCounterFlow;
+end CDU;

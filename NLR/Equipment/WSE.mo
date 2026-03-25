@@ -1,5 +1,5 @@
 within NLR.Equipment;
-model ConstantEffectiveness "Heat exchanger with constant effectiveness"
+model WSE "Heat exchanger with constant effectiveness"
   extends Buildings.Fluid.HeatExchangers.BaseClasses.PartialEffectiveness(
     sensibleOnly1 = true,
     sensibleOnly2 = true,
@@ -72,4 +72,4 @@ First implementation.
 </li>
 </ul>
 </html>"));
-end ConstantEffectiveness;
+end WSE;
