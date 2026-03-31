@@ -276,7 +276,7 @@ model Overall_test
     annotation (Placement(transformation(extent={{-200,80},{-180,100}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-150,100},{-130,80}})));
-  Modelica.Blocks.Sources.Constant MassFLow(k=1.1*mCW_flow_nominal)
+  Modelica.Blocks.Sources.Constant MassFLow(k=mCW_flow_nominal)
     annotation (Placement(transformation(extent={{-120,180},{-100,200}})));
   Modelica.Blocks.Sources.Constant Qflow(k=0.8) "MW"
     annotation (Placement(transformation(extent={{-260,-160},{-240,-140}})));
@@ -321,6 +321,8 @@ model Overall_test
     initType=Modelica.Blocks.Types.Init.InitialState)
     "Controller for freezing bypass"
     annotation (Placement(transformation(extent={{-180,120},{-160,140}})));
+  Modelica.Blocks.Math.Gain CHWmassflow(k=24.23)
+    annotation (Placement(transformation(extent={{-310,52},{-290,72}})));
 equation
   connect(AHU.port_b2, TAirSup.port_a) annotation (Line(
       points={{-60,-40},{-80,-40},{-80,-54}},
@@ -522,10 +524,6 @@ equation
       pattern=LinePattern.Dash));
   connect(TLiqRetSet.y, CHWPumMasCon.u_s)
     annotation (Line(points={{-377,62},{-360,62}}, color={0,0,127}));
-  connect(CHWPumMasCon.y, pumCHW.m_flow_in) annotation (Line(
-      points={{-337,62},{-60,62},{-60,34},{-40,34},{-40,29.6}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(TCHWRet.T, CHWPumMasCon.u_m) annotation (Line(
       points={{91,0},{140,0},{140,-192},{-348,-192},{-348,50}},
       color={0,0,127},
@@ -542,9 +540,18 @@ equation
       points={{-159,130},{32,130},{32,93.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(feedback.y, Bypass.y) annotation (Line(points={{-131,90},{-78,90},{-78,
-          70},{-4,70},{-4,67.2},{0,67.2}}, color={0,0,127}));
+  connect(feedback.y, Bypass.y) annotation (Line(points={{-131,90},{-100,90},{
+          -100,68},{-4,68},{-4,67.2},{0,67.2}},
+                                           color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(CHWPumMasCon.y, CHWmassflow.u)
+    annotation (Line(points={{-337,62},{-312,62}}, color={0,0,127}));
+  connect(CHWmassflow.y, pumCHW.m_flow_in) annotation (Line(
+      points={{-289,62},{-40,62},{-40,29.6}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})),                                        Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})),
+    experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"));
 end Overall_test;
