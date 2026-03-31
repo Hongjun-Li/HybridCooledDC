@@ -2,7 +2,9 @@ within NLR.Equipment;
 model D2C
   import Buildings;
   Buildings.Fluid.MixingVolumes.MixingVolume vol(
-    redeclare final package Medium = Buildings.Media.Water "Water",
+    redeclare package Medium =
+        Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
+          =0.40) "Propylene glycol water, 40% mass fraction",
     final m_flow_nominal=mrack_flow_nominal,
     V=v,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -21,13 +23,17 @@ model D2C
           rotation=0, extent={{-132,-10},{-113,10}}), iconTransformation(extent
           ={{-131,-9},{-113,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Buildings.Media.Water)
+        Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
+          =0.40))
     annotation (Placement(transformation(extent={{-40,-90},{-20,-70}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Buildings.Media.Water)
+        Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
+          =0.40))
     annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
   Buildings.Fluid.Movers.FlowControlled_m_flow pum(
-    redeclare package Medium = Buildings.Media.Water,
+    redeclare package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater
+        (property_T=293.15, X_a=0.40)
+      "Propylene glycol water, 40% mass fraction",
     redeclare Buildings.Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to8 per,
     addPowerToMedium=false,
     final m_flow_nominal=mrack_flow_nominal,
@@ -38,15 +44,17 @@ model D2C
         rotation=0,
         origin={-66,-60})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TSup(m_flow_nominal=
-        mrack_flow_nominal,
-                         redeclare package Medium = Buildings.Media.Water)
+        mrack_flow_nominal, redeclare package Medium =
+        Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
+          =0.40) "Propylene glycol water, 40% mass fraction")
     "Temperature sensor" annotation (Placement(transformation(
         extent={{-7,-6},{7,6}},
         rotation=0,
         origin={-101,-60})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TRet(m_flow_nominal=
-        mrack_flow_nominal,
-                         redeclare package Medium = Buildings.Media.Water)
+        mrack_flow_nominal, redeclare package Medium =
+        Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
+          =0.40) "Propylene glycol water, 40% mass fraction")
     "Temperature sensor" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,

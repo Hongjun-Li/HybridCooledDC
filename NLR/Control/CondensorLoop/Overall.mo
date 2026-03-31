@@ -5,7 +5,7 @@ model Overall
   CoolingTower coolingTower(TCWRetSet=TCWRetSet)
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
   Pump condenserPump(CW_flownominal=CW_flownominal)
-    annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
+    annotation (Placement(transformation(extent={{-10,-42},{10,-22}})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus Temperature
     annotation (Placement(transformation(extent={{-80,-22},{-40,18}}),
         iconTransformation(extent={{-74,-14},{-46,12}})));
@@ -26,8 +26,8 @@ equation
       color={217,67,180},
       thickness=0.5));
   connect(coolingTower.CTControl, condenserPump.CWPumpControl) annotation (Line(
-      points={{10,29.8333},{20,29.8333},{20,-30},{10,-30},{10,-29.8333},{
-          10.1667,-29.8333}},
+      points={{10,29.8333},{20,29.8333},{20,-30},{10,-30},{10,-31.8333},{
+          10.1667,-31.8333}},
       color={217,67,180},
       thickness=0.5));
   connect(TCWWet.y, coolingTower.TCWSupSet) annotation (Line(points={{-23.2,38},
