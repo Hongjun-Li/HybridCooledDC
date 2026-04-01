@@ -555,7 +555,10 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})),
-    experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"),
+    experiment(
+      StopTime=31536000,
+      Interval=600,
+      __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file(ensureSimulated=true) =
         "Resources/scripts/System/Overall_test/Simulate and Plot.mos"
         "Simulate and Plot"));
