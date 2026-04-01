@@ -203,11 +203,11 @@ model Overall
         rotation=90,
         origin={80,-64})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus controlBus
-    annotation (Placement(transformation(extent={{-144,-28},{-96,20}}),
-        iconTransformation(extent={{-134,-18},{-96,20}})));
+    annotation (Placement(transformation(extent={{-158,-36},{-94,26}}),
+        iconTransformation(extent={{-148,-26},{-94,26}})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus Temperature
-    annotation (Placement(transformation(extent={{90,-26},{138,22}}),
-        iconTransformation(extent={{100,-16},{138,22}})));
+    annotation (Placement(transformation(extent={{84,-36},{148,26}}),
+        iconTransformation(extent={{94,-26},{148,26}})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus ITProfile
     annotation (Placement(transformation(extent={{-140,-130},{-100,-90}}),
         iconTransformation(extent={{-140,-110},{-102,-72}})));
@@ -333,75 +333,75 @@ equation
       color={238,46,47},
       thickness=0.5));
   connect(TCWSup.T, Temperature.TCWSup) annotation (Line(
-      points={{-91,50},{-100,50},{-100,110},{100,110},{100,-2},{114,-2}},
+      points={{-91,50},{-100,50},{-100,110},{100,110},{100,-5},{116,-5}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCWRet.T, Temperature.TCWRet) annotation (Line(
-      points={{91,50},{100,50},{100,-2},{114,-2}},
+      points={{91,50},{100,50},{100,-5},{116,-5}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCHWSup.T, Temperature.TCHWSup) annotation (Line(
-      points={{-91,0},{-100,0},{-100,110},{100,110},{100,-2},{114,-2}},
+      points={{-91,0},{-100,0},{-100,110},{100,110},{100,-5},{116,-5}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCHWRet.T, Temperature.TCHWRet) annotation (Line(
-      points={{91,0},{106,0},{106,-2},{114,-2}},
+      points={{91,0},{106,0},{106,-5},{116,-5}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TAirSup.T, Temperature.TAirSup) annotation (Line(
-      points={{-91,-64},{-100,-64},{-100,-100},{100,-100},{100,-2},{114,-2}},
+      points={{-91,-64},{-100,-64},{-100,-100},{100,-100},{100,-5},{116,-5}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TAirRet.T, Temperature.TAirRet) annotation (Line(
-      points={{-9,-64},{-4,-64},{-4,-100},{100,-100},{100,-2},{114,-2}},
+      points={{-9,-64},{-4,-64},{-4,-100},{100,-100},{100,-5},{116,-5}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCDUSup.T, Temperature.TCDUSup) annotation (Line(
-      points={{9,-64},{4,-64},{4,-100},{100,-100},{100,-2},{114,-2}},
+      points={{9,-64},{4,-64},{4,-100},{100,-100},{100,-5},{116,-5}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(TCDURet.T, Temperature.TCDURet) annotation (Line(
-      points={{91,-64},{100,-64},{100,-2},{114,-2}},
+      points={{91,-64},{100,-64},{100,-5},{116,-5}},
       color={0,0,0},
       pattern=LinePattern.Dash));
   connect(controlBus.ValveMix, thrWayVal.y) annotation (Line(
-      points={{-120,-4},{-120,-120},{0,-120},{0,-40}},
+      points={{-126,-5},{-126,-120},{0,-120},{0,-40}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.AHUValve, AHU.uVal) annotation (Line(
-      points={{-120,-4},{-120,-30},{-61,-30}},
+      points={{-126,-5},{-126,-30},{-61,-30}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.AHUXSet, AHU.XSet_w) annotation (Line(
-      points={{-120,-4},{-120,-33},{-61,-33}},
+      points={{-126,-5},{-126,-33},{-61,-33}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.TAirSupSet, AHU.TSet) annotation (Line(
-      points={{-120,-4},{-120,-35},{-61,-35}},
+      points={{-126,-5},{-126,-35},{-61,-35}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.AHUFan, AHU.uFan) annotation (Line(
-      points={{-120,-4},{-120,-38},{-61,-38}},
+      points={{-126,-5},{-126,-38},{-61,-38}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus, controlBus) annotation (Line(
-      points={{-120,-4},{-120,-4}},
+      points={{-126,-5},{-126,-5}},
       color={255,204,51},
       thickness=0.5));
   connect(controlBus.CWBypass, Bypass.y) annotation (Line(
-      points={{-120,-4},{-120,70},{0,70},{0,67.2}},
+      points={{-126,-5},{-126,70},{0,70},{0,67.2}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.PumpCW, pumCW.m_flow_in) annotation (Line(
-      points={{-120,-4},{-120,104},{-40,104},{-40,95.6}},
+      points={{-126,-5},{-126,104},{-40,104},{-40,95.6}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.CTFan, WCT.y) annotation (Line(
-      points={{-120,-4},{-120,108},{20,108},{20,94},{12,94}},
+      points={{-126,-5},{-126,108},{20,108},{20,94},{12,94}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(controlBus.ValveWCT, MainValve.y) annotation (Line(
-      points={{-120,-4},{-120,70},{32,70},{32,78.8}},
+      points={{-126,-5},{-126,70},{32,70},{32,78.8}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(ITProfile.ITLoadAir, simplifiedRoom.u) annotation (Line(
@@ -433,7 +433,7 @@ equation
       color={28,108,200},
       thickness=0.5));
   connect(controlBus.PumpCHW, pumCHW.m_flow_in) annotation (Line(
-      points={{-120,-4},{-120,10.4},{-40,10.4}},
+      points={{-126,-5},{-126,10.4},{-40,10.4}},
       color={255,204,51},
       pattern=LinePattern.Dash));
   connect(TCDUEnt.port_b, CDU.port_a1) annotation (Line(
@@ -445,7 +445,7 @@ equation
       color={244,125,35},
       thickness=0.5));
   connect(TCDUEnt.T, Temperature.TCDUEnt) annotation (Line(
-      points={{25,-21.4},{25,-16},{100,-16},{100,-2},{114,-2}},
+      points={{25,-21.4},{25,-16},{100,-16},{100,-5},{116,-5}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},

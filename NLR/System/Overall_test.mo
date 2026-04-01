@@ -1,5 +1,6 @@
 within NLR.System;
 model Overall_test
+  import ModelicaServices;
   replaceable package MediumA = Buildings.Media.Air "Medium model";
   replaceable package MediumW = Buildings.Media.Water "Medium model";
   parameter Modelica.Units.SI.MassFlowRate mAir_flow_nominal=18 "Nominal mass flow rate at fan";
@@ -230,7 +231,8 @@ model Overall_test
   Buildings.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(transformation(extent={{-180,160},{-160,180}})));
   Buildings.BoundaryConditions.WeatherData.ReaderTMY3  weaData(filNam=
-        Modelica.Utilities.Files.loadResource("modelica://Buildings/Resources/weatherdata/DRYCOLD.mos"))
+        ModelicaServices.ExternalReferences.loadResource(
+        "modelica://Buildings/Resources/weatherdata/DRYCOLD.mos"))
     annotation (Placement(transformation(extent={{-220,160},{-200,180}})));
   Buildings.Controls.Continuous.LimPID ahuValSig(
     Ti=40,
@@ -553,5 +555,8 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})),
-    experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"),
+    __Dymola_Commands(file(ensureSimulated=true) =
+        "Resources/scripts/System/Overall_test/Simulate and Plot.mos"
+        "Simulate and Plot"));
 end Overall_test;

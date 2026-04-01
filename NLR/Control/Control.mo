@@ -8,10 +8,10 @@ model Control
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus Temperature
     annotation (Placement(transformation(extent={{-80,-20},{-40,20}}),
-        iconTransformation(extent={{-74,-14},{-46,12}})));
+        iconTransformation(extent={{-74,-14},{-46,14}})));
   Modelica.Blocks.Examples.BusUsage_Utilities.Interfaces.ControlBus Control
     annotation (Placement(transformation(extent={{40,-20},{80,20}}),
-        iconTransformation(extent={{46,-14},{74,12}})));
+        iconTransformation(extent={{46,-14},{74,14}})));
   ChilledWaterLoop.Overall FWS(CHW_flownominal=CHW_flownominal, TEnter=TEnter)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
