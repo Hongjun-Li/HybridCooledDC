@@ -25,10 +25,6 @@ package Overall_test
   equation
     connect(no.y,feedback. u1)
       annotation (Line(points={{21,-30},{52,-30}},   color={0,0,127}));
-    connect(TCWRet.T,bypassCon. u_m) annotation (Line(
-        points={{-120,-50},{-10,-50},{-10,28}},
-        color={0,0,127},
-        pattern=LinePattern.Dash));
     connect(bypassCon.y,feedback. u2) annotation (Line(points={{1,40},{60,40},{
             60,-22}},   color={0,0,127}));
     connect(feedback.y, yBypass)
@@ -37,6 +33,8 @@ package Overall_test
       annotation (Line(points={{1,40},{110,40}}, color={0,0,127}));
     connect(ReturnSet.y, bypassCon.u_s)
       annotation (Line(points={{-39,40},{-22,40}}, color={0,0,127}));
+    connect(TCWRet, bypassCon.u_m) annotation (Line(points={{-120,-50},{-10,-50},
+            {-10,28}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end Anti_freeze;
@@ -86,10 +84,6 @@ package Overall_test
                                                        color={0,0,127}));
     connect(TAirSupSet.y,ahuValSig. u_s)
       annotation (Line(points={{-79,-60},{-42,-60}}, color={0,0,127}));
-    connect(TAirSup.T,ahuValSig. u_m) annotation (Line(
-        points={{-120,-100},{-30,-100},{-30,-72}},
-        color={0,0,127},
-        pattern=LinePattern.Dash));
     connect(TAirRetSet.y,XAirSupSet. T) annotation (Line(points={{-79,-24},{-32,
             -24},{-32,10},{-22,10}},     color={0,0,127}));
     connect(phiAirRetSet.y,XAirSupSet. phi) annotation (Line(points={{-79,30},{
@@ -104,6 +98,8 @@ package Overall_test
       annotation (Line(points={{1,10},{110,10}}, color={0,0,127}));
     connect(TAirRet, ahuFanSpeCon.u_m)
       annotation (Line(points={{-120,60},{50,60},{50,78}}, color={0,0,127}));
+    connect(TAirSup, ahuValSig.u_m) annotation (Line(points={{-120,-100},{-30,
+            -100},{-30,-72}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end ahuCon;
@@ -207,13 +203,15 @@ package Overall_test
           273.15 + 12.78, weaBus.TWetBul + 3)))
       "Condenser water supply temperature setpoint"
       annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    Buildings.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+      annotation (Placement(transformation(extent={{90,50},{110,70}})));
   equation
     connect(TCWWet.y, conFan.u_s)
       annotation (Line(points={{-19,30},{-2,30}}, color={0,0,127}));
-    connect(TCWRet, conFan.u_m)
-      annotation (Line(points={{-120,0},{10,0},{10,18}}, color={0,0,127}));
     connect(conFan.y, uFan) annotation (Line(points={{21,30},{80,30},{80,0},{
             110,0}}, color={0,0,127}));
+    connect(TCWRet, conFan.u_m)
+      annotation (Line(points={{-120,0},{10,0},{10,18}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end CTCon;

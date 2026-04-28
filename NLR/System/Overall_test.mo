@@ -361,14 +361,6 @@ equation
       points={{16,-28},{40,-28}},
       color={244,125,35},
       thickness=0.5));
-  connect(weaData.weaBus, weaBus) annotation (Line(
-      points={{-140,184},{-90,184}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(weaBus.TWetBul, WCT.TAir) annotation (Line(
       points={{-89.95,184.05},{-89.95,184},{20,184},{20,90},{12,90}},
       color={255,204,51},
@@ -463,6 +455,18 @@ equation
       points={{91,50},{96,50},{96,104},{-170,104},{-170,150},{-162,150}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+  connect(weaData.weaBus, weaBus) annotation (Line(
+      points={{-140,184},{-90,184}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(weaData.weaBus, cTCon.weaBus) annotation (Line(
+      points={{-140,184},{-134,184},{-134,156},{-140,156}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})),

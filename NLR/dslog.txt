@@ -1,0 +1,257 @@
+Log-file of program ./dymosim
+(generated: Mon Apr 27 22:51:49 2026)
+
+dymosim started
+... "NLR.System.Overall_test" simulating
+... "dsin.txt" loading (dymosim input file)
+... "Overall_test.mat" creating (simulation result file)
+
+Integration started at T = 0 using integration method DASSL
+(DAE multi-step solver (dassl/dasslrt of Petzold modified by Dassault Systemes))
+Warning: The following was detected at time: 7307127.150395158
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 9733282.554609273
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 11020888.08585871
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 11020868.68946816
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 13922549.95515472
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 14031685.72824259
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 22659915.63833219
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 22705689.84685091
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 22705656.10641886
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 22916648.0734692
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 22916257.29717989
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23047878.43584033
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23106539.03853207
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23106555.3877321
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23376858.80464308
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23378905.72975605
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23464235.05776663
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23464217.99913391
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23464243.587083
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 23584660.53614568
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 24930671.75201742
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 24930655.98766396
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 25019895.37545872
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 25019911.36176163
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+Warning: The following was detected at time: 25063250.67494791
+  *** Warning in Overall_test.AHU.cooCoi: The flow direction reversed.
+      However, because the constant use_dynamicFlowRegime is set to false,
+      the model does not change equations based on the actual flow regime.
+      To switch equations based on the actual flow regime during the simulation,
+      set the constant use_dynamicFlowRegime=true.
+      Note that this can lead to slow simulation because of events.
+  Failed condition: noEvent(AHU.cooCoi.m1_flow > -2.423) and noEvent(AHU.cooCoi.m2_flow > -1.8)
+
+
+Integration terminated successfully at T = 31536000
+   CPU-time for integration                : 9.59 seconds
+   CPU-time for one grid interval          : 0.182 milliseconds
+   CPU-time for initialization             : 0.053 seconds
+   Number of result points                 : 52566
+   Number of grid points                   : 52561
+   Number of accepted steps                : 74660
+   Number of f-evaluations (dynamics)      : 171673
+   Number of crossing function evaluations : 127241
+   Number of Jacobian-evaluations          : 17677
+   Number of model time events             : 0
+   Number of input time events             : 0
+   Number of state events                  : 2
+   Number of step events                   : 0
+   Minimum integration stepsize            : 0.00091
+   Maximum integration stepsize            : 7.88e+03
+   Maximum integration order               : 5
+Calling terminal section
+... "dsfinal.txt" creating (final states)
+
+SUCCESSFUL simulation of NLR.System.Overall_test
