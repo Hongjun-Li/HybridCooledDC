@@ -1,7 +1,7 @@
 *.mat
-buildlog.txt
-dsfinal.txt
-dsin.txt
+*.exe
 dslog.txt
+dsin.txt
+dsfinal.txt
+buildlog.txt
 dsmodel.c
-dymosim.exe
