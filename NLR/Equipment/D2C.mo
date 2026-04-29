@@ -12,9 +12,7 @@ model D2C
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
-  Modelica.Blocks.Math.Gain gain(k=1000000) "Watt_to_MW"
-    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-    parameter Modelica.Units.SI.MassFlowRate mrack_flow_nominal=6
+    parameter Modelica.Units.SI.MassFlowRate mrack_flow_nominal=10
     "Nominal mass flow rate at Racks";
     parameter Real v=3
     "Volume of rack [m3]";
@@ -77,10 +75,6 @@ model D2C
 equation
   connect(vol.heatPort, prescribedHeatFlow.port)
     annotation (Line(points={{-40,0},{-52,0}},   color={191,0,0}));
-  connect(gain.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-79,0},{-72,0}},   color={0,0,127}));
-  connect(u, gain.u) annotation (Line(points={{-122.5,0},{-102,0}},
-                    color={0,0,127}));
   connect(TRet.port_b, port_b)
     annotation (Line(points={{6,-60},{22,-60},{22,-80},{-30,-80}},
                                              color={0,127,255}));
@@ -105,6 +99,8 @@ equation
   connect(gain1.y, pum.m_flow_in)
     annotation (Line(points={{-52.6,-40},{-66,-40},{-66,-48}},
                                                             color={0,0,127}));
+  connect(u, prescribedHeatFlow.Q_flow)
+    annotation (Line(points={{-122.5,0},{-72,0}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-120,-80},{40,80}})),Icon(
         coordinateSystem(extent={{-120,-80},{40,80}})));
 end D2C;

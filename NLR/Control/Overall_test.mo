@@ -44,20 +44,18 @@ package Overall_test
     Modelica.Blocks.Interfaces.RealOutput uVal
       annotation (Placement(transformation(extent={{100,80},{120,100}})));
     Modelica.Blocks.Interfaces.RealInput TAirSup
-      annotation (Placement(transformation(extent={{-140,-120},{-100,-80}})));
+      annotation (Placement(transformation(extent={{-140,30},{-100,70}})));
     Modelica.Blocks.Interfaces.RealInput TAirRet
-      annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-    Modelica.Blocks.Interfaces.RealOutput TSet
-      annotation (Placement(transformation(extent={{100,-34},{120,-14}})));
+      annotation (Placement(transformation(extent={{-140,-110},{-100,-70}})));
     Buildings.Controls.Continuous.LimPID ahuValSig(
       Ti=40,
       reverseActing=false,
       yMin=0.1,
       k=0.01)          "Valve position signal for the AHU"
-      annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
+      annotation (Placement(transformation(extent={{-40,80},{-20,100}})));
     Modelica.Blocks.Sources.Constant TAirSupSet(k=273.15 + 21.5)
       "Supply air temperature setpoint"
-      annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
+      annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
     Modelica.Blocks.Sources.Constant phiAirRetSet(k=0.5)
       "Return air relative humidity setpoint"
       annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
@@ -73,33 +71,32 @@ package Overall_test
       reverseActing=false,
       yMin=0.2,
       Ti=240) "Fan speed controller "
-      annotation (Placement(transformation(extent={{40,80},{60,100}})));
+      annotation (Placement(transformation(extent={{40,-82},{60,-62}})));
     Modelica.Blocks.Interfaces.RealOutput XSet_w
       annotation (Placement(transformation(extent={{100,0},{120,20}})));
     Modelica.Blocks.Interfaces.RealOutput uFan
-      annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
+      annotation (Placement(transformation(extent={{100,-82},{120,-62}})));
   equation
     connect(TAirRetSet.y,ahuFanSpeCon. u_s)
-      annotation (Line(points={{-79,-24},{30,-24},{30,90},{38,90}},
+      annotation (Line(points={{-79,-24},{28,-24},{28,-72},{38,-72}},
                                                        color={0,0,127}));
     connect(TAirSupSet.y,ahuValSig. u_s)
-      annotation (Line(points={{-79,-60},{-42,-60}}, color={0,0,127}));
+      annotation (Line(points={{-79,90},{-42,90}},   color={0,0,127}));
     connect(TAirRetSet.y,XAirSupSet. T) annotation (Line(points={{-79,-24},{-32,
             -24},{-32,10},{-22,10}},     color={0,0,127}));
     connect(phiAirRetSet.y,XAirSupSet. phi) annotation (Line(points={{-79,30},{
             -30,30},{-30,16},{-22,16}},  color={0,0,127}));
-    connect(ahuValSig.y, uFan)
-      annotation (Line(points={{-19,-60},{110,-60}}, color={0,0,127}));
-    connect(TAirRetSet.y, TSet)
-      annotation (Line(points={{-79,-24},{110,-24}}, color={0,0,127}));
-    connect(ahuFanSpeCon.y, uVal)
-      annotation (Line(points={{61,90},{110,90}}, color={0,0,127}));
     connect(XAirSupSet.X[1], XSet_w)
       annotation (Line(points={{1,10},{110,10}}, color={0,0,127}));
     connect(TAirRet, ahuFanSpeCon.u_m)
-      annotation (Line(points={{-120,60},{50,60},{50,78}}, color={0,0,127}));
-    connect(TAirSup, ahuValSig.u_m) annotation (Line(points={{-120,-100},{-30,
-            -100},{-30,-72}}, color={0,0,127}));
+      annotation (Line(points={{-120,-90},{50,-90},{50,-84}},
+                                                           color={0,0,127}));
+    connect(TAirSup, ahuValSig.u_m) annotation (Line(points={{-120,50},{-30,50},
+            {-30,78}},        color={0,0,127}));
+    connect(ahuFanSpeCon.y, uFan)
+      annotation (Line(points={{61,-72},{110,-72}}, color={0,0,127}));
+    connect(ahuValSig.y, uVal)
+      annotation (Line(points={{-19,90},{110,90}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end ahuCon;
@@ -107,26 +104,42 @@ package Overall_test
   model Qflow
       extends Modelica.Blocks.Icons.Block;
     Modelica.Blocks.Interfaces.RealOutput yAir
-      annotation (Placement(transformation(extent={{100,18},{120,38}})));
+      annotation (Placement(transformation(extent={{100,20},{120,40}})));
     Modelica.Blocks.Interfaces.RealOutput yLiq
       annotation (Placement(transformation(extent={{100,-20},{120,0}})));
-    Modelica.Blocks.Sources.Constant Qflow(k=0.8) "MW"
-      annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
-    Modelica.Blocks.Math.Gain QflowAir(k=0.3)
-      annotation (Placement(transformation(extent={{20,18},{40,38}})));
-    Modelica.Blocks.Math.Gain QflowLiq(k=0.7)
-      annotation (Placement(transformation(extent={{20,-20},{40,0}})));
+    Modelica.Blocks.Math.Gain QflowAir(k=1000)
+      annotation (Placement(transformation(extent={{-20,20},{0,40}})));
+    Modelica.Blocks.Math.Gain QflowLiq(k=1000)
+      annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
+    Modelica.Blocks.Sources.CombiTimeTable NLRdata(
+      tableOnFile=true,
+      tableName="tab1",
+      fileName="C:\\NLR_DC\\NLR\\Resources\\NLR_data\\NREL_HPCDC_modelica.txt",
+      columns={2,3,4,5,6,7})
+      annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
+    Modelica.Blocks.Discrete.Sampler samplerAir(samplePeriod=300)
+      annotation (Placement(transformation(extent={{40,20},{60,40}})));
+    Modelica.Blocks.Discrete.Sampler samplerLiq(samplePeriod=300)
+      annotation (Placement(transformation(extent={{40,-20},{60,0}})));
   equation
-    connect(Qflow.y,QflowAir. u) annotation (Line(points={{-39,10},{8,10},{8,28},
-            {18,28}},                 color={0,0,127}));
-    connect(Qflow.y,QflowLiq. u) annotation (Line(points={{-39,10},{8,10},{8,
-            -10},{18,-10}},           color={0,0,127}));
-    connect(QflowAir.y, yAir)
-      annotation (Line(points={{41,28},{110,28}}, color={0,0,127}));
-    connect(QflowLiq.y, yLiq)
-      annotation (Line(points={{41,-10},{110,-10}}, color={0,0,127}));
+    connect(NLRdata.y[4], QflowLiq.u) annotation (Line(points={{-59,10},{-32,10},
+            {-32,-10},{-22,-10}}, color={0,0,127}));
+    connect(samplerAir.y, yAir)
+      annotation (Line(points={{61,30},{110,30}}, color={0,0,127}));
+    connect(QflowLiq.y, samplerLiq.u)
+      annotation (Line(points={{1,-10},{38,-10}}, color={0,0,127}));
+    connect(samplerLiq.y, yLiq)
+      annotation (Line(points={{61,-10},{110,-10}}, color={0,0,127}));
+    connect(samplerAir.u, QflowAir.y)
+      annotation (Line(points={{38,30},{1,30}}, color={0,0,127}));
+    connect(NLRdata.y[1], QflowAir.u) annotation (Line(points={{-59,10},{-32,10},
+            {-32,30},{-22,30}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+          coordinateSystem(preserveAspectRatio=false)),
+      experiment(
+        StopTime=31536000,
+        Interval=599.999616,
+        __Dymola_Algorithm="Dassl"));
   end Qflow;
 
   model MixCon

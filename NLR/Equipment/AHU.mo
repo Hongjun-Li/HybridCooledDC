@@ -51,20 +51,6 @@ model AHU
     "Deadband for temperature difference";
   parameter Modelica.Units.SI.Time tWai=60 "Waiting time";
 
-  Modelica.Blocks.Interfaces.RealOutput PHea(
-    final unit = "W",
-    final quantity = "Power")
-    "Power consumed by electric heater"
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={18,-110})));
-  Modelica.Blocks.Interfaces.RealInput TSet(
-    final unit = "K",
-    final quantity = "ThermodynamicTemperature")
-    "Set point temperature of the fluid that leaves port_b"
-    annotation (Placement(transformation(extent={{-140,-40},{-100,0}}),
-        iconTransformation(extent={{-120,-20},{-100,0}})));
   Modelica.Blocks.Interfaces.RealInput XSet_w(
     final unit = "1",
     final quantity = "MassFraction",
@@ -73,9 +59,6 @@ model AHU
     "Set point for water vapor mass fraction in kg/kg total air of the fluid that leaves port_b"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,0},{-100,20}})));
-  Modelica.Blocks.Sources.RealExpression dT(y(final unit="K")=T_inflow_hea - TSet)
-    "Difference between inlet temperature and temperature setpoint of the reheater"
-    annotation (Placement(transformation(extent={{-60,-4},{-40,16}})));
 
   Buildings.Fluid.Humidifiers.SprayAirWasher_X hum(
     redeclare final package Medium = Medium2,
@@ -98,39 +81,6 @@ model AHU
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={20,-60})));
-  Buildings.Applications.DataCenters.ChillerCooled.Equipment.ElectricHeater eleHea(
-    redeclare final package Medium = Medium2,
-    final allowFlowReversal=allowFlowReversal2,
-    final show_T=show_T,
-    final m_flow_small=m2_flow_small,
-    final energyDynamics=energyDynamics,
-    final tau=tauEleHea,
-    final homotopyInitialization=homotopyInitialization,
-    final dp_nominal=0,
-    final QMax_flow=QHeaMax_flow,
-    final eta=etaHea,
-    final m_flow_nominal=m2_flow_nominal,
-    final T_start=T_start,
-    final from_dp=from_dp2,
-    final linearizeFlowResistance=linearizeFlowResistance2,
-    final deltaM=deltaM2)
-    "Electric heater"
-     annotation (
-      Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        origin={-22,-60})));
-
-  Buildings.Applications.DataCenters.ChillerCooled.Controls.Reheat heaCon(
-    final yValSwi=yValSwi,
-    final yValDeaBan=yValDeaBan,
-    final dTSwi=dTSwi,
-    final dTDeaBan=dTDeaBan,
-    final tWai=tWai)
-    "Reheater on/off controller"
-    annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        origin={-10,10})));
 
 protected
   Medium2.Temperature T_inflow_hea= Medium2.temperature(state=Medium2.setState_phX(port_b2.p,
@@ -139,34 +89,17 @@ protected
       "Temperature of inflowing fluid at port_a of reheater";
 
 equation
-  connect(TSet, eleHea.TSet)
-    annotation (Line(points={{-120,-20},{-88,-20},{-88,-28},{-4,-28},
-                {-4,-52},{-10,-52}},color={0,0,127}));
   connect(XSet_w, hum.X_w)
     annotation (Line(points={{-120,0},{-80,0},{-80,-20},{36,-20},
                 {36,-54},{32,-54}},color={0,0,127}));
-  connect(fan.port_a, eleHea.port_b)
-    annotation (Line(points={{-50,-60},{-41,-60},{-32,-60}},
-                color={0,127,255}));
-  connect(eleHea.port_a, hum.port_b)
-    annotation (Line(points={{-12,-60},{10,-60}},
-                color={0,127,255}));
   connect(hum.port_a, cooCoi.port_b2) annotation (Line(points={{30,-60},{30,
           -60},{48,-60},{42,-60},{60,-60}}, color={0,127,255}));
-  connect(eleHea.P, PHea)
-    annotation (Line(points={{-33,-66},{-40,-66},{-40,-76},
-                {18,-76},{18,-110}}, color={0,0,127}));
   connect(uFan,fan.y)
     annotation (Line(points={{-120,-50},{-120,-50},{-90,-50},{-90,-50},{-90,-50},
           {-90,-40},{-60,-40},{-60,-48},{-60,-48}}, color={0,0,127}));
-  connect(heaCon.y, eleHea.on)
-    annotation (Line(points={{1,10},{4,10},{4,-57},{-10,-57}},
-                     color={255,0,255}));
-  connect(dT.y, heaCon.dT)
-    annotation (Line(points={{-39,6},{-22,6},{-22,5}}, color={0,0,127}));
-  connect(heaCon.yVal, watVal.y_actual) annotation (Line(points={{-22,15},{-32,15},
-          {-32,16},{-32,40},{73,40},{73,-5}},     color={0,0,127}));
 
+  connect(hum.port_b, fan.port_a)
+    annotation (Line(points={{10,-60},{-50,-60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-92,62},{92,-64}},

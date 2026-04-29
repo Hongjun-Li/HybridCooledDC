@@ -46,8 +46,6 @@ model SimplifiedRoom "Simplified data center room"
   Modelica.Blocks.Interfaces.RealInput u annotation (Placement(transformation(
           extent={{-120,-20},{-80,20}}), iconTransformation(extent={{-120,-20},
             {-80,20}})));
-  Modelica.Blocks.Math.Gain gain(k=1000000)
-    annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
 equation
   connect(rooVol.ports, airPorts) annotation (Line(
       points={{41,-20},{40,-20},{40,-80},{0,-80},{0,-100}},
@@ -61,10 +59,8 @@ equation
           {22,-10},{31,-10}},color={191,0,0}));
   connect(TAir.T, TRooAir) annotation (Line(points={{61,36},{61,0},{110,0}},
                color={0,0,127}));
-  connect(gain.y, QSou.Q_flow)
-    annotation (Line(points={{-41,0},{-18,0}},     color={0,0,127}));
-  connect(gain.u, u) annotation (Line(points={{-64,0},{-100,0}},
-               color={0,0,127}));
+  connect(u, QSou.Q_flow)
+    annotation (Line(points={{-100,0},{-18,0}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Rectangle(

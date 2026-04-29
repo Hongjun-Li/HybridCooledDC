@@ -88,8 +88,6 @@ model Overall_test
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={20,-64})));
-  Equipment.D2C D2C
-    annotation (Placement(transformation(extent={{40,-84},{60,-64}})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TCHWSup(redeclare replaceable
       package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15, X_a=0.40)
@@ -108,17 +106,6 @@ model Overall_test
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={80,0})));
-  Equipment.CDU CDU(redeclare package Medium1 =
-        Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
-          =0.40) "Propylene glycol water, 40% mass fraction", redeclare package
-      Medium2 = Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15,
-          X_a=0.40) "Propylene glycol water, 40% mass fraction",
-    m1_flow_nominal=mCHW_flow_nominal,
-    m2_flow_nominal=15,
-    dp1_nominal=6000,
-    dp2_nominal=249*3,
-    UA_nominal=15*4186*5)
-    annotation (Placement(transformation(extent={{40,-44},{60,-24}})));
   Buildings.Fluid.Movers.FlowControlled_m_flow pumCW(
     redeclare package Medium = Buildings.Media.Water "Water",
     m_flow_nominal=mCW_flow_nominal,
@@ -260,6 +247,27 @@ model Overall_test
     annotation (Placement(transformation(extent={{-160,42},{-140,62}})));
   Control.Overall_test.CTCon cTCon
     annotation (Placement(transformation(extent={{-160,140},{-140,160}})));
+  Buildings.Fluid.Sensors.TemperatureTwoPort TAHULea(redeclare replaceable
+      package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15, X_a=0.40)
+      "Propylene glycol water, 40% mass fraction", m_flow_nominal=
+        mCHW_flow_nominal) "Return Fluid temperature" annotation (Placement(
+        transformation(
+        extent={{5,6},{-5,-6}},
+        rotation=180,
+        origin={-25,-28})));
+  Equipment.ITRack ITRack(mrack_flow_nominal=11)
+    annotation (Placement(transformation(extent={{40,-84},{60,-64}})));
+  Equipment.CDURack CDURack(
+    redeclare package Medium1 = Buildings.Media.Antifreeze.PropyleneGlycolWater
+        (property_T=293.15, X_a=0.40),
+    redeclare package Medium2 = Buildings.Media.Antifreeze.PropyleneGlycolWater
+        (property_T=293.15, X_a=0.40),
+    m1_flow_nominal=mCHW_flow_nominal,
+    m2_flow_nominal=11,
+    dp1_nominal=6000,
+    dp2_nominal=249*3)
+    annotation (Placement(transformation(extent={{40,-44},{60,-24}})));
 equation
   connect(AHU.port_b2, TAirSup.port_a) annotation (Line(
       points={{-60,-40},{-80,-40},{-80,-54}},
@@ -269,10 +277,6 @@ equation
       points={{-80,-74},{-80,-88},{-50.5625,-88},{-50.5625,-82.7}},
       color={28,108,200},
       thickness=0.5));
-  connect(TCDUSup.port_b, D2C.port_a) annotation (Line(
-      points={{20,-74},{20,-88},{48.75,-88},{48.75,-84}},
-      color={28,108,200},
-      thickness=0.5));
   connect(TCHWSup.port_b, AHU.port_a1) annotation (Line(
       points={{-80,-10},{-80,-28},{-60,-28}},
       color={28,108,200},
@@ -280,14 +284,6 @@ equation
   connect(HX.port_a2, TCHWRet.port_a) annotation (Line(
       points={{10,20},{80,20},{80,10}},
       color={238,46,47},
-      thickness=0.5));
-  connect(CDU.port_b1, TCHWRet.port_b) annotation (Line(
-      points={{60,-28},{80,-28},{80,-10}},
-      color={238,46,47},
-      thickness=0.5));
-  connect(CDU.port_b2, TCDUSup.port_a) annotation (Line(
-      points={{40,-40},{20,-40},{20,-54}},
-      color={28,108,200},
       thickness=0.5));
   connect(pumCW.port_a, WCT.port_b) annotation (Line(
       points={{-32,86},{-10,86}},
@@ -329,18 +325,6 @@ equation
       points={{-20,-54},{-20,-40},{-40,-40}},
       color={238,46,47},
       thickness=0.5));
-  connect(D2C.port_b, TCDURet.port_b) annotation (Line(
-      points={{51.25,-84},{52,-84},{52,-88},{80,-88},{80,-74}},
-      color={238,46,47},
-      thickness=0.5));
-  connect(TCDURet.port_a, CDU.port_a2) annotation (Line(
-      points={{80,-54},{80,-40},{60,-40}},
-      color={238,46,47},
-      thickness=0.5));
-  connect(expVesCDU.port_a, CDU.port_a2) annotation (Line(
-      points={{104,-40},{60,-40}},
-      color={238,46,47},
-      thickness=0.5));
   connect(expVesCHW.port_a, TCHWRet.port_b) annotation (Line(
       points={{104,-28},{80,-28},{80,-10}},
       color={238,46,47},
@@ -356,10 +340,6 @@ equation
   connect(pumCHW.port_b, TCHWSup.port_a) annotation (Line(
       points={{-48,20},{-80,20},{-80,10}},
       color={28,108,200},
-      thickness=0.5));
-  connect(TCDUEnt.port_b, CDU.port_a1) annotation (Line(
-      points={{16,-28},{40,-28}},
-      color={244,125,35},
       thickness=0.5));
   connect(weaBus.TWetBul, WCT.TAir) annotation (Line(
       points={{-89.95,184.05},{-89.95,184},{20,184},{20,90},{12,90}},
@@ -380,12 +360,8 @@ equation
       color={28,108,200},
       thickness=0.5));
   connect(Mix.port_b, TCDUEnt.port_a) annotation (Line(
-      points={{-34,-10},{-6,-10},{-6,-28},{6,-28}},
+      points={{-34,-10},{0,-10},{0,-28},{6,-28}},
       color={28,108,200},
-      thickness=0.5));
-  connect(AHU.port_b1, TCDUEnt.port_a) annotation (Line(
-      points={{-40,-28},{6,-28}},
-      color={238,46,47},
       thickness=0.5));
   connect(TCWRet.T, anti_freeze.TCWRet) annotation (Line(
       points={{91,50},{96,50},{96,104},{-170,104},{-170,117},{-162,117}},
@@ -400,35 +376,19 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(TAirRet.T, ahuCon.TAirRet) annotation (Line(
-      points={{-9,-64},{-4,-64},{-4,-92},{-172,-92},{-172,-26},{-162,-26}},
+      points={{-9,-64},{-4,-64},{-4,-92},{-172,-92},{-172,-41},{-162,-41}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(TAirSup.T, ahuCon.TAirSup) annotation (Line(
-      points={{-91,-64},{-162,-64},{-162,-42}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(ahuCon.uVal, AHU.uVal) annotation (Line(
-      points={{-139,-23},{-82,-23},{-82,-30},{-61,-30}},
+      points={{-91,-64},{-162,-64},{-162,-27}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ahuCon.XSet_w, AHU.XSet_w) annotation (Line(
       points={{-139,-31},{-84,-31},{-84,-33},{-61,-33}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(ahuCon.TSet, AHU.TSet) annotation (Line(
-      points={{-139,-34.4},{-86,-34.4},{-86,-35},{-61,-35}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(ahuCon.uFan, AHU.uFan) annotation (Line(
-      points={{-139,-38},{-61,-38}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(qflow.yAir, simplifiedRoom.u) annotation (Line(
-      points={{-139,-107.2},{-70,-107.2},{-70,-74},{-60,-74}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(qflow.yLiq, D2C.u) annotation (Line(
-      points={{-139,-111},{39.75,-111},{39.75,-73.9375}},
+      points={{-139,-107},{-70,-107},{-70,-74},{-60,-74}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(TCDUEnt.T, mixCon.TCDUEnt) annotation (Line(
@@ -467,12 +427,61 @@ equation
       points={{-140,184},{-134,184},{-134,156},{-140,156}},
       color={255,204,51},
       thickness=0.5));
+  connect(ahuCon.uVal, AHU.uVal) annotation (Line(
+      points={{-139,-23},{-82,-23},{-82,-30},{-61,-30}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(ahuCon.uFan, AHU.uFan) annotation (Line(
+      points={{-139,-39.2},{-90,-39.2},{-90,-38},{-61,-38}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(AHU.port_b1, TAHULea.port_a) annotation (Line(
+      points={{-40,-28},{-30,-28}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(TAHULea.port_b, TCDUEnt.port_a) annotation (Line(
+      points={{-20,-28},{6,-28}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(qflow.yLiq, ITRack.u) annotation (Line(
+      points={{-139,-111},{39,-111},{39,-73.9375}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(TCDUSup.port_b, ITRack.port_a) annotation (Line(
+      points={{20,-74},{20,-88},{49,-88},{49,-84}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(ITRack.port_b, TCDURet.port_b) annotation (Line(
+      points={{51.5,-84},{51.5,-88},{80,-88},{80,-74}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(CDURack.port_b1, TCHWRet.port_b) annotation (Line(
+      points={{60,-28},{80,-28},{80,-10}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(CDURack.port_a2, TCDURet.port_a) annotation (Line(
+      points={{60,-40},{80,-40},{80,-54}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(CDURack.port_a2, expVesCDU.port_a) annotation (Line(
+      points={{60,-40},{104,-40}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(CDURack.port_a1, TCDUEnt.port_b) annotation (Line(
+      points={{40,-28},{16,-28}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(CDURack.port_b2, TCDUSup.port_a) annotation (Line(
+      points={{40,-40},{20,-40},{20,-54}},
+      color={28,108,200},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})),
     experiment(
-      StopTime=31536000,
-      Interval=600,
+      StartTime=17366400,
+      StopTime=18230400,
+      Interval=599.999616,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file(ensureSimulated=true) =
         "Resources/scripts/System/Overall_test/Simulate and Plot.mos"
