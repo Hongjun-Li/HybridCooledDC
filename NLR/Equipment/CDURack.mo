@@ -10,7 +10,7 @@ model CDURack
 
   parameter Real v=3
     "Volume of rack [m3]";
-  parameter Real tcduretset = 273.15 + 50 "CDU Return Set Temperature [K]";
+  parameter Real tcduretset = 273.15 + 60 "CDU Return Set Temperature [K]";
   WSE HX(
     redeclare package Medium1 = Buildings.Media.Antifreeze.PropyleneGlycolWater
         (property_T=293.15, X_a=0.40)
@@ -92,16 +92,15 @@ equation
   connect(TSup.port_b, pum.port_b)
     annotation (Line(points={{-60,-10},{-40,-10}}, color={0,127,255},
       thickness=0.5));
-  connect(TRet.port_b, port_a2) annotation (Line(points={{60,-10},{100,-10},{
-          100,-60}},
-                 color={0,127,255},
+  connect(TRet.port_b, port_a2) annotation (Line(points={{60,-10},{100,-10},{100,
+          -60}}, color={0,127,255},
       thickness=0.5));
-  connect(pum.port_a, HX.port_b2) annotation (Line(points={{-20,-10},{-16,-10},
-          {-16,12},{-10,12}},
+  connect(pum.port_a, HX.port_b2) annotation (Line(points={{-20,-10},{-16,-10},{
+          -16,12},{-10,12}},
                            color={0,127,255},
       thickness=0.5));
-  connect(TRet.port_a, HX.port_a2) annotation (Line(points={{40,-10},{16,-10},{
-          16,12},{10,12}},
+  connect(TRet.port_a, HX.port_a2) annotation (Line(points={{40,-10},{16,-10},{16,
+          12},{10,12}},
                       color={0,127,255},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

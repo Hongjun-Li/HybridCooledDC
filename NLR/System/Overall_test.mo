@@ -1,5 +1,6 @@
 within NLR.System;
 model Overall_test
+  extends Modelica.Icons.Example;
   import ModelicaServices;
   replaceable package MediumA = Buildings.Media.Air "Medium model";
   replaceable package MediumW = Buildings.Media.Water "Medium model";
@@ -11,9 +12,9 @@ model Overall_test
   parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
     "Temperature difference condenser outlet-inlet";
   parameter Real COPc_nominal=8 "Chiller COP";
-  parameter Modelica.Units.SI.MassFlowRate mCHW_flow_nominal=24.23 "Nominal mass flow rate at chilled water";
+  parameter Modelica.Units.SI.MassFlowRate mCHW_flow_nominal=35 "Nominal mass flow rate at chilled water";
 
-  parameter Modelica.Units.SI.MassFlowRate mCW_flow_nominal=30.28 "Nominal mass flow rate at condenser water";
+  parameter Modelica.Units.SI.MassFlowRate mCW_flow_nominal=45 "Nominal mass flow rate at condenser water";
 
   parameter Modelica.Units.SI.PressureDifference dp_nominal=500
     "Nominal pressure difference";
@@ -206,47 +207,26 @@ model Overall_test
         extent={{8,-8},{-8,8}},
         rotation=0,
         origin={-40,20})));
-  Buildings.Fluid.Sensors.TemperatureTwoPort TCDUEnt(redeclare replaceable
-      package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater (
-          property_T=293.15, X_a=0.40)
-      "Propylene glycol water, 40% mass fraction",    m_flow_nominal=
-        mCHW_flow_nominal) "Supply Fluid temperature" annotation (Placement(
-        transformation(
-        extent={{5,-6},{-5,6}},
-        rotation=180,
-        origin={11,-28})));
   Buildings.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
-    annotation (Placement(transformation(extent={{-100,174},{-80,194}})));
+    annotation (Placement(transformation(extent={{50,110},{70,130}})));
   Buildings.BoundaryConditions.WeatherData.ReaderTMY3  weaData(filNam=
         ModelicaServices.ExternalReferences.loadResource(
         "modelica://Buildings/Resources/weatherdata/DRYCOLD.mos"))
-    annotation (Placement(transformation(extent={{-160,174},{-140,194}})));
+    annotation (Placement(transformation(extent={{120,140},{100,160}})));
   Modelica.Blocks.Sources.Constant MassFLow(k=mCW_flow_nominal)
-    annotation (Placement(transformation(extent={{-160,80},{-140,100}})));
-  Buildings.Fluid.Actuators.Valves.TwoWayLinear Mix(
-    redeclare package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater
-        (property_T=293.15, X_a=0.40)
-      "Propylene glycol water, 40% mass fraction",
-    m_flow_nominal=mCW_flow_nominal,
-    dpValve_nominal=20902,
-    dpFixed_nominal=89580,
-    y_start=1,
-    use_strokeTime=false) annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={-40,-10})));
+    annotation (Placement(transformation(extent={{-160,78},{-140,98}})));
   Control.Overall_test.Anti_freeze anti_freeze
-    annotation (Placement(transformation(extent={{-160,112},{-140,132}})));
+    annotation (Placement(transformation(extent={{-160,108},{-140,128}})));
   Control.Overall_test.ahuCon ahuCon
-    annotation (Placement(transformation(extent={{-160,-42},{-140,-22}})));
-  Control.Overall_test.Qflow qflow
+    annotation (Placement(transformation(extent={{-160,-44},{-140,-24}})));
+  Control.Overall_test.NLRdataset NLRdataset(interval=3600)
     annotation (Placement(transformation(extent={{-160,-120},{-140,-100}})));
   Control.Overall_test.MixCon mixCon
     annotation (Placement(transformation(extent={{-160,-6},{-140,14}})));
-  Control.Overall_test.CWpumCon cWpumCon
+  Control.Overall_test.CWpumCon cWpumCon(mCHW_flow_nominal=35)
     annotation (Placement(transformation(extent={{-160,42},{-140,62}})));
   Control.Overall_test.CTCon cTCon
-    annotation (Placement(transformation(extent={{-160,140},{-140,160}})));
+    annotation (Placement(transformation(extent={{-160,134},{-140,154}})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TAHULea(redeclare replaceable
       package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15, X_a=0.40)
@@ -256,7 +236,7 @@ model Overall_test
         extent={{5,6},{-5,-6}},
         rotation=180,
         origin={-25,-28})));
-  Equipment.ITRack ITRack(mrack_flow_nominal=11)
+  Equipment.ITRack ITRack(mrack_flow_nominal=15)
     annotation (Placement(transformation(extent={{40,-84},{60,-64}})));
   Equipment.CDURack CDURack(
     redeclare package Medium1 = Buildings.Media.Antifreeze.PropyleneGlycolWater
@@ -264,10 +244,20 @@ model Overall_test
     redeclare package Medium2 = Buildings.Media.Antifreeze.PropyleneGlycolWater
         (property_T=293.15, X_a=0.40),
     m1_flow_nominal=mCHW_flow_nominal,
-    m2_flow_nominal=11,
+    m2_flow_nominal=15,
     dp1_nominal=6000,
     dp2_nominal=249*3)
     annotation (Placement(transformation(extent={{40,-44},{60,-24}})));
+  Buildings.Fluid.Actuators.Valves.ThreeWayLinear valLin(
+    redeclare package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater
+        (property_T=293.15, X_a=0.40),
+    l={0.05,0.05},
+    m_flow_nominal=mCHW_flow_nominal,
+    use_strokeTime=false,
+    dpValve_nominal=6000,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+    "Valve model, linear opening characteristics"
+    annotation (Placement(transformation(extent={{-6,-22},{6,-34}})));
 equation
   connect(AHU.port_b2, TAirSup.port_a) annotation (Line(
       points={{-60,-40},{-80,-40},{-80,-54}},
@@ -342,7 +332,7 @@ equation
       color={28,108,200},
       thickness=0.5));
   connect(weaBus.TWetBul, WCT.TAir) annotation (Line(
-      points={{-89.95,184.05},{-89.95,184},{20,184},{20,90},{12,90}},
+      points={{60.05,120.05},{60.05,112},{60,112},{60,90},{12,90}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash),
@@ -352,98 +342,77 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(MassFLow.y, pumCW.m_flow_in) annotation (Line(
-      points={{-139,90},{-54,90},{-54,100},{-40,100},{-40,95.6}},
+      points={{-139,88},{-54,88},{-54,98},{-40,98},{-40,95.6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(TCHWSup.port_b, Mix.port_a) annotation (Line(
-      points={{-80,-10},{-46,-10}},
-      color={28,108,200},
-      thickness=0.5));
-  connect(Mix.port_b, TCDUEnt.port_a) annotation (Line(
-      points={{-34,-10},{0,-10},{0,-28},{6,-28}},
-      color={28,108,200},
-      thickness=0.5));
   connect(TCWRet.T, anti_freeze.TCWRet) annotation (Line(
-      points={{91,50},{96,50},{96,104},{-170,104},{-170,117},{-162,117}},
+      points={{91,50},{96,50},{96,104},{-170,104},{-170,113},{-162,113}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(anti_freeze.yMainValve, MainValve.y) annotation (Line(
-      points={{-139,126},{32,126},{32,93.2}},
+      points={{-139,122},{32,122},{32,93.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(anti_freeze.yBypass, Bypass.y) annotation (Line(
-      points={{-139,119},{-66,119},{-66,67.2},{0,67.2}},
+      points={{-139,115},{-66,115},{-66,67.2},{0,67.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(TAirRet.T, ahuCon.TAirRet) annotation (Line(
-      points={{-9,-64},{-4,-64},{-4,-92},{-172,-92},{-172,-41},{-162,-41}},
+      points={{-9,-64},{-4,-64},{-4,-92},{-172,-92},{-172,-43},{-162,-43}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(TAirSup.T, ahuCon.TAirSup) annotation (Line(
-      points={{-91,-64},{-162,-64},{-162,-27}},
+      points={{-91,-64},{-162,-64},{-162,-29}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ahuCon.XSet_w, AHU.XSet_w) annotation (Line(
-      points={{-139,-31},{-84,-31},{-84,-33},{-61,-33}},
+      points={{-139,-33},{-61,-33}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(qflow.yAir, simplifiedRoom.u) annotation (Line(
-      points={{-139,-107},{-70,-107},{-70,-74},{-60,-74}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(TCDUEnt.T, mixCon.TCDUEnt) annotation (Line(
-      points={{11,-34.6},{11,-38},{10,-38},{10,-50},{-172,-50},{-172,1},{-162,1}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(mixCon.uVal, Mix.y) annotation (Line(
-      points={{-139,7},{-96,7},{-96,6},{-40,6},{-40,-2.8}},
+  connect(NLRdataset.yAir, simplifiedRoom.u) annotation (Line(
+      points={{-139,-101},{-70,-101},{-70,-74},{-60,-74}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(cWpumCon.uCWpum, pumCHW.m_flow_in) annotation (Line(
       points={{-139,55},{-40,55},{-40,29.6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(TCHWRet.T, cWpumCon.TCHWRet) annotation (Line(
-      points={{91,0},{100,0},{100,-140},{-180,-140},{-180,51},{-162,51}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(cTCon.uFan, WCT.y) annotation (Line(
-      points={{-139,150},{12,150},{12,94}},
+      points={{-139,144},{12,144},{12,94}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(TCWRet.T, cTCon.TCWRet) annotation (Line(
-      points={{91,50},{96,50},{96,104},{-170,104},{-170,150},{-162,150}},
+      points={{91,50},{96,50},{96,104},{-170,104},{-170,144},{-162,144}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(weaData.weaBus, weaBus) annotation (Line(
-      points={{-140,184},{-90,184}},
+      points={{100,150},{60,150},{60,120}},
       color={255,204,51},
-      thickness=0.5), Text(
+      thickness=0.5,
+      pattern=LinePattern.Dash),
+                      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(weaData.weaBus, cTCon.weaBus) annotation (Line(
-      points={{-140,184},{-134,184},{-134,156},{-140,156}},
+      points={{100,150},{-140,150}},
       color={255,204,51},
-      thickness=0.5));
+      thickness=0.5,
+      pattern=LinePattern.Dash));
   connect(ahuCon.uVal, AHU.uVal) annotation (Line(
-      points={{-139,-23},{-82,-23},{-82,-30},{-61,-30}},
+      points={{-139,-25},{-82,-25},{-82,-30},{-61,-30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ahuCon.uFan, AHU.uFan) annotation (Line(
-      points={{-139,-39.2},{-90,-39.2},{-90,-38},{-61,-38}},
+      points={{-139,-37},{-90,-37},{-90,-38},{-61,-38}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(AHU.port_b1, TAHULea.port_a) annotation (Line(
       points={{-40,-28},{-30,-28}},
       color={28,108,200},
       thickness=0.5));
-  connect(TAHULea.port_b, TCDUEnt.port_a) annotation (Line(
-      points={{-20,-28},{6,-28}},
-      color={28,108,200},
-      thickness=0.5));
-  connect(qflow.yLiq, ITRack.u) annotation (Line(
+  connect(NLRdataset.yLiq, ITRack.u) annotation (Line(
       points={{-139,-111},{39,-111},{39,-73.9375}},
       color={0,0,127},
       pattern=LinePattern.Dash));
@@ -467,21 +436,42 @@ equation
       points={{60,-40},{104,-40}},
       color={238,46,47},
       thickness=0.5));
-  connect(CDURack.port_a1, TCDUEnt.port_b) annotation (Line(
-      points={{40,-28},{16,-28}},
-      color={0,127,255},
-      thickness=0.5));
   connect(CDURack.port_b2, TCDUSup.port_a) annotation (Line(
       points={{40,-40},{20,-40},{20,-54}},
       color={28,108,200},
       thickness=0.5));
+  connect(TCDUSup.T, mixCon.TCDUEnt) annotation (Line(
+      points={{9,-64},{0,-64},{0,-50},{-174,-50},{-174,1},{-162,1}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(TAHULea.port_b, valLin.port_1) annotation (Line(
+      points={{-20,-28},{-6,-28}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(valLin.port_2, CDURack.port_a1) annotation (Line(
+      points={{6,-28},{40,-28}},
+      color={102,44,145},
+      thickness=0.5));
+  connect(mixCon.uVal, valLin.y) annotation (Line(
+      points={{-139,7},{-96,7},{-96,6},{16,6},{16,-46},{0,-46},{0,-35.2}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(TCHWSup.port_b, valLin.port_3) annotation (Line(
+      points={{-80,-10},{-80,-14},{0,-14},{0,-22}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(TCDUSup.T, cWpumCon.TCHWRet) annotation (Line(
+      points={{9,-64},{0,-64},{0,-50},{-174,-50},{-174,50},{-168,50},{-168,51},
+          {-162,51}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})),
     experiment(
-      StartTime=17366400,
-      StopTime=18230400,
-      Interval=599.999616,
+      StartTime=20995200,
+      StopTime=52531200,
+      Interval=600,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file(ensureSimulated=true) =
         "Resources/scripts/System/Overall_test/Simulate and Plot.mos"
