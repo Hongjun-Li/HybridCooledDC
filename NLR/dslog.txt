@@ -1,5 +1,5 @@
 Log-file of program ./dymosim
-(generated: Wed Apr 29 23:45:41 2026)
+(generated: Thu Apr 30 00:45:00 2026)
 
 dymosim started
 ... "NLR.System.Overall_test" simulating
@@ -7844,8 +7844,8 @@ Integration terminated successfully at T = 52531200
   WARNING: You have many time events. This is probably due to fast sampling.
   Enable logging of event in Simulation/Setup/Debug/Events during simulation
    CPU-time for integration                : 127 seconds
-   CPU-time for one grid interval          : 2.43 milliseconds
-   CPU-time for initialization             : 0.784 seconds
+   CPU-time for one grid interval          : 2.41 milliseconds
+   CPU-time for initialization             : 0.79 seconds
    Number of result points                 : 1051205
    Number of grid points                   : 52561
    Number of accepted steps                : 456714
