@@ -224,7 +224,7 @@ package Overall_test
   model CWpumCon
       parameter Modelica.Units.SI.MassFlowRate mCHW_flow_nominal "Nominal mass flow rate at chilled water";
       extends Modelica.Blocks.Icons.Block;
-    Modelica.Blocks.Interfaces.RealOutput uCWpum
+    Modelica.Blocks.Interfaces.RealOutput uCHWpum
       annotation (Placement(transformation(extent={{100,20},{120,40}})));
     Modelica.Blocks.Interfaces.RealInput TCHWRet
       annotation (Placement(transformation(extent={{-140,-30},{-100,10}})));
@@ -239,7 +239,7 @@ package Overall_test
       "Return liq temperature setpoint"
       annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
   equation
-    connect(CHWmassflow.y, uCWpum)
+    connect(CHWmassflow.y, uCHWpum)
       annotation (Line(points={{31,30},{110,30}}, color={0,0,127}));
     connect(CHWPumMasCon.y, CHWmassflow.u)
       annotation (Line(points={{-19,30},{8,30}}, color={0,0,127}));

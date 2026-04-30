@@ -62,16 +62,16 @@ equation
 
   connect(pumSpeSig.y, chiWSE.yPum)
     annotation (Line(
-      points={{-99,-10},{-60,-10},{-60,25.6},{-1.6,25.6}},
+      points={{-99,-10},{-60,-10},{-60,23.92},{-0.96,23.92}},
       color={0,0,127}));
   connect(TCHWSup.port_b, ahu.port_a1)
     annotation (Line(
-      points={{-36,0},{-40,0},{-40,0},{-40,-114},{0,-114}},
+      points={{-26,0},{-40,0},{-40,0},{-40,-114},{0,-114}},
       color={0,127,255},
       thickness=0.5));
   connect(chiWSE.TCHWSupWSE, cooModCon.TCHWSupWSE)
     annotation (Line(
-      points={{21,34},{148,34},{148,200},{-226,200},{-226,106},{-216,106}},
+      points={{12.6,29.8},{148,29.8},{148,200},{-226,200},{-226,106},{-216,106}},
       color={0,0,127}));
   connect(cooLoaChi.y, chiStaCon.QTot)
     annotation (Line(
@@ -94,41 +94,44 @@ equation
       color={0,0,127}));
   connect(TCHWRet.port_b, chiWSE.port_a2)
     annotation (Line(
-      points={{80,0},{40,0},{40,24},{20,24}},
+      points={{26,0},{40,0},{40,22.8},{12,22.8}},
       color={0,127,255},
       thickness=0.5));
   connect(cooModCon.TCHWRetWSE, TCHWRet.T)
     annotation (Line(
-      points={{-216,102},{-228,102},{-228,206},{152,206},{152,20},{90,20},{90,
-          11}},
+      points={{-216,102},{-228,102},{-228,206},{152,206},{152,20},{32,20},{32,
+          6.6}},
     color={0,0,127}));
 
   connect(cooModCon.y, chiStaCon.cooMod)
     annotation (Line(
-      points={{-193,110},{-190,110},{-190,146},{-172,146}},
+      points={{-193,107},{-190,107},{-190,146},{-172,146}},
       color={255,127,0}));
   connect(cooModCon.y,intToBoo.u)
     annotation (Line(
-      points={{-193,110},{-172,110}},
+      points={{-193,107},{-182,107},{-182,110},{-172,110}},
       color={255,127,0}));
   connect(TCHWSup.T, chiStaCon.TCHWSup)
     annotation (Line(
-      points={{-26,11},{-26,18},{-182,18},{-182,134},{-172,134}},
+      points={{-20,6.6},{-20,18},{-182,18},{-182,134},{-172,134}},
       color={0,0,127}));
   connect(cooModCon.y, sigCha.u)
     annotation (Line(
-      points={{-193,110},{-190,110},{-190,212},{156,212},{156,160},{178,160}},
+      points={{-193,107},{-190,107},{-190,212},{156,212},{156,160},{178,160}},
       color={255,127,0}));
   connect(yVal5.y, chiWSE.yVal5) annotation (Line(points={{-139,40},{-84,40},{
-          -84,33},{-1.6,33}}, color={0,0,127}));
+          -84,29.1},{-0.96,29.1}},
+                              color={0,0,127}));
   connect(yVal6.y, chiWSE.yVal6) annotation (Line(points={{-139,24},{-84,24},{
-          -84,29.8},{-1.6,29.8}}, color={0,0,127}));
-  connect(cooModCon.y, cooTowSpeCon.cooMod) annotation (Line(points={{-193,110},
-          {-190,110},{-190,182.444},{-172,182.444}}, color={255,127,0}));
-  connect(cooModCon.y, CWPumCon.cooMod) annotation (Line(points={{-193,110},{
-          -190,110},{-190,75},{-174,75}}, color={255,127,0}));
+          -84,26.86},{-0.96,26.86}},
+                                  color={0,0,127}));
+  connect(cooModCon.y, cooTowSpeCon.cooMod) annotation (Line(points={{-193,107},
+          {-190,107},{-190,182.444},{-172,182.444}}, color={255,127,0}));
+  connect(cooModCon.y, CWPumCon.cooMod) annotation (Line(points={{-193,107},{
+          -190,107},{-190,76},{-174,76}}, color={255,127,0}));
   connect(weaBus.TWetBul, cooModCon.TWetBul) annotation (Line(
-      points={{-328,-20},{-340,-20},{-340,200},{-224,200},{-224,114},{-216,114}},
+      points={{-327.95,-19.95},{-340,-19.95},{-340,200},{-224,200},{-224,114},{
+          -216,114}},
       color={255,204,51},
       thickness=0.5));
 

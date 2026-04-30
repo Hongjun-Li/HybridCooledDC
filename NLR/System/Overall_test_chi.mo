@@ -1,5 +1,5 @@
 within NLR.System;
-model Overall_test
+model Overall_test_chi
   extends Modelica.Icons.Example;
   import ModelicaServices;
   replaceable package MediumA = Buildings.Media.Air "Medium model";
@@ -20,6 +20,36 @@ model Overall_test
     "Nominal pressure difference";
   parameter Real TApp_nominal = 6 "K";
 
+  parameter Modelica.Units.SI.Time tWai=1200 "Waiting time";
+
+
+  // Set point
+  parameter Modelica.Units.SI.Temperature TCHWSet=273.15 + 8
+    "Chilled water temperature setpoint";
+
+// Chiller parameters
+  parameter Integer numChi=1 "Number of chillers";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_chi_nominal=mCW_flow_nominal
+    "Nominal mass flow rate at condenser water in the chillers";
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_chi_nominal=18.3
+    "Nominal mass flow rate at evaporator water in the chillers";
+  parameter Modelica.Units.SI.PressureDifference dp1_chi_nominal=46.2*1000
+    "Nominal pressure";
+  parameter Modelica.Units.SI.PressureDifference dp2_chi_nominal=44.8*1000
+    "Nominal pressure";
+  parameter Modelica.Units.SI.Power QEva_nominal=m2_flow_chi_nominal*4200*(6.67
+       - 18.56) "Nominal cooling capaciaty(Negative means cooling)";
+
+ // WSE parameters
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_wse_nominal=mCW_flow_nominal
+    "Nominal mass flow rate at condenser water in the chillers";
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_wse_nominal=35.3
+    "Nominal mass flow rate at condenser water in the chillers";
+  parameter Modelica.Units.SI.PressureDifference dp1_wse_nominal=33.1*1000
+    "Nominal pressure";
+  parameter Modelica.Units.SI.PressureDifference dp2_wse_nominal=34.5*1000
+    "Nominal pressure";
+
 // Dry Cooling Tower
   parameter Modelica.Units.SI.Temperature T_a1_nominal=30 + 273.15
     "Temperature at nominal conditions as port a1";
@@ -34,6 +64,14 @@ model Overall_test
   parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=m1_flow_nominal*4200
       /1000*(T_a1_nominal - T_b1_nominal)/(T_b2_nominal - T_a2_nominal)
     "Nominal mass flow rate medium 2";
+// CHW pump
+  parameter Buildings.Fluid.Movers.Data.Generic[numChi] perPumPri(
+    each pressure=Buildings.Fluid.Movers.BaseClasses.Characteristics.flowParameters(
+          V_flow=m2_flow_chi_nominal/1000*{0.2,0.6,1.0,1.2},
+          dp=(dp2_chi_nominal+dp2_wse_nominal+18000)*{1.5,1.3,1.0,0.6}))
+    "Performance data for primary pumps";
+  parameter Modelica.Units.SI.Pressure dpSetPoi=80000
+    "Differential pressure setpoint";
   Equipment.AHU AHU(redeclare package Medium1 =
         Buildings.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15, X_a
           =0.40) "Propylene glycol water, 40% mass fraction", redeclare package
@@ -70,16 +108,6 @@ model Overall_test
     PFan_nominal=6000,
     TApp_nominal=TApp_nominal)
     annotation (Placement(transformation(extent={{10,76},{-10,96}})));
-  Equipment.WSE HX(
-    redeclare package Medium1 = Buildings.Media.Water "Water",
-    redeclare package Medium2 = Buildings.Media.Antifreeze.PropyleneGlycolWater
-        (property_T=293.15, X_a=0.40)
-      "Propylene glycol water, 40% mass fraction",
-    m1_flow_nominal=mCW_flow_nominal,
-    m2_flow_nominal=mCHW_flow_nominal,
-    dp1_nominal=0,
-    dp2_nominal=0)
-    annotation (Placement(transformation(extent={{-10,16},{10,36}})));
   Buildings.Fluid.Sensors.TemperatureTwoPort TCDUSup(redeclare replaceable
       package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15, X_a=0.40)
@@ -192,21 +220,7 @@ model Overall_test
         transformation(
         extent={{-6,7},{6,-7}},
         rotation=90,
-        origin={111,32})));
-  Buildings.Fluid.Movers.FlowControlled_m_flow pumCHW(
-    redeclare package Medium = Buildings.Media.Antifreeze.PropyleneGlycolWater
-        (property_T=293.15, X_a=0.40)
-      "Propylene glycol water, 40% mass fraction",
-    m_flow_nominal=mCHW_flow_nominal,
-    dp(start=214992),
-    nominalValuesDefineDefaultPressureCurve=true,
-    use_riseTime=false,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    dp_nominal=130000) "Chilled water pump"   annotation (Placement(
-        transformation(
-        extent={{8,-8},{-8,8}},
-        rotation=0,
-        origin={-40,20})));
+        origin={111,36})));
   Buildings.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(transformation(extent={{50,110},{70,130}})));
   Buildings.BoundaryConditions.WeatherData.ReaderTMY3  weaData(filNam=
@@ -223,7 +237,7 @@ model Overall_test
     annotation (Placement(transformation(extent={{-160,-92},{-140,-72}})));
   Control.Overall_test.MixCon mixCon
     annotation (Placement(transformation(extent={{-160,-6},{-140,14}})));
-  Control.Overall_test.CWpumCon cWpumCon(mCHW_flow_nominal=35)
+  Control.Overall_test.CWpumCon CHWpumCon(mCHW_flow_nominal=35)
     annotation (Placement(transformation(extent={{-160,42},{-140,62}})));
   Control.Overall_test.CTCon cTCon
     annotation (Placement(transformation(extent={{-160,134},{-140,154}})));
@@ -277,6 +291,70 @@ model Overall_test
         origin={-26,-10})));
   Control.Overall_test.RetCon RetCon
     annotation (Placement(transformation(extent={{-160,-126},{-140,-106}})));
+  Equipment.HXTrim HXTrim(
+    redeclare package Medium1 = Buildings.Media.Water,
+    redeclare package Medium2 = Buildings.Media.Antifreeze.PropyleneGlycolWater
+        (property_T=293.15, X_a=0.40),
+    m1_flow_chi_nominal=mCW_flow_nominal,
+    m2_flow_chi_nominal=mCHW_flow_nominal,
+    m1_flow_wse_nominal=mCW_flow_nominal,
+    m2_flow_wse_nominal=mCHW_flow_nominal,
+    dp1_chi_nominal=dp1_chi_nominal,
+    dp1_wse_nominal=dp1_wse_nominal,
+    dp2_chi_nominal=dp2_chi_nominal,
+    dp2_wse_nominal=dp2_wse_nominal,
+    use_controller=false,
+    numChi=numChi,
+    redeclare each
+      Buildings.Fluid.Chillers.Data.ElectricEIR.ElectricEIRChiller_York_YT_1055kW_5_96COP_Vanes
+      perChi,
+    perPum=perPumPri,
+    addPowerToMedium=false)
+    annotation (Placement(transformation(extent={{-10,14},{10,34}})));
+  Buildings.Applications.DataCenters.ChillerCooled.Controls.CoolingMode
+    cooModCon(
+    tWai=tWai,
+    deaBan1=1.1,
+    deaBan2=0.5,
+    deaBan3=1.1,
+    deaBan4=0.5)
+    "Cooling mode controller"
+    annotation (Placement(transformation(extent={{-260,60},{-240,80}})));
+  Modelica.Blocks.Sources.RealExpression yVal5(y=if cooModCon.y == Integer(
+        Buildings.Applications.DataCenters.Types.CoolingModes.FullMechanical)
+         then 1 else 0)
+    "On/off signal for valve 5"
+    annotation (Placement(transformation(extent={{-210,26},{-190,46}})));
+  Modelica.Blocks.Sources.RealExpression yVal6(y=if cooModCon.y == Integer(
+        Buildings.Applications.DataCenters.Types.CoolingModes.FreeCooling)
+         then 1 else 0)
+    "On/off signal for valve 6"
+    annotation (Placement(transformation(extent={{-210,14},{-190,34}})));
+  Modelica.Blocks.Logical.Not wseOn
+    "True: WSE is on; False: WSE is off "
+    annotation (Placement(transformation(extent={{-188,60},{-168,80}})));
+  Modelica.Blocks.Math.IntegerToBoolean intToBoo(threshold=Integer(Buildings.Applications.DataCenters.Types.CoolingModes.FullMechanical))
+    "Inverse on/off signal for the WSE"
+    annotation (Placement(transformation(extent={{-228,60},{-208,80}})));
+  Modelica.Blocks.Sources.RealExpression towTApp(y=TApp_nominal)
+    "Cooling tower approach temperature"
+    annotation (Placement(transformation(extent={{-300,60},{-280,80}})));
+  Modelica.Blocks.Sources.Constant TCHWSupSet(k=273.15 + 13)
+    "Chilled water supply temperature setpoint"
+    annotation (Placement(transformation(extent={{-320,94},{-300,114}})));
+  Modelica.Blocks.Math.RealToBoolean chiOn[numChi]
+    "Real value to boolean value"
+    annotation (Placement(transformation(extent={{-188,92},{-168,112}})));
+  Buildings.Applications.DataCenters.ChillerCooled.Controls.ChillerStage chiStaCon(
+    QEva_nominal=QEva_nominal,
+    tWai=0,
+    criPoiTem=TCHWSet + 1.5)
+    "Chiller staging control"
+    annotation (Placement(transformation(extent={{-222,92},{-202,112}})));
+  Modelica.Blocks.Sources.RealExpression cooLoaChi(y=-HXTrim.port_a2.m_flow*4180
+        *(HXTrim.TCHWSupWSE - TCHWSupSet.y))
+    "Cooling load in chillers"
+    annotation (Placement(transformation(extent={{-262,92},{-242,112}})));
 equation
   connect(AHU.port_b2, TAirSup.port_a) annotation (Line(
       points={{-60,-40},{-80,-40},{-80,-54}},
@@ -290,10 +368,6 @@ equation
       points={{-80,-10},{-80,-28},{-60,-28}},
       color={28,108,200},
       thickness=0.5));
-  connect(HX.port_a2, TCHWRet.port_a) annotation (Line(
-      points={{10,20},{80,20},{80,10}},
-      color={238,46,47},
-      thickness=0.5));
   connect(pumCW.port_a, WCT.port_b) annotation (Line(
       points={{-32,86},{-10,86}},
       color={28,108,200},
@@ -301,14 +375,6 @@ equation
   connect(pumCW.port_b, TCWSup.port_a) annotation (Line(
       points={{-48,86},{-80,86},{-80,60}},
       color={28,108,200},
-      thickness=0.5));
-  connect(TCWSup.port_b, HX.port_a1) annotation (Line(
-      points={{-80,40},{-80,32},{-10,32}},
-      color={28,108,200},
-      thickness=0.5));
-  connect(HX.port_b1, TCWRet.port_b) annotation (Line(
-      points={{10,32},{80,32},{80,40}},
-      color={238,46,47},
       thickness=0.5));
   connect(WCT.port_a, MainValve.port_b) annotation (Line(
       points={{10,86},{26,86}},
@@ -339,16 +405,8 @@ equation
       color={238,46,47},
       thickness=0.5));
   connect(expVesCW.port_a, TCWRet.port_b) annotation (Line(
-      points={{104,32},{80,32},{80,40}},
+      points={{104,36},{80,36},{80,40}},
       color={238,46,47},
-      thickness=0.5));
-  connect(pumCHW.port_a, HX.port_b2) annotation (Line(
-      points={{-32,20},{-10,20}},
-      color={28,108,200},
-      thickness=0.5));
-  connect(pumCHW.port_b, TCHWSup.port_a) annotation (Line(
-      points={{-48,20},{-80,20},{-80,10}},
-      color={28,108,200},
       thickness=0.5));
   connect(weaBus.TWetBul, WCT.TAir) annotation (Line(
       points={{60.05,120.05},{60.05,112},{60,112},{60,90},{12,90}},
@@ -390,10 +448,6 @@ equation
       pattern=LinePattern.Dash));
   connect(NLRdataset.yAir, simplifiedRoom.u) annotation (Line(
       points={{-139,-73},{-70,-73},{-70,-74},{-60,-74}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(cWpumCon.uCHWpum, pumCHW.m_flow_in) annotation (Line(
-      points={{-139,55},{-40,55},{-40,29.6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(cTCon.uFan, WCT.y) annotation (Line(
@@ -463,9 +517,9 @@ equation
       points={{9,-64},{0,-64},{0,-50},{-174,-50},{-174,1},{-162,1}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(TCDUSup.T, cWpumCon.TCHWRet) annotation (Line(
-      points={{9,-64},{0,-64},{0,-50},{-174,-50},{-174,50},{-168,50},{-168,51},
-          {-162,51}},
+  connect(TCDUSup.T, CHWpumCon.TCHWRet) annotation (Line(
+      points={{9,-64},{0,-64},{0,-50},{-174,-50},{-174,50},{-168,50},{-168,51},{
+          -162,51}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(valLin.port_3, TCHWRet.port_b) annotation (Line(
@@ -504,6 +558,79 @@ equation
       points={{-139,-116},{0,-116},{0,-35.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+  connect(TCHWSup.port_a, HXTrim.port_b2) annotation (Line(
+      points={{-80,10},{-80,18},{-10,18}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(HXTrim.port_a2, TCHWRet.port_a) annotation (Line(
+      points={{10,18},{80,18},{80,10}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(TCWRet.port_b, HXTrim.port_b1) annotation (Line(
+      points={{80,40},{80,30},{10,30}},
+      color={238,46,47},
+      thickness=0.5));
+  connect(HXTrim.port_a1, TCWSup.port_b) annotation (Line(
+      points={{-10,30},{-80,30},{-80,40}},
+      color={28,108,200},
+      thickness=0.5));
+  connect(TCHWRet.T, cooModCon.TCHWRetWSE) annotation (Line(points={{91,0},{100,
+          0},{100,-140},{-268,-140},{-268,62},{-262,62}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(HXTrim.TCHWSupWSE, cooModCon.TCHWSupWSE) annotation (Line(points={{11,
+          28},{142,28},{142,-148},{-272,-148},{-272,66},{-262,66}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(yVal5.y, HXTrim.yVal5) annotation (Line(points={{-189,36},{-82,36},{-82,
+          27},{-11.6,27}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(yVal6.y, HXTrim.yVal6) annotation (Line(points={{-189,24},{-166,24},{-166,
+          23.8},{-11.6,23.8}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(intToBoo.y, wseOn.u)
+    annotation (Line(points={{-207,70},{-190,70}}, color={255,0,255}));
+  connect(cooModCon.y, intToBoo.u) annotation (Line(points={{-239,67},{-234,67},
+          {-234,70},{-230,70}}, color={255,127,0}));
+  connect(towTApp.y, cooModCon.TApp)
+    annotation (Line(points={{-279,70},{-262,70}}, color={0,0,127}));
+  connect(weaBus.TWetBul, cooModCon.TWetBul) annotation (Line(
+      points={{60.05,120.05},{60,120.05},{60,162},{-272,162},{-272,74},{-262,74}},
+      color={255,204,51},
+      thickness=0.5,
+      pattern=LinePattern.Dash),
+                      Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(TCHWSupSet.y, cooModCon.TCHWSupSet) annotation (Line(points={{-299,104},
+          {-270,104},{-270,78},{-262,78}}, color={0,0,127}));
+  connect(TCHWSupSet.y, HXTrim.TSet) annotation (Line(points={{-299,104},{-270,104},
+          {-270,86},{-70,86},{-70,34.8},{-11.6,34.8}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(CHWpumCon.uCHWpum, HXTrim.uCHWpum) annotation (Line(
+      points={{-139,55},{-96,55},{-96,20},{-12,20}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(wseOn.y, HXTrim.on[numChi + 1]) annotation (Line(points={{-167,70},{-90,
+          70},{-90,31.6},{-11.6,31.6}}, color={255,0,255}));
+  connect(cooModCon.y, chiStaCon.cooMod) annotation (Line(points={{-239,67},{-240,
+          67},{-240,68},{-234,68},{-234,108},{-224,108}}, color={255,127,0}));
+  connect(cooLoaChi.y, chiStaCon.QTot)
+    annotation (Line(points={{-241,102},{-224,102}}, color={0,0,127}));
+  connect(TCHWSup.T, chiStaCon.TCHWSup) annotation (Line(points={{-91,0},{-230,0},
+          {-230,96},{-224,96}}, color={0,0,127}));
+  connect(chiStaCon.y, chiOn.u)
+    annotation (Line(points={{-201,102},{-190,102}}, color={0,0,127}));
+  for i in 1:numChi loop
+    connect(pumCW[i].port_a, TCWSup.port_b)
+      annotation (Line(
+        points={{-32,86},{-32,40},{-80,40}},
+        color={0,127,255},
+        thickness=0.5));
+   end for;
+  connect(chiOn[i].y, HXTrim.on[i]) annotation (Line(points={{-167,102},{-168,102},
+          {-168,82},{-164,82},{-164,72},{-68,72},{-68,66},{-60,66},{-60,36},{-16,
+          36},{-16,31.6},{-11.6,31.6}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{120,120}})),
@@ -515,4 +642,4 @@ equation
     __Dymola_Commands(file(ensureSimulated=true) =
         "Resources/scripts/System/Overall_test/Simulate and Plot.mos"
         "Simulate and Plot"));
-end Overall_test;
+end Overall_test_chi;
