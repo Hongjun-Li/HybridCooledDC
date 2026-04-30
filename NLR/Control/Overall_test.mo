@@ -115,7 +115,7 @@ package Overall_test
     Modelica.Blocks.Sources.CombiTimeTable NLRdata(
       tableOnFile=true,
       tableName="tab1",
-      fileName="C:\\NLR_DC\\NLR\\Resources\\NLR_data\\NREL_HPCDC_modelica.txt",
+      fileName="E:\\NLR_DC\\NLR\\Resources\\NLR_data\\NREL_HPCDC_modelica.txt",
       columns={2,3,4,5,6,7},
       startTime=20995200,
       shiftTime=20995200)
@@ -202,9 +202,9 @@ package Overall_test
       annotation (Placement(transformation(extent={{-140,-50},{-100,-10}})));
     Buildings.Controls.Continuous.LimPID mixValSig(
       Ti=40,
-      yMax=0.5,
-      reverseActing=true,
-      yMin=0.01,
+      yMax=1,
+      reverseActing=false,
+      yMin=0,
       k=0.01) "Valve position signal for the Mixing valve"
       annotation (Placement(transformation(extent={{0,20},{20,40}})));
     Modelica.Blocks.Sources.Constant TLiqSupSet(k=273.15 + 23.35)
@@ -282,4 +282,33 @@ package Overall_test
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end CTCon;
+
+  model RetCon
+      extends Modelica.Blocks.Icons.Block;
+    Modelica.Blocks.Interfaces.RealOutput uVal
+      annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+    Modelica.Blocks.Interfaces.RealInput TCDULea
+      annotation (Placement(transformation(extent={{-20,-20},{20,20}},
+          rotation=90,
+          origin={0,-120})));
+    Modelica.Blocks.Sources.Constant TLiqRetSet(k=273.15 + 36.5)
+      "Ret CHW temperature setpoint"
+      annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+    Buildings.Controls.Continuous.LimPID ValSig(
+      Ti=40,
+      yMax=1,
+      reverseActing=false,
+      yMin=0,
+      k=0.01) "Valve position signal for the 3way valve"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  equation
+    connect(TLiqRetSet.y, ValSig.u_s)
+      annotation (Line(points={{-39,0},{-12,0}}, color={0,0,127}));
+    connect(ValSig.y, uVal)
+      annotation (Line(points={{11,0},{110,0}}, color={0,0,127}));
+    connect(TCDULea, ValSig.u_m)
+      annotation (Line(points={{0,-120},{0,-12}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end RetCon;
 end Overall_test;

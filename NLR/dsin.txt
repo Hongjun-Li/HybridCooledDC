@@ -102,7 +102,7 @@ int settings(13,1)
 
 
 #    Names of initial variables
-char initialName(4573,90)
+char initialName(4847,90)
 mAir_flow_nominal
 P_nominal
 dTEva_nominal
@@ -4480,6 +4480,8 @@ valLin.T_start
 valLin.X_start[1]
 valLin.mSenFac
 valLin.wrongEnergyMassBalanceConfiguration
+valLin.port_1.m_flow
+valLin.port_1.p
 valLin.port_3.m_flow
 valLin.tau
 valLin.mDyn_flow_nominal
@@ -4574,6 +4576,7 @@ valLin.use_strokeTime
 valLin.strokeTime
 valLin.init
 valLin.y_start
+valLin.y
 valLin.casePreInd
 valLin.CvData
 valLin.Kv
@@ -4671,13 +4674,284 @@ valLin.vol.dynBal.rho_default
 valLin.vol.dynBal.hStart
 valLin.vol.dynBal._simplify_mWat_flow
 valLin.vol.dynBal.mWat_flow_internal
+Mix.energyDynamics
+Mix.massDynamics
+Mix.substanceDynamics
+Mix.traceDynamics
+Mix.p_start
+Mix.T_start
+Mix.X_start[1]
+Mix.mSenFac
+Mix.wrongEnergyMassBalanceConfiguration
+Mix.port_1.h_outflow
+Mix.port_3.m_flow
+Mix.port_3.p
+Mix.tau
+Mix.mDyn_flow_nominal
+Mix.from_dp
+Mix.portFlowDirection_1
+Mix.portFlowDirection_2
+Mix.portFlowDirection_3
+Mix.verifyFlowReversal
+Mix.m_flow_small
+Mix.res1.allowFlowReversal
+Mix.res1.port_b.p
+Mix.res1.m_flow_nominal
+Mix.res1.m_flow_small
+Mix.res1.show_T
+Mix.res1.dp
+Mix.res1._m_flow_start
+Mix.res1._dp_start
+Mix.res1.homotopyInitialization
+Mix.res1.from_dp
+Mix.res1.dp_nominal
+Mix.res1.linearized
+Mix.res1.m_flow_turbulent
+Mix.res1.sta_default.p
+Mix.res1.sta_default.T
+Mix.res1.eta_default
+Mix.res1.m_flow_nominal_pos
+Mix.res1.dp_nominal_pos
+Mix.res1.deltaM
+Mix.res1.k
+Mix.res1.disableComputeFlowResistance_internal
+Mix.res1.computeFlowResistance
+Mix.res1.coeff
+Mix.res2.allowFlowReversal
+Mix.res2.m_flow_nominal
+Mix.res2.m_flow_small
+Mix.res2.show_T
+Mix.res2.dp
+Mix.res2._m_flow_start
+Mix.res2._dp_start
+Mix.res2.homotopyInitialization
+Mix.res2.from_dp
+Mix.res2.dp_nominal
+Mix.res2.linearized
+Mix.res2.m_flow_turbulent
+Mix.res2.sta_default.p
+Mix.res2.sta_default.T
+Mix.res2.eta_default
+Mix.res2.m_flow_nominal_pos
+Mix.res2.dp_nominal_pos
+Mix.res2.deltaM
+Mix.res2.k
+Mix.res2.disableComputeFlowResistance_internal
+Mix.res2.computeFlowResistance
+Mix.res2.coeff
+Mix.res3.allowFlowReversal
+Mix.res3.m_flow_nominal
+Mix.res3.m_flow_small
+Mix.res3.show_T
+Mix.res3.dp
+Mix.res3._m_flow_start
+Mix.res3._dp_start
+Mix.res3.homotopyInitialization
+Mix.res3.from_dp
+Mix.res3.dp_nominal
+Mix.res3.linearized
+Mix.res3.m_flow_turbulent
+Mix.res3.sta_default.p
+Mix.res3.sta_default.T
+Mix.res3.eta_default
+Mix.res3.m_flow_nominal_pos
+Mix.res3.dp_nominal_pos
+Mix.res3.deltaM
+Mix.res3.k
+Mix.res3.disableComputeFlowResistance_internal
+Mix.res3.computeFlowResistance
+Mix.res3.coeff
+Mix.have_controlVolume
+Mix.homotopyInitialization
+Mix.m_flow_nominal[1]
+Mix.m_flow_nominal[2]
+Mix.m_flow_nominal[3]
+Mix.dp_nominal[1]
+Mix.dp_nominal[2]
+Mix.dp_nominal[3]
+Mix.deltaM
+Mix.linearized
+Mix.vol.energyDynamics
+Mix.vol.massDynamics
+Mix.vol.substanceDynamics
+Mix.vol.traceDynamics
+Mix.vol.p_start
+Mix.vol.T_start
+Mix.vol.X_start[1]
+Mix.vol.mSenFac
+Mix.vol.wrongEnergyMassBalanceConfiguration
+Mix.vol.initialize_p
+Mix.vol.prescribedHeatFlowRate
+Mix.vol.simplify_mWat_flow
+Mix.vol.m_flow_nominal
+Mix.vol.nPorts
+Mix.vol.m_flow_small
+Mix.vol.allowFlowReversal
+Mix.vol.V
+Mix.vol.T
+Mix.vol.rho_start
+Mix.vol.state_default.p
+Mix.vol.state_default.T
+Mix.vol.rho_default
+Mix.vol.state_start.p
+Mix.vol.state_start.T
+Mix.vol.useSteadyStateTwoPort
+Mix.vol.preTem.port.Q_flow
+Mix.vol.heaFloSen.Q_flow
+Mix.vol.heaFloSen.port_a.Q_flow
+Mix.vol.heaFloSen.port_b.Q_flow
+Mix.vol.use_C_flow
+Mix.vol.heatPort.Q_flow
+Mix.vol.tau
+Mix.vol.V_nominal
+Mix.vol.dynBal.energyDynamics
+Mix.vol.dynBal.massDynamics
+Mix.vol.dynBal.substanceDynamics
+Mix.vol.dynBal.traceDynamics
+Mix.vol.dynBal.p_start
+Mix.vol.dynBal.T_start
+Mix.vol.dynBal.X_start[1]
+Mix.vol.dynBal.mSenFac
+Mix.vol.dynBal.wrongEnergyMassBalanceConfiguration
+Mix.vol.dynBal.initialize_p
+Mix.vol.dynBal.simplify_mWat_flow
+Mix.vol.dynBal.nPorts
+Mix.vol.dynBal.use_mWat_flow
+Mix.vol.dynBal.use_C_flow
+Mix.vol.dynBal.Q_flow
+Mix.vol.dynBal.medium.T
+Mix.vol.dynBal.medium.d
+Mix.vol.dynBal.medium.X[1]
+Mix.vol.dynBal.medium.R_s
+Mix.vol.dynBal.medium.MM
+Mix.vol.dynBal.medium.preferredMediumStates
+Mix.vol.dynBal.medium.standardOrderComponents
+Mix.vol.dynBal.medium.T_degC
+Mix.vol.dynBal.medium.p_bar
+Mix.vol.dynBal.U
+Mix.vol.dynBal.der(U)
+Mix.vol.dynBal.m
+Mix.vol.dynBal.der(m)
+Mix.vol.dynBal.mb_flow
+Mix.vol.dynBal.fluidVolume
+Mix.vol.dynBal.CSen
+Mix.vol.dynBal.ports_H_flow[1]
+Mix.vol.dynBal.ports_H_flow[2]
+Mix.vol.dynBal.ports_H_flow[3]
+Mix.vol.dynBal.cp_default
+Mix.vol.dynBal.rho_start
+Mix.vol.dynBal.computeCSen
+Mix.vol.dynBal.state_default.p
+Mix.vol.dynBal.state_default.T
+Mix.vol.dynBal.rho_default
+Mix.vol.dynBal.hStart
+Mix.vol.dynBal._simplify_mWat_flow
+Mix.vol.dynBal.mWat_flow_internal
+MixingVal.allowFlowReversal
+MixingVal.port_b.h_outflow
+MixingVal.m_flow_nominal
+MixingVal.m_flow_small
+MixingVal.show_T
+MixingVal.dp
+MixingVal._m_flow_start
+MixingVal._dp_start
+MixingVal.homotopyInitialization
+MixingVal.from_dp
+MixingVal.dp_nominal
+MixingVal.linearized
+MixingVal.m_flow_turbulent
+MixingVal.sta_default.p
+MixingVal.sta_default.T
+MixingVal.eta_default
+MixingVal.m_flow_nominal_pos
+MixingVal.dp_nominal_pos
+MixingVal.CvData
+MixingVal.Kv
+MixingVal.Cv
+MixingVal.Av
+MixingVal.deltaM
+MixingVal.dpValve_nominal
+MixingVal.rhoStd
+MixingVal.Kv_SI
+MixingVal.use_strokeTime
+MixingVal.strokeTime
+MixingVal.init
+MixingVal.y_start
+MixingVal.casePreInd
+MixingVal.dpFixed_nominal
+MixingVal.l
+MixingVal.phi
+MixingVal.kFixed
+MixingVal.kVal
+RetCon.TLiqRetSet.k
+RetCon.ValSig.controlError
+RetCon.ValSig.controllerType
+RetCon.ValSig.k
+RetCon.ValSig.Ti
+RetCon.ValSig.Td
+RetCon.ValSig.yMax
+RetCon.ValSig.yMin
+RetCon.ValSig.wp
+RetCon.ValSig.wd
+RetCon.ValSig.Ni
+RetCon.ValSig.Nd
+RetCon.ValSig.initType
+RetCon.ValSig.xi_start
+RetCon.ValSig.xd_start
+RetCon.ValSig.y_start
+RetCon.ValSig.strict
+RetCon.ValSig.reverseActing
+RetCon.ValSig.reset
+RetCon.ValSig.y_reset
+RetCon.ValSig.addP.y
+RetCon.ValSig.addP.k1
+RetCon.ValSig.addP.k2
+RetCon.ValSig.P.k
+RetCon.ValSig.P.y
+RetCon.ValSig.addPID.k1
+RetCon.ValSig.addPID.k2
+RetCon.ValSig.addPID.k3
+RetCon.ValSig.addPID.u2
+RetCon.ValSig.addPID.y
+RetCon.ValSig.unitTime
+RetCon.ValSig.revAct
+RetCon.ValSig.with_I
+RetCon.ValSig.with_D
+RetCon.ValSig.Dzero.k
+RetCon.ValSig.Dzero.y
+RetCon.ValSig.y_reset_internal
+RetCon.ValSig.addI.k1
+RetCon.ValSig.addI.k2
+RetCon.ValSig.addI.k3
+RetCon.ValSig.addI.u3
+RetCon.ValSig.addI.y
+RetCon.ValSig.addSat.y
+RetCon.ValSig.addSat.k1
+RetCon.ValSig.addSat.k2
+RetCon.ValSig.gainPID.k
+RetCon.ValSig.gainPID.y
+RetCon.ValSig.gainTrack.k
+RetCon.ValSig.limiter.uMax
+RetCon.ValSig.limiter.uMin
+RetCon.ValSig.limiter.strict
+RetCon.ValSig.limiter.limitsAtInit
+RetCon.ValSig.I.y
+RetCon.ValSig.I.der(y)
+RetCon.ValSig.I.k
+RetCon.ValSig.I.initType
+RetCon.ValSig.I.y_start
+RetCon.ValSig.I.reset
+RetCon.ValSig.I.y_reset
+RetCon.ValSig.I.y_reset_internal
+RetCon.ValSig.I.trigger_internal
 _GlobalScope.AHU.cooCoi.heaCoo.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
 _GlobalScope.pumCHW.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
 _GlobalScope.ITRack.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
 _GlobalScope.CDURack.pum.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
 _GlobalScope.valLin.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
+_GlobalScope.Mix.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
 
-double initialValue(4573,6)
+double initialValue(4847,6)
   0      18                       0                       0                
   6   256   # mAir_flow_nominal
  -1   80000                       0                       0                
@@ -4718,7 +4992,7 @@ double initialValue(4573,6)
   6   260   # AHU.port_a1.p
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # AHU.port_a1.h_outflow
-  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  0       0                       0                  1.0000000000000000E+08
   6   260   # AHU.port_b1.p
   0       0                 -100000                  100000                
   6   388   # AHU.port_a2.m_flow
@@ -11268,9 +11542,9 @@ double initialValue(4573,6)
   1   280   # mixCon.mixValSig.Ti
  -1  1.0000000000000001E-01       0                 1.7976931348623157E+308
   1   280   # mixCon.mixValSig.Td
- -1  5.0000000000000000E-01       0                       0                
+ -1       1                       0                       0                
   1   280   # mixCon.mixValSig.yMax
- -1  1.0000000000000000E-02       0                       0                
+ -1       0                       0                       0                
   1   280   # mixCon.mixValSig.yMin
  -1       1                       0                 1.7976931348623157E+308
   1   280   # mixCon.mixValSig.wp
@@ -11290,7 +11564,7 @@ double initialValue(4573,6)
   1   280   # mixCon.mixValSig.y_start
   0       1                       0                       0                
   6   257   # mixCon.mixValSig.strict
- -1       1                       0                       0                
+ -1       0                       0                       0                
   1   281   # mixCon.mixValSig.reverseActing
   0       1                       1                       3                
   6   258   # mixCon.mixValSig.reset
@@ -11832,7 +12106,7 @@ double initialValue(4573,6)
   6   257   # CDURack.allowFlowReversal2
   0       0                 -100000                  100000                
   6   388   # CDURack.port_a1.m_flow
-  0       0                       0                  1.0000000000000000E+08
+  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
   6   260   # CDURack.port_a1.p
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # CDURack.port_a1.h_outflow
@@ -13433,6 +13707,10 @@ double initialValue(4573,6)
   0       0                       0                       0                
   6  1281   # valLin.wrongEnergyMassBalanceConfiguration
   0       0                 -100000                  100000                
+  6   388   # valLin.port_1.m_flow
+  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  6   260   # valLin.port_1.p
+  0       0                 -100000                  100000                
   6   388   # valLin.port_3.m_flow
  -1      10                       0                       0                
   1   280   # valLin.tau
@@ -13620,6 +13898,8 @@ double initialValue(4573,6)
   1   282   # valLin.init
  -1       1                       0                       0                
   1   280   # valLin.y_start
+  0       0                       0                       1                
+  6   256   # valLin.y
   0       0                       0                       0                
   6  1281   # valLin.casePreInd
   0       1                       1                       4                
@@ -13814,6 +14094,546 @@ double initialValue(4573,6)
   6  1281   # valLin.vol.dynBal._simplify_mWat_flow
   0       0                       0                       0                
   6  1280   # valLin.vol.dynBal.mWat_flow_internal
+  0       1                       1                       4                
+  6   258   # Mix.energyDynamics
+  0       1                       1                       4                
+  6   258   # Mix.massDynamics
+  0       1                       1                       4                
+  6   258   # Mix.substanceDynamics
+  0       1                       1                       4                
+  6   258   # Mix.traceDynamics
+ -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  1   280   # Mix.p_start
+ -1  2.9314999999999998E+02       1                   10000                
+  1   280   # Mix.T_start
+ -1       1                       0                       1                
+  1   280   # Mix.X_start[1]
+  0       1                       1                 1.7976931348623157E+308
+  6   256   # Mix.mSenFac
+  0       0                       0                       0                
+  6  1281   # Mix.wrongEnergyMassBalanceConfiguration
+  0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
+  6   260   # Mix.port_1.h_outflow
+  0       0                 -100000                  100000                
+  6   388   # Mix.port_3.m_flow
+  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  6   260   # Mix.port_3.p
+ -1      10                       0                       0                
+  1   280   # Mix.tau
+  0      35                       0                       0                
+  6   256   # Mix.mDyn_flow_nominal
+  0       1                       0                       0                
+  6   257   # Mix.from_dp
+  0       3                       1                       3                
+  6   258   # Mix.portFlowDirection_1
+  0       3                       1                       3                
+  6   258   # Mix.portFlowDirection_2
+  0       3                       1                       3                
+  6   258   # Mix.portFlowDirection_3
+  0       0                       0                       0                
+  6   257   # Mix.verifyFlowReversal
+  0  3.5000000000000001E-03       0                       0                
+  6   256   # Mix.m_flow_small
+  0       1                       0                       0                
+  6   257   # Mix.res1.allowFlowReversal
+  0       0                       0                  1.0000000000000000E+08
+  6   260   # Mix.res1.port_b.p
+  0      35                       0                       0                
+  6   256   # Mix.res1.m_flow_nominal
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  6   256   # Mix.res1.m_flow_small
+  0       0                       0                       0                
+  6   769   # Mix.res1.show_T
+  0       0                       0                       0                
+  6   288   # Mix.res1.dp
+  0       0                       0                       0                
+  6  1280   # Mix.res1._m_flow_start
+  0       0                       0                       0                
+  6  1280   # Mix.res1._dp_start
+  0       1                       0                       0                
+  6   769   # Mix.res1.homotopyInitialization
+  0       1                       0                       0                
+  6   257   # Mix.res1.from_dp
+  0    6000                       0                       0                
+  6   256   # Mix.res1.dp_nominal
+  0       0                       0                       0                
+  6   257   # Mix.res1.linearized
+  0  1.0500000000000000E+01       0                 1.7976931348623157E+308
+  6   256   # Mix.res1.m_flow_turbulent
+ -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  1  1304   # Mix.res1.sta_default.p
+ -1  2.9314999999999998E+02       1                   10000                
+  1  1304   # Mix.res1.sta_default.T
+  0  4.3837802581567966E-03       0                 1.7976931348623157E+308
+  6  1280   # Mix.res1.eta_default
+  0      35                       0                       0                
+  6  1280   # Mix.res1.m_flow_nominal_pos
+  0    6000                       0                       0                
+  6  1280   # Mix.res1.dp_nominal_pos
+  0  2.9999999999999999E-01  9.9999999999999995E-07 1.7976931348623157E+308
+  6   256   # Mix.res1.deltaM
+  0  4.5184805705753195E-01       0                       0                
+  6   256   # Mix.res1.k
+  0       0                       0                       0                
+  6  1281   # Mix.res1.disableComputeFlowResistance_internal
+  0       1                       0                       0                
+  6  1281   # Mix.res1.computeFlowResistance
+  0       0                       0                       0                
+  6  1280   # Mix.res1.coeff
+  0       1                       0                       0                
+  6   257   # Mix.res2.allowFlowReversal
+  0      35                       0                       0                
+  6   256   # Mix.res2.m_flow_nominal
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  6   256   # Mix.res2.m_flow_small
+  0       0                       0                       0                
+  6   769   # Mix.res2.show_T
+  0       0                       0                       0                
+  6   256   # Mix.res2.dp
+  0       0                       0                       0                
+  6  1280   # Mix.res2._m_flow_start
+  0       0                       0                       0                
+  6  1280   # Mix.res2._dp_start
+  0       1                       0                       0                
+  6   769   # Mix.res2.homotopyInitialization
+  0       1                       0                       0                
+  6   257   # Mix.res2.from_dp
+  0    6000                       0                       0                
+  6   256   # Mix.res2.dp_nominal
+  0       0                       0                       0                
+  6   257   # Mix.res2.linearized
+  0  1.0500000000000000E+01       0                 1.7976931348623157E+308
+  6   256   # Mix.res2.m_flow_turbulent
+ -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  1  1304   # Mix.res2.sta_default.p
+ -1  2.9314999999999998E+02       1                   10000                
+  1  1304   # Mix.res2.sta_default.T
+  0  4.3837802581567966E-03       0                 1.7976931348623157E+308
+  6  1280   # Mix.res2.eta_default
+  0      35                       0                       0                
+  6  1280   # Mix.res2.m_flow_nominal_pos
+  0    6000                       0                       0                
+  6  1280   # Mix.res2.dp_nominal_pos
+  0  2.9999999999999999E-01  9.9999999999999995E-07 1.7976931348623157E+308
+  6   256   # Mix.res2.deltaM
+  0  4.5184805705753195E-01       0                       0                
+  6   256   # Mix.res2.k
+  0       0                       0                       0                
+  6  1281   # Mix.res2.disableComputeFlowResistance_internal
+  0       1                       0                       0                
+  6  1281   # Mix.res2.computeFlowResistance
+  0       0                       0                       0                
+  6  1280   # Mix.res2.coeff
+  0       1                       0                       0                
+  6   257   # Mix.res3.allowFlowReversal
+  0      35                       0                       0                
+  6   256   # Mix.res3.m_flow_nominal
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  6   256   # Mix.res3.m_flow_small
+  0       0                       0                       0                
+  6   769   # Mix.res3.show_T
+  0       0                       0                       0                
+  6   256   # Mix.res3.dp
+  0       0                       0                       0                
+  6  1280   # Mix.res3._m_flow_start
+  0       0                       0                       0                
+  6  1280   # Mix.res3._dp_start
+  0       1                       0                       0                
+  6   769   # Mix.res3.homotopyInitialization
+  0       1                       0                       0                
+  6   257   # Mix.res3.from_dp
+  0    6000                       0                       0                
+  6   256   # Mix.res3.dp_nominal
+  0       0                       0                       0                
+  6   257   # Mix.res3.linearized
+  0  1.0500000000000000E+01       0                 1.7976931348623157E+308
+  6   256   # Mix.res3.m_flow_turbulent
+ -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  1  1304   # Mix.res3.sta_default.p
+ -1  2.9314999999999998E+02       1                   10000                
+  1  1304   # Mix.res3.sta_default.T
+  0  4.3837802581567966E-03       0                 1.7976931348623157E+308
+  6  1280   # Mix.res3.eta_default
+  0      35                       0                       0                
+  6  1280   # Mix.res3.m_flow_nominal_pos
+  0    6000                       0                       0                
+  6  1280   # Mix.res3.dp_nominal_pos
+  0  2.9999999999999999E-01  9.9999999999999995E-07 1.7976931348623157E+308
+  6   256   # Mix.res3.deltaM
+  0  4.5184805705753195E-01       0                       0                
+  6   256   # Mix.res3.k
+  0       0                       0                       0                
+  6  1281   # Mix.res3.disableComputeFlowResistance_internal
+  0       1                       0                       0                
+  6  1281   # Mix.res3.computeFlowResistance
+  0       0                       0                       0                
+  6  1280   # Mix.res3.coeff
+  0       1                       0                       0                
+  6  1281   # Mix.have_controlVolume
+  0       1                       0                       0                
+  6   769   # Mix.homotopyInitialization
+  0      35                       0                       0                
+  6   256   # Mix.m_flow_nominal[1]
+  0      35                       0                       0                
+  6   256   # Mix.m_flow_nominal[2]
+  0      35                       0                       0                
+  6   256   # Mix.m_flow_nominal[3]
+  0    6000                       0                       0                
+  6   256   # Mix.dp_nominal[1]
+  0    6000                       0                       0                
+  6   256   # Mix.dp_nominal[2]
+  0    6000                       0                       0                
+  6   256   # Mix.dp_nominal[3]
+  0  2.9999999999999999E-01       0                 1.7976931348623157E+308
+  6   256   # Mix.deltaM
+  0       0                       0                       0                
+  6   257   # Mix.linearized
+  0       1                       1                       4                
+  6   258   # Mix.vol.energyDynamics
+  0       1                       1                       4                
+  6   258   # Mix.vol.massDynamics
+  0       1                       1                       4                
+  6   258   # Mix.vol.substanceDynamics
+  0       1                       1                       4                
+  6   258   # Mix.vol.traceDynamics
+  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  6   256   # Mix.vol.p_start
+  0  2.9314999999999998E+02       1                   10000                
+  6   256   # Mix.vol.T_start
+  0       0                       0                       1                
+  6   256   # Mix.vol.X_start[1]
+  0       1                       1                 1.7976931348623157E+308
+  6   256   # Mix.vol.mSenFac
+  0       0                       0                       0                
+  6  1281   # Mix.vol.wrongEnergyMassBalanceConfiguration
+  0       0                       0                       0                
+  6   769   # Mix.vol.initialize_p
+  0       0                       0                       0                
+  6   257   # Mix.vol.prescribedHeatFlowRate
+  0       1                       0                       0                
+  6   257   # Mix.vol.simplify_mWat_flow
+  0      35                       0                 1.7976931348623157E+308
+  6   256   # Mix.vol.m_flow_nominal
+  0       3                       0                       0                
+  6   258   # Mix.vol.nPorts
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  6   256   # Mix.vol.m_flow_small
+  0       1                       0                       0                
+  6   257   # Mix.vol.allowFlowReversal
+  0       0                       0                       0                
+  6   256   # Mix.vol.V
+  0     300                       1                   10000                
+  6   256   # Mix.vol.T
+  0  1.0322726598927813E+03       0                 1.7976931348623157E+308
+  6  1280   # Mix.vol.rho_start
+  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  6  1280   # Mix.vol.state_default.p
+  0  2.9314999999999998E+02       1                   10000                
+  6  1280   # Mix.vol.state_default.T
+  0  1.0322726598927813E+03       0                 1.7976931348623157E+308
+  6  1280   # Mix.vol.rho_default
+  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  6  1280   # Mix.vol.state_start.p
+  0  2.9314999999999998E+02       1                   10000                
+  6  1280   # Mix.vol.state_start.T
+  0       0                       0                       0                
+  6  1281   # Mix.vol.useSteadyStateTwoPort
+  0       0                       0                       0                
+  6  1412   # Mix.vol.preTem.port.Q_flow
+  0       0                       0                       0                
+  6  1280   # Mix.vol.heaFloSen.Q_flow
+  0       0                       0                       0                
+  6  1412   # Mix.vol.heaFloSen.port_a.Q_flow
+  0       0                       0                       0                
+  6  1412   # Mix.vol.heaFloSen.port_b.Q_flow
+  0       0                       0                       0                
+  6   257   # Mix.vol.use_C_flow
+  0       0                       0                       0                
+  6   388   # Mix.vol.heatPort.Q_flow
+  0       0                       0                       0                
+  6   256   # Mix.vol.tau
+  0       0                       0                       0                
+  6  1280   # Mix.vol.V_nominal
+  0       1                       1                       4                
+  6  1282   # Mix.vol.dynBal.energyDynamics
+  0       1                       1                       4                
+  6  1282   # Mix.vol.dynBal.massDynamics
+  0       1                       1                       4                
+  6  1282   # Mix.vol.dynBal.substanceDynamics
+  0       1                       1                       4                
+  6  1282   # Mix.vol.dynBal.traceDynamics
+  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  6  1280   # Mix.vol.dynBal.p_start
+  0  2.9314999999999998E+02       1                   10000                
+  6  1280   # Mix.vol.dynBal.T_start
+  0       0                       0                       1                
+  6  1280   # Mix.vol.dynBal.X_start[1]
+  0       1                       1                 1.7976931348623157E+308
+  6  1280   # Mix.vol.dynBal.mSenFac
+  0       0                       0                       0                
+  6  1281   # Mix.vol.dynBal.wrongEnergyMassBalanceConfiguration
+  0       0                       0                       0                
+  6   769   # Mix.vol.dynBal.initialize_p
+  0       1                       0                       0                
+  6  1281   # Mix.vol.dynBal.simplify_mWat_flow
+  0       3                       0                       0                
+  6  1282   # Mix.vol.dynBal.nPorts
+  0       0                       0                       0                
+  6  1281   # Mix.vol.dynBal.use_mWat_flow
+  0       0                       0                       0                
+  6  1281   # Mix.vol.dynBal.use_C_flow
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.Q_flow
+  0     300                       1                   10000                
+  6  1280   # Mix.vol.dynBal.medium.T
+  0  1.0322726598927813E+03       0                 1.7976931348623157E+308
+  6  1280   # Mix.vol.dynBal.medium.d
+  0       1                       0                       1                
+  6  1280   # Mix.vol.dynBal.medium.X[1]
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.medium.R_s
+  0  2.5932254297811944E-02       0                 1.7976931348623157E+308
+  6  1280   # Mix.vol.dynBal.medium.MM
+  0       0                       0                       0                
+  6  1281   # Mix.vol.dynBal.medium.preferredMediumStates
+  0       1                       0                       0                
+  6  1281   # Mix.vol.dynBal.medium.standardOrderComponents
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.medium.T_degC
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.medium.p_bar
+ -1       0                       0                       0                
+  2  1296   # Mix.vol.dynBal.U
+  0       0                       0                       0                
+  3  1280   # Mix.vol.dynBal.der(U)
+  0       0                       0                 1.7976931348623157E+308
+  6  1280   # Mix.vol.dynBal.m
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.der(m)
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.mb_flow
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.fluidVolume
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.CSen
+  0       0                 -1.0000000000000000E+08  1.0000000000000000E+08
+  6  1280   # Mix.vol.dynBal.ports_H_flow[1]
+  0       0                 -1.0000000000000000E+08  1.0000000000000000E+08
+  6  1280   # Mix.vol.dynBal.ports_H_flow[2]
+  0       0                 -1.0000000000000000E+08  1.0000000000000000E+08
+  6  1280   # Mix.vol.dynBal.ports_H_flow[3]
+  0  3.7067225654037829E+03       0                       0                
+  6  1280   # Mix.vol.dynBal.cp_default
+  0  1.0322726598927813E+03       0                 1.7976931348623157E+308
+  6  1280   # Mix.vol.dynBal.rho_start
+  0       0                       0                       0                
+  6  1281   # Mix.vol.dynBal.computeCSen
+  0  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  6  1280   # Mix.vol.dynBal.state_default.p
+  0  2.9314999999999998E+02       1                   10000                
+  6  1280   # Mix.vol.dynBal.state_default.T
+  0  1.0322726598927813E+03       0                 1.7976931348623157E+308
+  6  1280   # Mix.vol.dynBal.rho_default
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.hStart
+  0       0                       0                       0                
+  6  1281   # Mix.vol.dynBal._simplify_mWat_flow
+  0       0                       0                       0                
+  6  1280   # Mix.vol.dynBal.mWat_flow_internal
+  0       1                       0                       0                
+  6   257   # MixingVal.allowFlowReversal
+  0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
+  6   260   # MixingVal.port_b.h_outflow
+  0      35                       0                       0                
+  6   256   # MixingVal.m_flow_nominal
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  6   256   # MixingVal.m_flow_small
+  0       0                       0                       0                
+  6   769   # MixingVal.show_T
+  0       0                       0                       0                
+  6   288   # MixingVal.dp
+  0       0                       0                       0                
+  6  1280   # MixingVal._m_flow_start
+  0       0                       0                       0                
+  6  1280   # MixingVal._dp_start
+  0       1                       0                       0                
+  6   769   # MixingVal.homotopyInitialization
+  0       0                       0                       0                
+  6   257   # MixingVal.from_dp
+  0       0                       0                       0                
+  6   256   # MixingVal.dp_nominal
+  0       0                       0                       0                
+  6   257   # MixingVal.linearized
+  0       0                       0                 1.7976931348623157E+308
+  6   256   # MixingVal.m_flow_turbulent
+ -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
+  1  1304   # MixingVal.sta_default.p
+ -1  2.9314999999999998E+02       1                   10000                
+  1  1304   # MixingVal.sta_default.T
+  0  4.3837802581567966E-03       0                 1.7976931348623157E+308
+  6  1280   # MixingVal.eta_default
+  0      35                       0                       0                
+  6  1280   # MixingVal.m_flow_nominal_pos
+  0       0                       0                       0                
+  6  1280   # MixingVal.dp_nominal_pos
+  0       1                       1                       4                
+  6   258   # MixingVal.CvData
+  0       0                       0                       0                
+  6   256   # MixingVal.Kv
+  0       0                       0                       0                
+  6   256   # MixingVal.Cv
+  0       0                       0                       0                
+  6   256   # MixingVal.Av
+ -1  2.0000000000000000E-02       0                       0                
+  1   280   # MixingVal.deltaM
+ -1    6000                       0                 1.7976931348623157E+308
+  1   280   # MixingVal.dpValve_nominal
+ -1  1.0322726598927813E+03       0                 1.7976931348623157E+308
+  1   280   # MixingVal.rhoStd
+  0       0                       0                 1.7976931348623157E+308
+  6  1280   # MixingVal.Kv_SI
+  0       0                       0                       0                
+  6   257   # MixingVal.use_strokeTime
+ -1     120                       0                       0                
+  1   280   # MixingVal.strokeTime
+ -1       4                       1                       4                
+  1   282   # MixingVal.init
+ -1       1                       0                       0                
+  1   280   # MixingVal.y_start
+  0       0                       0                       0                
+  6  1281   # MixingVal.casePreInd
+  0       0                       0                 1.7976931348623157E+308
+  6   256   # MixingVal.dpFixed_nominal
+ -1  1.0000000000000000E-04  1.0000000000000000E-10       1                
+  1   280   # MixingVal.l
+  0       0                       0                       0                
+  6   256   # MixingVal.phi
+  0       0                       0                 1.7976931348623157E+308
+  6   256   # MixingVal.kFixed
+  0  9.9999999999999997E-61  9.9999999999999997E-61 1.7976931348623157E+308
+  6   256   # MixingVal.kVal
+ -1  3.0964999999999998E+02       0                       0                
+  1   280   # RetCon.TLiqRetSet.k
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.controlError
+  0       2                       1                       4                
+  6   258   # RetCon.ValSig.controllerType
+ -1  1.0000000000000000E-02       0                 1.7976931348623157E+308
+  1   280   # RetCon.ValSig.k
+ -1      40                  9.9999999999999997E-61 1.7976931348623157E+308
+  1   280   # RetCon.ValSig.Ti
+ -1  1.0000000000000001E-01       0                 1.7976931348623157E+308
+  1   280   # RetCon.ValSig.Td
+ -1       1                       0                       0                
+  1   280   # RetCon.ValSig.yMax
+ -1       0                       0                       0                
+  1   280   # RetCon.ValSig.yMin
+ -1       1                       0                 1.7976931348623157E+308
+  1   280   # RetCon.ValSig.wp
+ -1       0                       0                 1.7976931348623157E+308
+  1   280   # RetCon.ValSig.wd
+ -1  9.0000000000000002E-01  1.0000000000000000E-13 1.7976931348623157E+308
+  1   280   # RetCon.ValSig.Ni
+ -1      10                  1.0000000000000000E-13 1.7976931348623157E+308
+  1   280   # RetCon.ValSig.Nd
+  0       3                       1                       4                
+  6   258   # RetCon.ValSig.initType
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.xi_start
+ -1       0                       0                       0                
+  1   280   # RetCon.ValSig.xd_start
+ -1       0                       0                       0                
+  1   280   # RetCon.ValSig.y_start
+  0       1                       0                       0                
+  6   257   # RetCon.ValSig.strict
+ -1       0                       0                       0                
+  1   281   # RetCon.ValSig.reverseActing
+  0       1                       1                       3                
+  6   258   # RetCon.ValSig.reset
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.y_reset
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.addP.y
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.addP.k1
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.addP.k2
+ -1       1                       0                       0                
+  1   280   # RetCon.ValSig.P.k
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.P.y
+  0       1                       0                       0                
+  6   256   # RetCon.ValSig.addPID.k1
+  0       1                       0                       0                
+  6   256   # RetCon.ValSig.addPID.k2
+  0       1                       0                       0                
+  6   256   # RetCon.ValSig.addPID.k3
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.addPID.u2
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.addPID.y
+  0       1                       0                       0                
+  6   768   # RetCon.ValSig.unitTime
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.revAct
+  0       1                       0                       0                
+  6   769   # RetCon.ValSig.with_I
+  0       0                       0                       0                
+  6   769   # RetCon.ValSig.with_D
+  0       0                       0                       0                
+  6   768   # RetCon.ValSig.Dzero.k
+  0       0                       0                       0                
+  6   768   # RetCon.ValSig.Dzero.y
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.y_reset_internal
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.addI.k1
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.addI.k2
+ -1       1                       0                       0                
+  1  1304   # RetCon.ValSig.addI.k3
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.addI.u3
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.addI.y
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.addSat.y
+  0       1                       0                       0                
+  6  1280   # RetCon.ValSig.addSat.k1
+  0      -1                       0                       0                
+  6  1280   # RetCon.ValSig.addSat.k2
+  0       1                       0                       0                
+  6  1280   # RetCon.ValSig.gainPID.k
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.gainPID.y
+  0       1                       0                       0                
+  6  1280   # RetCon.ValSig.gainTrack.k
+  0       1                       0                       0                
+  6  1280   # RetCon.ValSig.limiter.uMax
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.limiter.uMin
+  0       1                       0                       0                
+  6  1281   # RetCon.ValSig.limiter.strict
+  0       1                       0                       0                
+  6  1281   # RetCon.ValSig.limiter.limitsAtInit
+ -1       0                       0                       0                
+  2   272   # RetCon.ValSig.I.y
+  0       0                       0                       0                
+  3   256   # RetCon.ValSig.I.der(y)
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.I.k
+  0       3                       1                       4                
+  6   258   # RetCon.ValSig.I.initType
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.I.y_start
+  0       1                       1                       3                
+  6   258   # RetCon.ValSig.I.reset
+  0       0                       0                       0                
+  6   256   # RetCon.ValSig.I.y_reset
+  0       0                       0                       0                
+  6  1280   # RetCon.ValSig.I.y_reset_internal
+  0       0                       0                       0                
+  6  1281   # RetCon.ValSig.I.trigger_internal
   0  7.6090000000000005E-02  1.0000000000000000E-03  2.5000000000000000E-01
   6  1280   # _GlobalScope.AHU.cooCoi.heaCoo.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
   0  7.6090000000000005E-02  1.0000000000000000E-03  2.5000000000000000E-01
@@ -13824,6 +14644,8 @@ double initialValue(4573,6)
   6  1280   # _GlobalScope.CDURack.pum.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
   0  7.6090000000000005E-02  1.0000000000000000E-03  2.5000000000000000E-01
   6  1280   # _GlobalScope.valLin.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
+  0  7.6090000000000005E-02  1.0000000000000000E-03  2.5000000000000000E-01
+  6  1280   # _GlobalScope.Mix.vol.dynBal.simplePropyleneGlycolWaterConstants[1].molarMass
 
 
 # Matrix with 6 columns defining the initial value calculation
@@ -13870,7 +14692,7 @@ double initialValue(4573,6)
 #   Which variables will be important for initialization and continue
 #   is indicated by value in column 6 & dsStartMasks.
 #
-char initialDescription(4573,184)
+char initialDescription(4847,184)
 Nominal mass flow rate at fan [kg/s]
 Nominal compressor power (at y=1) [W]
 Temperature difference evaporator inlet-outlet [K,]
@@ -18249,6 +19071,8 @@ Start value of mass fractions m_i/m [kg/kg]
 Factor for scaling the sensible thermal mass of the volume
 True if configuration of energy and mass balance is wrong. [:#(type=Boolean)]
 Mass flow rate from the connection point into the component [kg/s]
+Thermodynamic pressure in the connection point [Pa|bar]
+Mass flow rate from the connection point into the component [kg/s]
 Time constant at nominal flow for dynamic energy and momentum balance [s]
 Nominal mass flow rate for dynamic momentum and energy balance [kg/s]
 = true, use m_flow = f(dp) else dp = f(m_flow) [:#(type=Boolean)]
@@ -18342,6 +19166,7 @@ Set to true to continuously open and close valve using strokeTime [:#(type=Boole
 Time needed to fully open or close actuator [s]
 Type of initialization (no init/steady state/initial state/initial output) [:#(type=Modelica.Blocks.Types.Init)]
 Initial position of actuator
+Actuator position (0: closed, 1: open)
 In case of PressureIndependent the model I/O is modified [:#(type=Boolean)]
 Selection of flow coefficient [:#(type=Buildings.Fluid.Types.CvTypes)]
 Kv (metric) flow coefficient [m3/h/(bar)^(1/2)] []
@@ -18439,6 +19264,277 @@ Density, used to compute fluid mass [kg/m3|g/cm3]
 Start value for specific enthalpy [J/kg]
 If true, then port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero, and equations are simplified [:#(type=Boolean)]
 Needed to connect to conditional connector [kg/s]
+Type of energy balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of mass balance: dynamic (3 initialization options) or steady state, must be steady state if energyDynamics is steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of independent mass fraction balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of trace substance balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Start value of pressure [Pa|bar]
+Start value of temperature [K|degC]
+Start value of mass fractions m_i/m [kg/kg]
+Factor for scaling the sensible thermal mass of the volume
+True if configuration of energy and mass balance is wrong. [:#(type=Boolean)]
+Specific thermodynamic enthalpy close to the connection point if m_flow < 0 [J/kg]
+Mass flow rate from the connection point into the component [kg/s]
+Thermodynamic pressure in the connection point [Pa|bar]
+Time constant at nominal flow for dynamic energy and momentum balance [s]
+Nominal mass flow rate for dynamic momentum and energy balance [kg/s]
+= true, use m_flow = f(dp) else dp = f(m_flow) [:#(type=Boolean)]
+Flow direction for port_1 [:#(type=Modelica.Fluid.Types.PortFlowDirection)]
+Flow direction for port_2 [:#(type=Modelica.Fluid.Types.PortFlowDirection)]
+Flow direction for port_3 [:#(type=Modelica.Fluid.Types.PortFlowDirection)]
+=true, to assert that the flow does not reverse when portFlowDirection_* does not equal Bidirectional [:#(type=Boolean)]
+Small mass flow rate for checking flow reversal [kg/s]
+= false to simplify equations, assuming, but not enforcing, no flow reversal [:#(type=Boolean)]
+Thermodynamic pressure in the connection point [Pa|bar]
+Nominal mass flow rate [kg/s]
+Small mass flow rate for regularization of zero flow [kg/s]
+= true, if actual temperature at port is computed [:#(type=Boolean)]
+Pressure difference between port_a and port_b [Pa|Pa]
+Start value for m_flow, used to avoid a warning if not set in m_flow, and to avoid m_flow.start in parameter window [kg/s]
+Start value for dp, used to avoid a warning if not set in dp, and to avoid dp.start in parameter window [Pa|Pa]
+= true, use homotopy method [:#(type=Boolean)]
+= true, use m_flow = f(dp) else dp = f(m_flow) [:#(type=Boolean)]
+Pressure drop at nominal mass flow rate [Pa|Pa]
+= true, use linear relation between m_flow and dp for any flow rate [:#(type=Boolean)]
+Turbulent flow if |m_flow| >= m_flow_turbulent [kg/s]
+Absolute pressure of medium [Pa|bar]
+Temperature of medium [K|degC]
+Dynamic viscosity, used to compute transition to turbulent flow regime [Pa.s]
+Absolute value of nominal flow rate [kg/s]
+Absolute value of nominal pressure difference [Pa|Pa]
+Fraction of nominal mass flow rate where transition to turbulent occurs
+Flow coefficient, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2)
+=false to disable computation of flow resistance [:#(type=Boolean)]
+Flag to enable/disable computation of flow resistance [:#(type=Boolean)]
+Precomputed coefficient to avoid division by parameter
+= false to simplify equations, assuming, but not enforcing, no flow reversal [:#(type=Boolean)]
+Nominal mass flow rate [kg/s]
+Small mass flow rate for regularization of zero flow [kg/s]
+= true, if actual temperature at port is computed [:#(type=Boolean)]
+Pressure difference between port_a and port_b [Pa|Pa]
+Start value for m_flow, used to avoid a warning if not set in m_flow, and to avoid m_flow.start in parameter window [kg/s]
+Start value for dp, used to avoid a warning if not set in dp, and to avoid dp.start in parameter window [Pa|Pa]
+= true, use homotopy method [:#(type=Boolean)]
+= true, use m_flow = f(dp) else dp = f(m_flow) [:#(type=Boolean)]
+Pressure drop at nominal mass flow rate [Pa|Pa]
+= true, use linear relation between m_flow and dp for any flow rate [:#(type=Boolean)]
+Turbulent flow if |m_flow| >= m_flow_turbulent [kg/s]
+Absolute pressure of medium [Pa|bar]
+Temperature of medium [K|degC]
+Dynamic viscosity, used to compute transition to turbulent flow regime [Pa.s]
+Absolute value of nominal flow rate [kg/s]
+Absolute value of nominal pressure difference [Pa|Pa]
+Fraction of nominal mass flow rate where transition to turbulent occurs
+Flow coefficient, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2)
+=false to disable computation of flow resistance [:#(type=Boolean)]
+Flag to enable/disable computation of flow resistance [:#(type=Boolean)]
+Precomputed coefficient to avoid division by parameter
+= false to simplify equations, assuming, but not enforcing, no flow reversal [:#(type=Boolean)]
+Nominal mass flow rate [kg/s]
+Small mass flow rate for regularization of zero flow [kg/s]
+= true, if actual temperature at port is computed [:#(type=Boolean)]
+Pressure difference between port_a and port_b [Pa|Pa]
+Start value for m_flow, used to avoid a warning if not set in m_flow, and to avoid m_flow.start in parameter window [kg/s]
+Start value for dp, used to avoid a warning if not set in dp, and to avoid dp.start in parameter window [Pa|Pa]
+= true, use homotopy method [:#(type=Boolean)]
+= true, use m_flow = f(dp) else dp = f(m_flow) [:#(type=Boolean)]
+Pressure drop at nominal mass flow rate [Pa|Pa]
+= true, use linear relation between m_flow and dp for any flow rate [:#(type=Boolean)]
+Turbulent flow if |m_flow| >= m_flow_turbulent [kg/s]
+Absolute pressure of medium [Pa|bar]
+Temperature of medium [K|degC]
+Dynamic viscosity, used to compute transition to turbulent flow regime [Pa.s]
+Absolute value of nominal flow rate [kg/s]
+Absolute value of nominal pressure difference [Pa|Pa]
+Fraction of nominal mass flow rate where transition to turbulent occurs
+Flow coefficient, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2)
+=false to disable computation of flow resistance [:#(type=Boolean)]
+Flag to enable/disable computation of flow resistance [:#(type=Boolean)]
+Precomputed coefficient to avoid division by parameter
+Boolean flag used to remove conditional components [:#(type=Boolean)]
+= true, use homotopy method [:#(type=Boolean)]
+Mass flow rate. Set negative at outflowing ports. [kg/s]
+Mass flow rate. Set negative at outflowing ports. [kg/s]
+Mass flow rate. Set negative at outflowing ports. [kg/s]
+Pressure drop at nominal mass flow rate, set to zero or negative number at outflowing ports. [Pa|Pa]
+Pressure drop at nominal mass flow rate, set to zero or negative number at outflowing ports. [Pa|Pa]
+Pressure drop at nominal mass flow rate, set to zero or negative number at outflowing ports. [Pa|Pa]
+Fraction of nominal mass flow rate where transition to turbulent occurs
+= true, use linear relation between m_flow and dp for any flow rate [:#(type=Boolean)]
+Type of energy balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of mass balance: dynamic (3 initialization options) or steady state, must be steady state if energyDynamics is steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of independent mass fraction balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of trace substance balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Start value of pressure [Pa|bar]
+Start value of temperature [K|degC]
+Start value of mass fractions m_i/m [kg/kg]
+Factor for scaling the sensible thermal mass of the volume
+True if configuration of energy and mass balance is wrong. [:#(type=Boolean)]
+= true to set up initial equations for pressure [:#(type=Boolean)]
+Set to true if the model has a prescribed heat flow at its heatPort. If the heat flow rate at the heatPort is only based on temperature difference, then set to false [:#(type=Boolean)]
+Set to true to cause port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero [:#(type=Boolean)]
+Nominal mass flow rate [kg/s]
+Number of ports [:#(type=Integer)]
+Small mass flow rate for regularization of zero flow [kg/s]
+= false to simplify equations, assuming, but not enforcing, no flow reversal. Used only if model has two ports. [:#(type=Boolean)]
+Volume [m3]
+Temperature of the fluid [K|degC]
+Density, used to compute start and guess values [kg/m3|g/cm3]
+Absolute pressure of medium [Pa|bar]
+Temperature of medium [K|degC]
+Density, used to compute fluid mass [kg/m3|g/cm3]
+Absolute pressure of medium [Pa|bar]
+Temperature of medium [K|degC]
+Flag, true if the model has two ports only and uses a steady state balance [:#(type=Boolean)]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow from port_a to port_b as output signal [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Set to true to enable input connector for trace substance [:#(type=Boolean)]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Time constant at nominal flow [s]
+Volume of delay element [m3]
+Type of energy balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of mass balance: dynamic (3 initialization options) or steady state, must be steady state if energyDynamics is steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of independent mass fraction balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Type of trace substance balance: dynamic (3 initialization options) or steady state [:#(type=Modelica.Fluid.Types.Dynamics)]
+Start value of pressure [Pa|bar]
+Start value of temperature [K|degC]
+Start value of mass fractions m_i/m [kg/kg]
+Factor for scaling the sensible thermal mass of the volume
+True if configuration of energy and mass balance is wrong. [:#(type=Boolean)]
+= true to set up initial equations for pressure [:#(type=Boolean)]
+Set to true to cause port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero. Used only if Medium.nX > 1 [:#(type=Boolean)]
+Number of ports [:#(type=Integer)]
+Set to true to enable input connector for moisture mass flow rate [:#(type=Boolean)]
+Set to true to enable input connector for trace substance [:#(type=Boolean)]
+Sensible plus latent heat flow rate transferred into the medium [W]
+Temperature of medium [K|degC]
+Density of medium [kg/m3|g/cm3]
+Mass fractions (= (component mass)/total mass  m_i/m) [1]
+Gas constant (of mixture if applicable) [J/(kg.K)]
+Molar mass (of mixture or single fluid) [kg/mol]
+= true if StateSelect.prefer shall be used for the independent property variables of the medium [:#(type=Boolean)]
+If true, and reducedX = true, the last element of X will be computed from the other ones [:#(type=Boolean)]
+Temperature of medium in [degC] [degC;]
+Absolute pressure of medium in [bar] [bar]
+Internal energy of fluid [J]
+der(Internal energy of fluid) [W]
+Mass of fluid [kg]
+der(Mass of fluid) [kg/s]
+Mass flows across boundaries [kg/s]
+Volume [m3]
+Aditional heat capacity for implementing mFactor [J/K]
+[W]
+[W]
+[W]
+Heat capacity, to compute additional dry mass [J/(kg.K)]
+Density, used to compute fluid mass [kg/m3|g/cm3]
+[:#(type=Boolean)]
+Absolute pressure of medium [Pa|bar]
+Temperature of medium [K|degC]
+Density, used to compute fluid mass [kg/m3|g/cm3]
+Start value for specific enthalpy [J/kg]
+If true, then port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero, and equations are simplified [:#(type=Boolean)]
+Needed to connect to conditional connector [kg/s]
+= false to simplify equations, assuming, but not enforcing, no flow reversal [:#(type=Boolean)]
+Specific thermodynamic enthalpy close to the connection point if m_flow < 0 [J/kg]
+Nominal mass flow rate [kg/s]
+Small mass flow rate for regularization of zero flow [kg/s]
+= true, if actual temperature at port is computed [:#(type=Boolean)]
+Pressure difference between port_a and port_b [Pa|Pa]
+Start value for m_flow, used to avoid a warning if not set in m_flow, and to avoid m_flow.start in parameter window [kg/s]
+Start value for dp, used to avoid a warning if not set in dp, and to avoid dp.start in parameter window [Pa|Pa]
+= true, use homotopy method [:#(type=Boolean)]
+= true, use m_flow = f(dp) else dp = f(m_flow) [:#(type=Boolean)]
+Pressure drop at nominal mass flow rate [Pa|Pa]
+= true, use linear relation between m_flow and dp for any flow rate [:#(type=Boolean)]
+Turbulent flow if |m_flow| >= m_flow_turbulent [kg/s]
+Absolute pressure of medium [Pa|bar]
+Temperature of medium [K|degC]
+Dynamic viscosity, used to compute transition to turbulent flow regime [Pa.s]
+Absolute value of nominal flow rate [kg/s]
+Absolute value of nominal pressure difference [Pa|Pa]
+Selection of flow coefficient [:#(type=Buildings.Fluid.Types.CvTypes)]
+Kv (metric) flow coefficient [m3/h/(bar)^(1/2)] []
+Cv (US) flow coefficient [USG/min/(psi)^(1/2)] []
+Av (metric) flow coefficient [m2]
+Fraction of nominal flow rate where linearization starts, if y=1
+Nominal pressure drop of fully open valve, used if CvData=Buildings.Fluid.Types.CvTypes.OpPoint [Pa|Pa]
+Inlet density for which valve coefficients are defined [kg/m3|g/cm3]
+Flow coefficient for fully open valve in SI units, Kv=m_flow/sqrt(dp) [kg/s/(Pa)^(1/2)] []
+Set to true to continuously open and close valve using strokeTime [:#(type=Boolean)]
+Time needed to fully open or close actuator [s]
+Type of initialization (no init/steady state/initial state/initial output) [:#(type=Modelica.Blocks.Types.Init)]
+Initial position of actuator
+In case of PressureIndependent the model I/O is modified [:#(type=Boolean)]
+Pressure drop of pipe and other resistances that are in series [Pa|Pa]
+Valve leakage, l=Kv(y=0)/Kv(y=1)
+Ratio actual to nominal mass flow rate of valve, phi=Kv(y)/Kv(y=1)
+Flow coefficient of fixed resistance that may be in series with valve, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2).
+Flow coefficient of valve, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2).
+Constant output value
+Control error (set point - measurement)
+Type of controller [:#(type=Modelica.Blocks.Types.SimpleController)]
+Gain of controller
+Time constant of Integrator block [s]
+Time constant of Derivative block [s]
+Upper limit of output
+Lower limit of output
+Set-point weight for Proportional block (0..1)
+Set-point weight for Derivative block (0..1)
+Ni*Ti is time constant of anti-windup compensation
+The higher Nd, the more ideal the derivative block
+Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output) [:#(type=Modelica.Blocks.Types.Init)]
+Initial or guess value value for integrator output (= integrator state)
+Initial or guess value for state of derivative block
+Initial value of output
+= true, if strict limits with noEvent(..) [:#(type=Boolean)]
+Set to true for reverse acting, or false for direct acting control action [:#(type=Boolean)]
+Type of controller output reset [:#(type=Buildings.Types.Reset)]
+Value to which the controller output is reset if the boolean trigger has a rising edge, used if reset == Buildings.Types.Reset.Parameter
+Connector of Real output signal
+Gain of input signal 1
+Gain of input signal 2
+Gain value multiplied with input signal [1]
+Output signal connector
+Gain of input signal 1
+Gain of input signal 2
+Gain of input signal 3
+Connector of Real input signal 2
+Connector of Real output signal
+[s]
+Switch for sign for reverse or direct acting controller
+Boolean flag to enable integral action [:#(type=Boolean)]
+Boolean flag to enable derivative action [:#(type=Boolean)]
+Constant output value
+Connector of Real output signal
+Internal connector for controller output reset
+Gain of input signal 1
+Gain of input signal 2
+Gain of input signal 3
+Connector of Real input signal 3
+Connector of Real output signal
+Connector of Real output signal
+Gain of input signal 1
+Gain of input signal 2
+Gain value multiplied with input signal [1]
+Output signal connector
+Gain value multiplied with input signal [1]
+Upper limits of input signals
+Lower limits of input signals
+= true, if strict limits with noEvent(..) [:#(type=Boolean)]
+Has no longer an effect and is only kept for backwards compatibility (the implementation uses now the homotopy operator) [:#(type=Boolean)]
+Connector of Real output signal
+der(Connector of Real output signal)
+Integrator gain [1]
+Type of initialization (1: no init, 2: steady state, 3,4: initial output) [:#(type=Modelica.Blocks.Types.Init)]
+Initial or guess value of output (= state)
+Type of integrator reset [:#(type=Buildings.Types.Reset)]
+Value to which integrator is reset, used if reset = Buildings.Types.Reset.Parameter
+Internal connector for integrator reset
+Needed to use conditional connector trigger [:#(type=Boolean)]
+Molar mass [kg/mol]
 Molar mass [kg/mol]
 Molar mass [kg/mol]
 Molar mass [kg/mol]

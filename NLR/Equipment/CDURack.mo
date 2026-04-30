@@ -109,25 +109,25 @@ equation
           color={255,255,255},
           thickness=0.5),
         Rectangle(
-          extent={{-72,80},{68,-80}},
+          extent={{-72,64},{68,-64}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{34,80},{38,-80}},
+          extent={{34,64},{38,-64}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-42,80},{-38,-80}},
+          extent={{-42,64},{-38,-64}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-4,80},{0,-80}},
+          extent={{-4,64},{0,-64}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
@@ -143,6 +143,23 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,255},
-          fillPattern=FillPattern.Solid)}),                      Diagram(
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-60,20},{-20,-20}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={0,100,199}),
+        Polygon(
+          points={{-40,18},{-40,-18},{-60,0},{-40,18}},
+          lineColor={0,0,0},
+          pattern=LinePattern.None,
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={255,255,255}),
+        Ellipse(
+          extent={{-54,6},{-42,-6}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          visible=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState,
+          fillColor={0,100,199})}),                              Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end CDURack;
