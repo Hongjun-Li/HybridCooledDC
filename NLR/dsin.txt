@@ -10,7 +10,7 @@ double experiment(7,1)
   2.0995200000000000E+07   # StartTime    Time at which integration starts
                            #              (and linearization and trimming time)
   5.2531200000000000E+07   # StopTime     Time at which integration stops
-     600                   # Increment    Communication step size, if > 0
+  5.9999961599999995E+02   # Increment    Communication step size, if > 0
        0                   # nInterval    Number of communication intervals, if > 0
   1.0000000000000000E-04   # Tolerance    Relative precision of signals for
                            #              simulation, linearization and trimming
@@ -4962,9 +4962,9 @@ double initialValue(4847,6)
   1   280   # dTCon_nominal
  -1       8                       0                       0                
   1   280   # COPc_nominal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # mCHW_flow_nominal
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # mCW_flow_nominal
  -1     500                       0                       0                
   1   280   # dp_nominal
@@ -4978,7 +4978,7 @@ double initialValue(4847,6)
   1   280   # T_a2_nominal
  -1  3.0314999999999998E+02       0                 1.7976931348623157E+308
   1   280   # T_b2_nominal
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # m1_flow_nominal
   0       0                       0                       0                
   6   256   # m2_flow_nominal
@@ -5006,11 +5006,11 @@ double initialValue(4847,6)
   6   260   # AHU.port_b2.h_outflow
   0       0                       0                       1                
   6   260   # AHU.port_b2.Xi_outflow[1]
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # AHU.m1_flow_nominal
   0      18                       0                 1.7976931348623157E+308
   6   256   # AHU.m2_flow_nominal
-  0  3.5000000000000001E-03       0                  100000                
+  0  2.5000000000000001E-03       0                  100000                
   6   256   # AHU.m1_flow_small
   0  1.8000000000000002E-03       0                  100000                
   6   256   # AHU.m2_flow_small
@@ -5064,7 +5064,7 @@ double initialValue(4847,6)
   6   256   # AHU.Av
   0  1.0000000000000001E-01       0                       0                
   6   256   # AHU.deltaM
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # AHU.m_flow_nominal
  -1    6000                       0                 1.7976931348623157E+308
   1   280   # AHU.dpValve_nominal
@@ -5242,11 +5242,11 @@ double initialValue(4847,6)
   2   276   # AHU.cooCoi.port_b2.p
   0       0                       0                       0                
   3   260   # AHU.cooCoi.port_b2.der(p)
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # AHU.cooCoi.m1_flow_nominal
   0      18                       0                 1.7976931348623157E+308
   6   256   # AHU.cooCoi.m2_flow_nominal
-  0  3.5000000000000001E-03       0                  100000                
+  0  2.5000000000000001E-03       0                  100000                
   6   256   # AHU.cooCoi.m1_flow_small
   0  1.8000000000000002E-03       0                  100000                
   6   256   # AHU.cooCoi.m2_flow_small
@@ -5368,7 +5368,7 @@ double initialValue(4847,6)
   6  1280   # AHU.cooCoi.UAFroRated.TWatIn
   0      18                       0                       0                
   6  1280   # AHU.cooCoi.UAFroRated.mAir_flow
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # AHU.cooCoi.UAFroRated.mWat_flow
   0   90540                       0                       0                
   6  1280   # AHU.cooCoi.UAFroRated.UA
@@ -5436,9 +5436,9 @@ double initialValue(4847,6)
   6  1280   # AHU.cooCoi.UAFroRated.hSatTWatOut
   0       1                       0                       0                
   6  1281   # AHU.cooCoi.heaCoo.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # AHU.cooCoi.heaCoo.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # AHU.cooCoi.heaCoo.m_flow_small
   0       0                       0                       0                
   6   769   # AHU.cooCoi.heaCoo.show_T
@@ -5494,11 +5494,11 @@ double initialValue(4847,6)
   6  1281   # AHU.cooCoi.heaCoo.vol.prescribedHeatFlowRate
   0       1                       0                       0                
   6  1281   # AHU.cooCoi.heaCoo.vol.simplify_mWat_flow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6  1280   # AHU.cooCoi.heaCoo.vol.m_flow_nominal
   0       2                       0                       0                
   6  1282   # AHU.cooCoi.heaCoo.vol.nPorts
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # AHU.cooCoi.heaCoo.vol.m_flow_small
   0       1                       0                       0                
   6  1281   # AHU.cooCoi.heaCoo.vol.allowFlowReversal
@@ -5610,9 +5610,9 @@ double initialValue(4847,6)
   6  1281   # AHU.cooCoi.heaCoo.preDro.allowFlowReversal
   0       0                 -1.0000000000000000E+10  1.0000000000000000E+10
   6  1284   # AHU.cooCoi.heaCoo.preDro.port_b.h_outflow
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # AHU.cooCoi.heaCoo.preDro.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # AHU.cooCoi.heaCoo.preDro.m_flow_small
   0       0                       0                       0                
   6   769   # AHU.cooCoi.heaCoo.preDro.show_T
@@ -5638,7 +5638,7 @@ double initialValue(4847,6)
   1  1304   # AHU.cooCoi.heaCoo.preDro.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # AHU.cooCoi.heaCoo.preDro.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # AHU.cooCoi.heaCoo.preDro.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # AHU.cooCoi.heaCoo.preDro.dp_nominal_pos
@@ -5954,7 +5954,7 @@ double initialValue(4847,6)
   6  1280   # AHU.cooCoi.heaCooHum_u.gai.k
   0   90540                       0                 1.7976931348623157E+308
   6  1280   # AHU.cooCoi.hA.UA_nominal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # AHU.cooCoi.hA.m_flow_nominal_w
   0      18                       0                       0                
   6  1280   # AHU.cooCoi.hA.m_flow_nominal_a
@@ -6002,7 +6002,7 @@ double initialValue(4847,6)
   6  1280   # AHU.cooCoi.hA.fm_w
   0       0                       0                       0                
   6  1280   # AHU.cooCoi.hA.fm_a
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6  1280   # AHU.cooCoi.dryWetCalcs.mWat_flow_nominal
   0      18                       0                 1.7976931348623157E+308
   6  1280   # AHU.cooCoi.dryWetCalcs.mAir_flow_nominal
@@ -6020,7 +6020,7 @@ double initialValue(4847,6)
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyDry.cpWat
   0      18                       0                       0                
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyDry.mAir_flow_nominal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyDry.mWat_flow_nominal
  -1  1.0000000000000000E-03       0                       0                
   1  1304   # AHU.cooCoi.dryWetCalcs.fullyDry.delta
@@ -6060,7 +6060,7 @@ double initialValue(4847,6)
   1  1304   # AHU.cooCoi.dryWetCalcs.fullyWet.tau
   0  3.7067225654037829E+03       0                       0                
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyWet.cpWat
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyWet.mWat_flow_nominal
   0      18                       0                       0                
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyWet.mAir_flow_nominal
@@ -6158,7 +6158,7 @@ double initialValue(4847,6)
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyWet.epsSta
   0       0                       0                       0                
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyWet.CStaMin
-  0  1.7083333333333332E+01       0                       0                
+  0  1.2202380952380953E+01       0                       0                
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyWet.CStaMin_flow_nominal
   0      18                       0                       0                
   6  1280   # AHU.cooCoi.dryWetCalcs.fullyWet.CStaMax_flow_nominal
@@ -7086,9 +7086,9 @@ double initialValue(4847,6)
   6  1280   # AHU.fan.gain.k
   0       1                       0                       0                
   6   257   # AHU.watVal.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # AHU.watVal.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # AHU.watVal.m_flow_small
   0       1                       0                       0                
   6   769   # AHU.watVal.show_T
@@ -7118,7 +7118,7 @@ double initialValue(4847,6)
   1  1304   # AHU.watVal.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # AHU.watVal.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # AHU.watVal.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # AHU.watVal.dp_nominal_pos
@@ -7606,23 +7606,23 @@ double initialValue(4847,6)
   6  1280   # TAirSup.T_b_inflow
   0       1                       0                       0                
   6   257   # WCT.allowFlowReversal
-  0      45                 -100000                  100000                
+  0      35                 -100000                  100000                
   6   388   # WCT.port_a.m_flow
   0  3.0000000000000000E+05       0                  1.0000000000000000E+08
   6   260   # WCT.port_a.p
   0       0                 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # WCT.port_a.h_outflow
-  0     -45                 -100000                  100000                
+  0     -35                 -100000                  100000                
   6   388   # WCT.port_b.m_flow
   0  3.0000000000000000E+05       0                  1.0000000000000000E+08
   6   260   # WCT.port_b.p
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # WCT.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # WCT.m_flow_small
   0       0                       0                       0                
   6   769   # WCT.show_T
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # WCT.m_flow
   0       0                       0                       0                
   6   256   # WCT.dp
@@ -7676,19 +7676,19 @@ double initialValue(4847,6)
   6   257   # WCT.vol.prescribedHeatFlowRate
   0       1                       0                       0                
   6   257   # WCT.vol.simplify_mWat_flow
-  0      45                       0                 1.7976931348623157E+308
+  0      35                       0                 1.7976931348623157E+308
   6   256   # WCT.vol.m_flow_nominal
   0       2                       0                       0                
   6   258   # WCT.vol.nPorts
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # WCT.vol.m_flow_small
   0       1                       0                       0                
   6   257   # WCT.vol.allowFlowReversal
   0       0                       0                       0                
   6   256   # WCT.vol.V
-  0      45                 -100000                  100000                
+  0      35                 -100000                  100000                
   6   388   # WCT.vol.ports[1].m_flow
-  0     -45                 -100000                  100000                
+  0     -35                 -100000                  100000                
   6   388   # WCT.vol.ports[2].m_flow
   0  9.9558600000000001E+02       0                 1.7976931348623157E+308
   6  1280   # WCT.vol.rho_start
@@ -7736,9 +7736,9 @@ double initialValue(4847,6)
   6  1281   # WCT.vol.dynBal.use_mWat_flow
   0       0                       0                       0                
   6  1281   # WCT.vol.dynBal.use_C_flow
-  0      45                 -100000                  100000                
+  0      35                 -100000                  100000                
   6  1412   # WCT.vol.dynBal.ports[1].m_flow
-  0     -45                 -100000                  100000                
+  0     -35                 -100000                  100000                
   6  1412   # WCT.vol.dynBal.ports[2].m_flow
   0       0                       0                       0                
   6  1281   # WCT.vol.dynBal.medium.preferredMediumStates
@@ -7798,17 +7798,17 @@ double initialValue(4847,6)
   6  1280   # WCT.vol.dynBal.mWat_flow_internal
   0       1                       0                       0                
   6   257   # WCT.preDro.allowFlowReversal
-  0      45                 -9.9999999999999995E+59  100000                
+  0      35                 -9.9999999999999995E+59  100000                
   6   388   # WCT.preDro.port_a.m_flow
-  0     -45                 -100000                  9.9999999999999995E+59
+  0     -35                 -100000                  9.9999999999999995E+59
   6   388   # WCT.preDro.port_b.m_flow
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # WCT.preDro.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # WCT.preDro.m_flow_small
   0       0                       0                       0                
   6   769   # WCT.preDro.show_T
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # WCT.preDro.m_flow
   0  1.0451000000000000E+05       0                       0                
   6   256   # WCT.preDro.dp
@@ -7824,7 +7824,7 @@ double initialValue(4847,6)
   6   256   # WCT.preDro.dp_nominal
   0       0                       0                       0                
   6   257   # WCT.preDro.linearized
-  0  4.5000000000000000E+00       0                 1.7976931348623157E+308
+  0  3.5000000000000000E+00       0                 1.7976931348623157E+308
   6   256   # WCT.preDro.m_flow_turbulent
  -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
   1  1304   # WCT.preDro.sta_default.p
@@ -7832,13 +7832,13 @@ double initialValue(4847,6)
   1  1304   # WCT.preDro.sta_default.T
   0  1.0000000000000000E-03       0                 1.7976931348623157E+308
   6  1280   # WCT.preDro.eta_default
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # WCT.preDro.m_flow_nominal_pos
   0  1.0451000000000000E+05       0                       0                
   6  1280   # WCT.preDro.dp_nominal_pos
   0  1.0000000000000001E-01  9.9999999999999995E-07 1.7976931348623157E+308
   6   256   # WCT.preDro.deltaM
-  0  1.3919819055901494E-01       0                       0                
+  0  1.0826525932367830E-01       0                       0                
   6   256   # WCT.preDro.k
   0       0                       0                       0                
   6  1281   # WCT.preDro.disableComputeFlowResistance_internal
@@ -7946,7 +7946,7 @@ double initialValue(4847,6)
   6   256   # WCT.FRWat
   0       1                       0                 1.7976931348623157E+308
   6  1312   # WCT.FRWat0
-  0      45                       0                 1.7976931348623157E+308
+  0      35                       0                 1.7976931348623157E+308
   6  1280   # WCT.mWat_flow_nominal
   0       0                       0                       0                
   6  1280   # WCT.dTMax
@@ -7974,13 +7974,13 @@ double initialValue(4847,6)
   6   260   # HX.port_a2.h_outflow
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # HX.port_b2.h_outflow
-  0      45                       0                 1.7976931348623157E+308
-  6   256   # HX.m1_flow_nominal
   0      35                       0                 1.7976931348623157E+308
+  6   256   # HX.m1_flow_nominal
+  0      25                       0                 1.7976931348623157E+308
   6   256   # HX.m2_flow_nominal
-  0  4.5000000000000005E-03       0                  100000                
-  6   256   # HX.m1_flow_small
   0  3.5000000000000001E-03       0                  100000                
+  6   256   # HX.m1_flow_small
+  0  2.5000000000000001E-03       0                  100000                
   6   256   # HX.m2_flow_small
   0       0                       0                       0                
   6   769   # HX.show_T
@@ -8034,9 +8034,9 @@ double initialValue(4847,6)
   6   257   # HX.sensibleOnly2
   0       1                       0                       0                
   6  1281   # HX.bal1.allowFlowReversal
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # HX.bal1.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # HX.bal1.m_flow_small
   0       0                       0                       0                
   6   769   # HX.bal1.show_T
@@ -8066,9 +8066,9 @@ double initialValue(4847,6)
   6  1280   # HX.bal1.mWat_flow
   0       1                       0                       0                
   6  1281   # HX.bal1.vol.allowFlowReversal
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # HX.bal1.vol.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # HX.bal1.vol.m_flow_small
   0       0                       0                       0                
   6   769   # HX.bal1.vol.show_T
@@ -8090,21 +8090,21 @@ double initialValue(4847,6)
   6  1281   # HX.bal1.vol.use_m_flowInv
   0       0                       0                       0                
   6  1280   # HX.bal1.vol.m_flowInv
-  0  4.5000000000000001E-06       0                       0                
+  0  3.4999999999999999E-06       0                       0                
   6  1280   # HX.bal1.vol.deltaReg
-  0  2.2222222222222222E+05       0                       0                
+  0  2.8571428571428574E+05       0                       0                
   6  1280   # HX.bal1.vol.deltaInvReg
-  0 -3.3333333333333335E+06       0                       0                
+  0 -4.2857142857142864E+06       0                       0                
   6  1280   # HX.bal1.vol.aReg
-  0  5.8765432098765430E+12       0                       0                
+  0  9.7142857142857148E+12       0                       0                
   6  1280   # HX.bal1.vol.bReg
-  0 -3.9615912208504801E+18       0                       0                
+  0 -8.4198250728862996E+18       0                       0                
   6  1280   # HX.bal1.vol.cReg
-  0  1.3022405121170554E+24       0                       0                
+  0  3.5585172844648073E+24       0                       0                
   6  1280   # HX.bal1.vol.dReg
-  0 -2.0593066775051227E+29       0                       0                
+  0 -7.2350806211697540E+29       0                       0                
   6  1280   # HX.bal1.vol.eReg
-  0  1.2524438272545775E+34       0                       0                
+  0  5.6575066511402584E+34       0                       0                
   6  1280   # HX.bal1.vol.fReg
   0  3.0000000000000000E+05       0                  1.0000000000000000E+08
   6  1280   # HX.bal1.vol.state_default.p
@@ -8118,9 +8118,9 @@ double initialValue(4847,6)
   6  1280   # HX.bal1.vol.mWat_flow_internal
   0       1                       0                       0                
   6  1281   # HX.bal1.preDro.allowFlowReversal
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # HX.bal1.preDro.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # HX.bal1.preDro.m_flow_small
   0       0                       0                       0                
   6   769   # HX.bal1.preDro.show_T
@@ -8146,7 +8146,7 @@ double initialValue(4847,6)
   1  1304   # HX.bal1.preDro.sta_default.T
   0  1.0000000000000000E-03       0                 1.7976931348623157E+308
   6  1280   # HX.bal1.preDro.eta_default
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # HX.bal1.preDro.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # HX.bal1.preDro.dp_nominal_pos
@@ -8166,9 +8166,9 @@ double initialValue(4847,6)
   6  1280   # HX.bal1.masExc.y
   0       1                       0                       0                
   6  1281   # HX.bal2.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # HX.bal2.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # HX.bal2.m_flow_small
   0       0                       0                       0                
   6   769   # HX.bal2.show_T
@@ -8198,9 +8198,9 @@ double initialValue(4847,6)
   6  1280   # HX.bal2.mWat_flow
   0       1                       0                       0                
   6  1281   # HX.bal2.vol.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # HX.bal2.vol.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # HX.bal2.vol.m_flow_small
   0       0                       0                       0                
   6   769   # HX.bal2.vol.show_T
@@ -8222,21 +8222,21 @@ double initialValue(4847,6)
   6  1281   # HX.bal2.vol.use_m_flowInv
   0       0                       0                       0                
   6  1280   # HX.bal2.vol.m_flowInv
-  0  3.4999999999999999E-06       0                       0                
+  0  2.5000000000000002E-06       0                       0                
   6  1280   # HX.bal2.vol.deltaReg
-  0  2.8571428571428574E+05       0                       0                
+  0  3.9999999999999994E+05       0                       0                
   6  1280   # HX.bal2.vol.deltaInvReg
-  0 -4.2857142857142864E+06       0                       0                
+  0 -5.9999999999999991E+06       0                       0                
   6  1280   # HX.bal2.vol.aReg
-  0  9.7142857142857148E+12       0                       0                
+  0  1.9039999999999992E+13       0                       0                
   6  1280   # HX.bal2.vol.bReg
-  0 -8.4198250728862996E+18       0                       0                
+  0 -2.3103999999999992E+19       0                       0                
   6  1280   # HX.bal2.vol.cReg
-  0  3.5585172844648073E+24       0                       0                
+  0  1.3670399999999992E+25       0                       0                
   6  1280   # HX.bal2.vol.dReg
-  0 -7.2350806211697540E+29       0                       0                
+  0 -3.8911999999999968E+30       0                       0                
   6  1280   # HX.bal2.vol.eReg
-  0  5.6575066511402584E+34       0                       0                
+  0  4.2598399999999963E+35       0                       0                
   6  1280   # HX.bal2.vol.fReg
   0  3.0000000000000000E+05       0                  1.0000000000000000E+08
   6  1280   # HX.bal2.vol.state_default.p
@@ -8250,9 +8250,9 @@ double initialValue(4847,6)
   6  1280   # HX.bal2.vol.mWat_flow_internal
   0       1                       0                       0                
   6  1281   # HX.bal2.preDro.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # HX.bal2.preDro.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # HX.bal2.preDro.m_flow_small
   0       0                       0                       0                
   6   769   # HX.bal2.preDro.show_T
@@ -8278,7 +8278,7 @@ double initialValue(4847,6)
   1  1304   # HX.bal2.preDro.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # HX.bal2.preDro.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # HX.bal2.preDro.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # HX.bal2.preDro.dp_nominal_pos
@@ -8314,7 +8314,7 @@ double initialValue(4847,6)
   6  1280   # HX.cp1_default
   0  3.7067225654037829E+03       0                       0                
   6  1280   # HX.cp2_default
-  0  1.2973528978913240E+01       0                       0                
+  0  9.2668064135094568E+00       0                       0                
   6  1280   # HX.CMin_flow_small
   0       0                       0                       1                
   6  1280   # HX.fra_a1
@@ -8332,9 +8332,9 @@ double initialValue(4847,6)
   6   260   # TCDUSup.port_a.h_outflow
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # TCDUSup.port_b.h_outflow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # TCDUSup.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # TCDUSup.m_flow_small
   0       1                       0                 1.7976931348623157E+308
   6   256   # TCDUSup.tau
@@ -8376,9 +8376,9 @@ double initialValue(4847,6)
   6   260   # TCHWSup.port_a.h_outflow
   0       0                 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # TCHWSup.port_b.h_outflow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # TCHWSup.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # TCHWSup.m_flow_small
   0       1                       0                 1.7976931348623157E+308
   6   256   # TCHWSup.tau
@@ -8418,9 +8418,9 @@ double initialValue(4847,6)
   6   257   # TCHWRet.allowFlowReversal
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # TCHWRet.port_a.h_outflow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # TCHWRet.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # TCHWRet.m_flow_small
   0       1                       0                 1.7976931348623157E+308
   6   256   # TCHWRet.tau
@@ -8476,11 +8476,11 @@ double initialValue(4847,6)
   6  1281   # pumCW.wrongEnergyMassBalanceConfiguration
   0       1                       0                       0                
   6   257   # pumCW.allowFlowReversal
-  0      45                 -9.9999999999999995E+59  100000                
+  0      35                 -9.9999999999999995E+59  100000                
   6   388   # pumCW.port_a.m_flow
   0       0                 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # pumCW.port_a.h_outflow
-  0     -45                 -100000                  9.9999999999999995E+59
+  0     -35                 -100000                  9.9999999999999995E+59
   6   388   # pumCW.port_b.m_flow
   0       0                       0                 1.7976931348623157E+308
   6   256   # pumCW.per.pressure.V_flow[1]
@@ -8582,9 +8582,9 @@ double initialValue(4847,6)
   6   257   # pumCW.per.havePressureCurve
   0       3                       1                       3                
   6   258   # pumCW.inputType
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # pumCW.constInput
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # pumCW.stageInputs[1]
   0       0                       0                       0                
   6   257   # pumCW.computePowerUsingSimilarityLaws
@@ -8608,7 +8608,7 @@ double initialValue(4847,6)
   6   260   # pumCW.heatPort.T
   0       0                       0                       0                
   6   388   # pumCW.heatPort.Q_flow
-  0  4.5199510639964802E-02       0                       0                
+  0  3.5155174942194847E-02       0                       0                
   6   256   # pumCW.VMachine_flow
   0       0                       0                       0                
   6   256   # pumCW.dpMachine
@@ -8618,15 +8618,15 @@ double initialValue(4847,6)
   6   256   # pumCW.etaHyd
   0  6.9999999999999996E-01       0                       0                
   6   256   # pumCW.etaMot
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # pumCW.m_flow_small
   0       0                       0                       0                
   6   769   # pumCW.show_T
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # pumCW.m_flow
   0  2.1499200000000000E+05       0                       0                
   6   256   # pumCW.dp
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # pumCW._m_flow_nominal
   0       0                       0                       0                
   6  1280   # pumCW._m_flow_start
@@ -8642,7 +8642,7 @@ double initialValue(4847,6)
   6  1282   # pumCW.nOri
   0       1                       0                       0                
   6  1281   # pumCW.haveVMax
-  0  9.0399021279929603E-02       0                       0                
+  0  7.0310349884389695E-02       0                       0                
   6  1280   # pumCW.V_flow_max
   0  9.9558600000000001E+02       0                 1.7976931348623157E+308
   6  1280   # pumCW.rho_default
@@ -8652,9 +8652,9 @@ double initialValue(4847,6)
   6  1280   # pumCW.sta_start.T
   0       0                       0                       0                
   6  1280   # pumCW.h_outflow_start
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # pumCW.inputSwitch.u
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # pumCW.inputSwitch.y
   0       2                       1                       4                
   6  1282   # pumCW.vol.energyDynamics
@@ -8680,19 +8680,19 @@ double initialValue(4847,6)
   6  1281   # pumCW.vol.prescribedHeatFlowRate
   0       1                       0                       0                
   6  1281   # pumCW.vol.simplify_mWat_flow
-  0      45                       0                 1.7976931348623157E+308
+  0      35                       0                 1.7976931348623157E+308
   6  1280   # pumCW.vol.m_flow_nominal
   0       2                       0                       0                
   6  1282   # pumCW.vol.nPorts
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # pumCW.vol.m_flow_small
   0       1                       0                       0                
   6  1281   # pumCW.vol.allowFlowReversal
   0       0                       0                       0                
   6  1280   # pumCW.vol.V
-  0      45                 -100000                  100000                
+  0      35                 -100000                  100000                
   6  1412   # pumCW.vol.ports[1].m_flow
-  0     -45                 -100000                  100000                
+  0     -35                 -100000                  100000                
   6  1412   # pumCW.vol.ports[2].m_flow
   0  9.9558600000000001E+02       0                 1.7976931348623157E+308
   6  1280   # pumCW.vol.rho_start
@@ -8744,9 +8744,9 @@ double initialValue(4847,6)
   6  1281   # pumCW.vol.dynBal.use_mWat_flow
   0       0                       0                       0                
   6  1281   # pumCW.vol.dynBal.use_C_flow
-  0      45                 -100000                  100000                
+  0      35                 -100000                  100000                
   6  1412   # pumCW.vol.dynBal.ports[1].m_flow
-  0     -45                 -100000                  100000                
+  0     -35                 -100000                  100000                
   6  1412   # pumCW.vol.dynBal.ports[2].m_flow
   0       0                       0                       0                
   6  1281   # pumCW.vol.dynBal.medium.preferredMediumStates
@@ -8806,33 +8806,33 @@ double initialValue(4847,6)
   6  1280   # pumCW.vol.dynBal.mWat_flow_internal
   0       1                       0                       0                
   6  1281   # pumCW.preSou.allowFlowReversal
-  0      45                 -9.9999999999999995E+59  100000                
+  0      35                 -9.9999999999999995E+59  100000                
   6  1412   # pumCW.preSou.port_a.m_flow
   0       0                 -1.0000000000000000E+10  1.0000000000000000E+10
   6  1284   # pumCW.preSou.port_a.h_outflow
-  0     -45                 -100000                  9.9999999999999995E+59
+  0     -35                 -100000                  9.9999999999999995E+59
   6  1412   # pumCW.preSou.port_b.m_flow
  -1       0                       0                       0                
   1  1304   # pumCW.preSou.dp_start
   0       0                 -100000                  100000                
   6  1280   # pumCW.preSou.m_flow_start
-  0  4.5000000000000005E-03 -100000                  100000                
+  0  3.5000000000000001E-03 -100000                  100000                
   6  1280   # pumCW.preSou.m_flow_small
   0       0                       0                       0                
   6   769   # pumCW.preSou.show_T
   0       1                       0                       0                
   6   769   # pumCW.preSou.show_V_flow
-  0      45                 -9.9999999999999995E+59  100000                
+  0      35                 -9.9999999999999995E+59  100000                
   6  1280   # pumCW.preSou.m_flow
-  0  4.5199510639964802E-02       0                       0                
+  0  3.5155174942194847E-02       0                       0                
   6  1280   # pumCW.preSou.V_flow
   0       1                       0                       0                
   6  1281   # pumCW.preSou.control_m_flow
   0       0                       0                       0                
   6  1281   # pumCW.preSou.control_dp
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # pumCW.preSou.m_flow_in
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # pumCW.preSou.m_flow_internal
   0       0                       0                       0                
   6  1280   # pumCW.preSou.dp_internal
@@ -8840,9 +8840,9 @@ double initialValue(4847,6)
   6   769   # pumCW.heaDis.homotopyInitialization
   0       0                       0                       0                
   6  1281   # pumCW.heaDis.motorCooledByFluid
-  0  9.0399021279929600E-05       0                       0                
+  0  7.0310349884389700E-05       0                       0                
   6  1280   # pumCW.heaDis.delta_V_flow
-  0  4.5199510639964802E-02       0                       0                
+  0  3.5155174942194847E-02       0                       0                
   6  1280   # pumCW.heaDis.V_flow
   0       0                       0                       0                
   6  1280   # pumCW.heaDis.Q_flow
@@ -8862,15 +8862,15 @@ double initialValue(4847,6)
   6  1280   # pumCW.rho_inlet.y
   0       1                       0                       0                
   6  1281   # pumCW.senMasFlo.allowFlowReversal
-  0      45                 -9.9999999999999995E+59  100000                
+  0      35                 -9.9999999999999995E+59  100000                
   6  1412   # pumCW.senMasFlo.port_a.m_flow
-  0     -45                 -100000                  9.9999999999999995E+59
+  0     -35                 -100000                  9.9999999999999995E+59
   6  1412   # pumCW.senMasFlo.port_b.m_flow
   0       0                       0                 1.7976931348623157E+308
   6  1280   # pumCW.senMasFlo.m_flow_nominal
   0       0                       0                 1.7976931348623157E+308
   6  1280   # pumCW.senMasFlo.m_flow_small
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # pumCW.senMasFlo.m_flow
   0       0                       0                  100000                
   6  1412   # pumCW.senRelPre.port_a.m_flow
@@ -8886,13 +8886,13 @@ double initialValue(4847,6)
   6   769   # pumCW.eff.homotopyInitialization
   0       0                       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.per.pressure.V_flow[1]
-  0  9.0399021279929603E-02       0                 1.7976931348623157E+308
+  0  7.0310349884389695E-02       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.per.pressure.V_flow[2]
   0  2.6000000000000000E+05       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.per.pressure.dp[1]
   0       0                       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.per.pressure.dp[2]
-  0  9.0399021279929603E-02       0                       0                
+  0  7.0310349884389695E-02       0                       0                
   6  1280   # pumCW.eff.per.V_flow_max
   0  2.6000000000000000E+05       0                       0                
   6  1280   # pumCW.eff.per.dpMax
@@ -8986,23 +8986,23 @@ double initialValue(4847,6)
   6  1282   # pumCW.eff.preVar
   0       0                       0                       0                
   6  1281   # pumCW.eff.computePowerUsingSimilarityLaws
-  0  9.0399021279929603E-02       0                       0                
+  0  7.0310349884389695E-02       0                       0                
   6  1280   # pumCW.eff.V_flow_nominal
   0  9.9558600000000001E+02       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.rho_default
   0       1                       0                       0                
   6  1281   # pumCW.eff.haveVMax
-  0  9.0399021279929603E-02       0                       0                
+  0  7.0310349884389695E-02       0                       0                
   6  1280   # pumCW.eff.V_flow_max
   0       2                       1                 1.7976931348623157E+308
   6  1282   # pumCW.eff.nOri
   0       1                       0                       0                
   6  1280   # pumCW.eff.y_out
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # pumCW.eff.m_flow
   0  9.9558600000000001E+02       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.rho
-  0  4.5199510639964802E-02       0                       0                
+  0  3.5155174942194847E-02       0                       0                
   6  1280   # pumCW.eff.V_flow
   0       0                       0                       0                
   6  1280   # pumCW.eff.WFlo
@@ -9050,7 +9050,7 @@ double initialValue(4847,6)
   6  1280   # pumCW.eff.dpMax
   0  5.0000000000000003E-02       0                       0                
   6  1280   # pumCW.eff.delta
-  0  7.1903433333333351E+02       0                 1.7976931348623157E+308
+  0  9.2447271428571446E+02       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.kRes
   0       1                       0                       0                
   6  1282   # pumCW.eff.curve
@@ -9058,7 +9058,7 @@ double initialValue(4847,6)
   6  1282   # pumCW.eff.pCur1.n
   0       0                       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.pCur1.V_flow[1]
-  0  9.0399021279929603E-02       0                 1.7976931348623157E+308
+  0  7.0310349884389695E-02       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.pCur1.V_flow[2]
   0  2.6000000000000000E+05       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.pCur1.dp[1]
@@ -9254,33 +9254,33 @@ double initialValue(4847,6)
   6  1281   # pumCW.eff.haveDPMax
   0  6.9999999999999996E-01       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.eta_internal
-  0  2.3503745532781699E+00       0                       0                
+  0  1.8280690969941320E+00       0                       0                
   6  1280   # pumCW.eff.deltaP
   0  8.3299999999999996E-01       0                 1.7976931348623157E+308
   6  1280   # pumCW.eff.yMot
-  0      45                  9.9999999999999997E-61 1.7976931348623157E+308
+  0      35                  9.9999999999999997E-61 1.7976931348623157E+308
   6   256   # pumCW.m_flow_nominal
   0  1.3000000000000000E+05  9.9999999999999997E-61 1.7976931348623157E+308
   6   256   # pumCW.dp_nominal
  -1       0                       0                 1.7976931348623157E+308
   1   280   # pumCW.m_flow_start
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # pumCW.constantMassFlowRate
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # pumCW.massFlowRates[1]
   0  5.2000000000000000E+05       0                 1.7976931348623157E+308
   6   256   # pumCW.dpMax
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # pumCW.m_flow_in
-  0      45                 -100000                  100000                
+  0      35                 -100000                  100000                
   6   256   # pumCW.m_flow_actual
   0       1                       0                       0                
   6   257   # TCWSup.allowFlowReversal
   0   83680                 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # TCWSup.port_b.h_outflow
-  0      45                       0                 1.7976931348623157E+308
+  0      35                       0                 1.7976931348623157E+308
   6   256   # TCWSup.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # TCWSup.m_flow_small
   0       1                       0                 1.7976931348623157E+308
   6   256   # TCWSup.tau
@@ -9324,9 +9324,9 @@ double initialValue(4847,6)
   6   260   # TCWRet.port_a.h_outflow
   0   83680                 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # TCWRet.port_b.h_outflow
-  0      45                       0                 1.7976931348623157E+308
+  0      35                       0                 1.7976931348623157E+308
   6   256   # TCWRet.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # TCWRet.m_flow_small
   0       1                       0                 1.7976931348623157E+308
   6   256   # TCWRet.tau
@@ -9364,19 +9364,19 @@ double initialValue(4847,6)
   6  1280   # TCWRet.T_b_inflow
   0       1                       0                       0                
   6   257   # MainValve.allowFlowReversal
-  0      45                 -9.9999999999999995E+59  100000                
+  0      35                 -9.9999999999999995E+59  100000                
   6   388   # MainValve.port_a.m_flow
-  0     -45                 -100000                  9.9999999999999995E+59
+  0     -35                 -100000                  9.9999999999999995E+59
   6   388   # MainValve.port_b.m_flow
   0   83680                 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # MainValve.port_b.h_outflow
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # MainValve.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # MainValve.m_flow_small
   0       0                       0                       0                
   6   769   # MainValve.show_T
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # MainValve.m_flow
   0       0                       0                       0                
   6   256   # MainValve.dp
@@ -9400,7 +9400,7 @@ double initialValue(4847,6)
   1  1304   # MainValve.sta_default.T
   0  1.0000000000000000E-03       0                 1.7976931348623157E+308
   6  1280   # MainValve.eta_default
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # MainValve.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # MainValve.dp_nominal_pos
@@ -9452,9 +9452,9 @@ double initialValue(4847,6)
   6   260   # Bypass.port_a.h_outflow
   0   83680                 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # Bypass.port_b.h_outflow
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # Bypass.m_flow_nominal
-  0  4.5000000000000005E-03       0                 1.7976931348623157E+308
+  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # Bypass.m_flow_small
   0       0                       0                       0                
   6   769   # Bypass.show_T
@@ -9480,7 +9480,7 @@ double initialValue(4847,6)
   1  1304   # Bypass.sta_default.T
   0  1.0000000000000000E-03       0                 1.7976931348623157E+308
   6  1280   # Bypass.eta_default
-  0      45                       0                       0                
+  0      35                       0                       0                
   6  1280   # Bypass.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # Bypass.dp_nominal_pos
@@ -9568,9 +9568,9 @@ double initialValue(4847,6)
   6   257   # TCDURet.allowFlowReversal
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # TCDURet.port_b.h_outflow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # TCDURet.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # TCDURet.m_flow_small
   0       1                       0                 1.7976931348623157E+308
   6   256   # TCDURet.tau
@@ -9836,9 +9836,9 @@ double initialValue(4847,6)
   6   257   # pumCHW.per.havePressureCurve
   0       3                       1                       3                
   6   258   # pumCHW.inputType
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # pumCHW.constInput
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # pumCHW.stageInputs[1]
   0       0                       0                       0                
   6   257   # pumCHW.computePowerUsingSimilarityLaws
@@ -9872,13 +9872,13 @@ double initialValue(4847,6)
   6   256   # pumCHW.etaHyd
   0  6.9999999999999996E-01       0                       0                
   6   256   # pumCHW.etaMot
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # pumCHW.m_flow_small
   0       0                       0                       0                
   6   769   # pumCHW.show_T
   0  2.1499200000000000E+05       0                       0                
   6   256   # pumCHW.dp
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # pumCHW._m_flow_nominal
   0       0                       0                       0                
   6  1280   # pumCHW._m_flow_start
@@ -9894,7 +9894,7 @@ double initialValue(4847,6)
   6  1282   # pumCHW.nOri
   0       1                       0                       0                
   6  1281   # pumCHW.haveVMax
-  0  6.7811541194233174E-02       0                       0                
+  0  4.8436815138737987E-02       0                       0                
   6  1280   # pumCHW.V_flow_max
   0  1.0322726598927813E+03       0                 1.7976931348623157E+308
   6  1280   # pumCHW.rho_default
@@ -9928,11 +9928,11 @@ double initialValue(4847,6)
   6  1281   # pumCHW.vol.prescribedHeatFlowRate
   0       1                       0                       0                
   6  1281   # pumCHW.vol.simplify_mWat_flow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6  1280   # pumCHW.vol.m_flow_nominal
   0       2                       0                       0                
   6  1282   # pumCHW.vol.nPorts
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # pumCHW.vol.m_flow_small
   0       1                       0                       0                
   6  1281   # pumCHW.vol.allowFlowReversal
@@ -10050,7 +10050,7 @@ double initialValue(4847,6)
   1  1304   # pumCHW.preSou.dp_start
   0       0                 -100000                  100000                
   6  1280   # pumCHW.preSou.m_flow_start
-  0  3.5000000000000001E-03 -100000                  100000                
+  0  2.5000000000000001E-03 -100000                  100000                
   6  1280   # pumCHW.preSou.m_flow_small
   0       0                       0                       0                
   6   769   # pumCHW.preSou.show_T
@@ -10068,7 +10068,7 @@ double initialValue(4847,6)
   6   769   # pumCHW.heaDis.homotopyInitialization
   0       0                       0                       0                
   6  1281   # pumCHW.heaDis.motorCooledByFluid
-  0  6.7811541194233178E-05       0                       0                
+  0  4.8436815138737991E-05       0                       0                
   6  1280   # pumCHW.heaDis.delta_V_flow
   0       0                       0                       0                
   6  1280   # pumCHW.heaDis.Q_flow
@@ -10106,13 +10106,13 @@ double initialValue(4847,6)
   6   769   # pumCHW.eff.homotopyInitialization
   0       0                       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.per.pressure.V_flow[1]
-  0  6.7811541194233174E-02       0                 1.7976931348623157E+308
+  0  4.8436815138737987E-02       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.per.pressure.V_flow[2]
   0  2.6000000000000000E+05       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.per.pressure.dp[1]
   0       0                       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.per.pressure.dp[2]
-  0  6.7811541194233174E-02       0                       0                
+  0  4.8436815138737987E-02       0                       0                
   6  1280   # pumCHW.eff.per.V_flow_max
   0  2.6000000000000000E+05       0                       0                
   6  1280   # pumCHW.eff.per.dpMax
@@ -10206,13 +10206,13 @@ double initialValue(4847,6)
   6  1282   # pumCHW.eff.preVar
   0       0                       0                       0                
   6  1281   # pumCHW.eff.computePowerUsingSimilarityLaws
-  0  6.7811541194233174E-02       0                       0                
+  0  4.8436815138737987E-02       0                       0                
   6  1280   # pumCHW.eff.V_flow_nominal
   0  1.0322726598927813E+03       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.rho_default
   0       1                       0                       0                
   6  1281   # pumCHW.eff.haveVMax
-  0  6.7811541194233174E-02       0                       0                
+  0  4.8436815138737987E-02       0                       0                
   6  1280   # pumCHW.eff.V_flow_max
   0       2                       1                 1.7976931348623157E+308
   6  1282   # pumCHW.eff.nOri
@@ -10232,7 +10232,7 @@ double initialValue(4847,6)
   6  1280   # pumCHW.eff.etaMot
   0       1                       0                       0                
   6  1280   # pumCHW.eff.r_N
-  0  3.3905770597116587E-02       0                       0                
+  0  2.4218407569368994E-02       0                       0                
   6  1280   # pumCHW.eff.r_V
   0       0                       0                       0                
   6  1281   # pumCHW.eff.preSpe
@@ -10266,7 +10266,7 @@ double initialValue(4847,6)
   6  1280   # pumCHW.eff.dpMax
   0  5.0000000000000003E-02       0                       0                
   6  1280   # pumCHW.eff.delta
-  0  9.5853889847186872E+02       0                 1.7976931348623157E+308
+  0  1.3419544578606160E+03       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.kRes
   0       1                       0                       0                
   6  1282   # pumCHW.eff.curve
@@ -10274,7 +10274,7 @@ double initialValue(4847,6)
   6  1282   # pumCHW.eff.pCur1.n
   0       0                       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.pCur1.V_flow[1]
-  0  6.7811541194233174E-02       0                 1.7976931348623157E+308
+  0  4.8436815138737987E-02       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.pCur1.V_flow[2]
   0  2.6000000000000000E+05       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.pCur1.dp[1]
@@ -10470,19 +10470,19 @@ double initialValue(4847,6)
   6  1281   # pumCHW.eff.haveDPMax
   0  6.9999999999999996E-01       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.eta_internal
-  0  1.7631000710500626E+00       0                       0                
+  0  1.2593571936071879E+00       0                       0                
   6  1280   # pumCHW.eff.deltaP
   0  8.3299999999999996E-01       0                 1.7976931348623157E+308
   6  1280   # pumCHW.eff.yMot
-  0      35                  9.9999999999999997E-61 1.7976931348623157E+308
+  0      25                  9.9999999999999997E-61 1.7976931348623157E+308
   6   256   # pumCHW.m_flow_nominal
   0  1.3000000000000000E+05  9.9999999999999997E-61 1.7976931348623157E+308
   6   256   # pumCHW.dp_nominal
  -1       0                       0                 1.7976931348623157E+308
   1   280   # pumCHW.m_flow_start
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # pumCHW.constantMassFlowRate
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # pumCHW.massFlowRates[1]
   0  5.2000000000000000E+05       0                 1.7976931348623157E+308
   6   256   # pumCHW.dpMax
@@ -10980,9 +10980,9 @@ double initialValue(4847,6)
   1  1304   # weaData.cheTemBlaSky.TMin
  -1  3.4314999999999998E+02       0                 1.7976931348623157E+308
   1  1304   # weaData.cheTemBlaSky.TMax
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # MassFLow.k
-  0      45                       0                       0                
+  0      35                       0                       0                
   6   256   # MassFLow.y
   0       0                       0                       0                
   6   256   # anti_freeze.bypassCon.controlError
@@ -11914,9 +11914,9 @@ double initialValue(4847,6)
   6   257   # TAHULea.allowFlowReversal
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # TAHULea.port_a.h_outflow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # TAHULea.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # TAHULea.m_flow_small
   0       1                       0                 1.7976931348623157E+308
   6   256   # TAHULea.tau
@@ -12114,11 +12114,11 @@ double initialValue(4847,6)
   6   260   # CDURack.port_b1.h_outflow
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # CDURack.port_a2.h_outflow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # CDURack.m1_flow_nominal
   0      15                       0                 1.7976931348623157E+308
   6   256   # CDURack.m2_flow_nominal
-  0  3.5000000000000001E-03       0                  100000                
+  0  2.5000000000000001E-03       0                  100000                
   6   256   # CDURack.m1_flow_small
   0  1.5000000000000000E-03       0                  100000                
   6   256   # CDURack.m2_flow_small
@@ -12168,11 +12168,11 @@ double initialValue(4847,6)
   6   260   # CDURack.HX.port_b2.p
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # CDURack.HX.port_b2.h_outflow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # CDURack.HX.m1_flow_nominal
   0      15                       0                 1.7976931348623157E+308
   6   256   # CDURack.HX.m2_flow_nominal
-  0  3.5000000000000001E-03       0                  100000                
+  0  2.5000000000000001E-03       0                  100000                
   6   256   # CDURack.HX.m1_flow_small
   0  1.5000000000000000E-03       0                  100000                
   6   256   # CDURack.HX.m2_flow_small
@@ -12228,9 +12228,9 @@ double initialValue(4847,6)
   6   257   # CDURack.HX.sensibleOnly2
   0       1                       0                       0                
   6  1281   # CDURack.HX.bal1.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # CDURack.HX.bal1.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # CDURack.HX.bal1.m_flow_small
   0       0                       0                       0                
   6   769   # CDURack.HX.bal1.show_T
@@ -12260,9 +12260,9 @@ double initialValue(4847,6)
   6  1280   # CDURack.HX.bal1.mWat_flow
   0       1                       0                       0                
   6  1281   # CDURack.HX.bal1.vol.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # CDURack.HX.bal1.vol.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # CDURack.HX.bal1.vol.m_flow_small
   0       0                       0                       0                
   6   769   # CDURack.HX.bal1.vol.show_T
@@ -12284,21 +12284,21 @@ double initialValue(4847,6)
   6  1281   # CDURack.HX.bal1.vol.use_m_flowInv
   0       0                       0                       0                
   6  1280   # CDURack.HX.bal1.vol.m_flowInv
-  0  3.4999999999999999E-06       0                       0                
+  0  2.5000000000000002E-06       0                       0                
   6  1280   # CDURack.HX.bal1.vol.deltaReg
-  0  2.8571428571428574E+05       0                       0                
+  0  3.9999999999999994E+05       0                       0                
   6  1280   # CDURack.HX.bal1.vol.deltaInvReg
-  0 -4.2857142857142864E+06       0                       0                
+  0 -5.9999999999999991E+06       0                       0                
   6  1280   # CDURack.HX.bal1.vol.aReg
-  0  9.7142857142857148E+12       0                       0                
+  0  1.9039999999999992E+13       0                       0                
   6  1280   # CDURack.HX.bal1.vol.bReg
-  0 -8.4198250728862996E+18       0                       0                
+  0 -2.3103999999999992E+19       0                       0                
   6  1280   # CDURack.HX.bal1.vol.cReg
-  0  3.5585172844648073E+24       0                       0                
+  0  1.3670399999999992E+25       0                       0                
   6  1280   # CDURack.HX.bal1.vol.dReg
-  0 -7.2350806211697540E+29       0                       0                
+  0 -3.8911999999999968E+30       0                       0                
   6  1280   # CDURack.HX.bal1.vol.eReg
-  0  5.6575066511402584E+34       0                       0                
+  0  4.2598399999999963E+35       0                       0                
   6  1280   # CDURack.HX.bal1.vol.fReg
   0  3.0000000000000000E+05       0                  1.0000000000000000E+08
   6  1280   # CDURack.HX.bal1.vol.state_default.p
@@ -12312,9 +12312,9 @@ double initialValue(4847,6)
   6  1280   # CDURack.HX.bal1.vol.mWat_flow_internal
   0       1                       0                       0                
   6  1281   # CDURack.HX.bal1.preDro.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # CDURack.HX.bal1.preDro.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6  1280   # CDURack.HX.bal1.preDro.m_flow_small
   0       0                       0                       0                
   6   769   # CDURack.HX.bal1.preDro.show_T
@@ -12332,7 +12332,7 @@ double initialValue(4847,6)
   6  1280   # CDURack.HX.bal1.preDro.dp_nominal
   0       0                       0                       0                
   6  1281   # CDURack.HX.bal1.preDro.linearized
-  0  3.5000000000000000E+00       0                 1.7976931348623157E+308
+  0  2.5000000000000000E+00       0                 1.7976931348623157E+308
   6  1280   # CDURack.HX.bal1.preDro.m_flow_turbulent
  -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
   1  1304   # CDURack.HX.bal1.preDro.sta_default.p
@@ -12340,13 +12340,13 @@ double initialValue(4847,6)
   1  1304   # CDURack.HX.bal1.preDro.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # CDURack.HX.bal1.preDro.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # CDURack.HX.bal1.preDro.m_flow_nominal_pos
   0    6000                       0                       0                
   6  1280   # CDURack.HX.bal1.preDro.dp_nominal_pos
   0  1.0000000000000001E-01  9.9999999999999995E-07 1.7976931348623157E+308
   6  1280   # CDURack.HX.bal1.preDro.deltaM
-  0  4.5184805705753195E-01       0                       0                
+  0  3.2274861218395140E-01       0                       0                
   6  1280   # CDURack.HX.bal1.preDro.k
   0       0                       0                       0                
   6  1281   # CDURack.HX.bal1.preDro.disableComputeFlowResistance_internal
@@ -13714,7 +13714,7 @@ double initialValue(4847,6)
   6   388   # valLin.port_3.m_flow
  -1      10                       0                       0                
   1   280   # valLin.tau
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # valLin.mDyn_flow_nominal
   0       1                       0                       0                
   6   257   # valLin.from_dp
@@ -13726,13 +13726,13 @@ double initialValue(4847,6)
   6   258   # valLin.portFlowDirection_3
   0       0                       0                       0                
   6   257   # valLin.verifyFlowReversal
-  0  3.5000000000000001E-03       0                       0                
+  0  2.5000000000000001E-03       0                       0                
   6   256   # valLin.m_flow_small
   0       1                       0                       0                
   6   257   # valLin.res1.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # valLin.res1.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # valLin.res1.m_flow_small
   0       0                       0                       0                
   6   769   # valLin.res1.show_T
@@ -13758,7 +13758,7 @@ double initialValue(4847,6)
   1  1304   # valLin.res1.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # valLin.res1.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # valLin.res1.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # valLin.res1.dp_nominal_pos
@@ -13800,9 +13800,9 @@ double initialValue(4847,6)
   6   256   # valLin.res1.kVal
   0       1                       0                       0                
   6   257   # valLin.res2.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # valLin.res2.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # valLin.res2.m_flow_small
   0       0                       0                       0                
   6   769   # valLin.res2.show_T
@@ -13818,9 +13818,9 @@ double initialValue(4847,6)
   6   257   # valLin.res3.allowFlowReversal
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # valLin.res3.port_b.h_outflow
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # valLin.res3.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # valLin.res3.m_flow_small
   0       0                       0                       0                
   6   769   # valLin.res3.show_T
@@ -13846,7 +13846,7 @@ double initialValue(4847,6)
   1  1304   # valLin.res3.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # valLin.res3.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # valLin.res3.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # valLin.res3.dp_nominal_pos
@@ -13912,7 +13912,7 @@ double initialValue(4847,6)
   6   256   # valLin.Av
  -1  2.0000000000000000E-02       0                       0                
   1   280   # valLin.deltaM
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # valLin.m_flow_nominal
  -1    6000                       0                 1.7976931348623157E+308
   1   280   # valLin.dpValve_nominal
@@ -13966,11 +13966,11 @@ double initialValue(4847,6)
   6   257   # valLin.vol.prescribedHeatFlowRate
   0       1                       0                       0                
   6   257   # valLin.vol.simplify_mWat_flow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # valLin.vol.m_flow_nominal
   0       3                       0                       0                
   6   258   # valLin.vol.nPorts
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # valLin.vol.m_flow_small
   0       1                       0                       0                
   6   257   # valLin.vol.allowFlowReversal
@@ -14120,7 +14120,7 @@ double initialValue(4847,6)
   6   260   # Mix.port_3.p
  -1      10                       0                       0                
   1   280   # Mix.tau
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # Mix.mDyn_flow_nominal
   0       1                       0                       0                
   6   257   # Mix.from_dp
@@ -14132,15 +14132,15 @@ double initialValue(4847,6)
   6   258   # Mix.portFlowDirection_3
   0       0                       0                       0                
   6   257   # Mix.verifyFlowReversal
-  0  3.5000000000000001E-03       0                       0                
+  0  2.5000000000000001E-03       0                       0                
   6   256   # Mix.m_flow_small
   0       1                       0                       0                
   6   257   # Mix.res1.allowFlowReversal
   0       0                       0                  1.0000000000000000E+08
   6   260   # Mix.res1.port_b.p
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # Mix.res1.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # Mix.res1.m_flow_small
   0       0                       0                       0                
   6   769   # Mix.res1.show_T
@@ -14158,7 +14158,7 @@ double initialValue(4847,6)
   6   256   # Mix.res1.dp_nominal
   0       0                       0                       0                
   6   257   # Mix.res1.linearized
-  0  1.0500000000000000E+01       0                 1.7976931348623157E+308
+  0  7.5000000000000000E+00       0                 1.7976931348623157E+308
   6   256   # Mix.res1.m_flow_turbulent
  -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
   1  1304   # Mix.res1.sta_default.p
@@ -14166,13 +14166,13 @@ double initialValue(4847,6)
   1  1304   # Mix.res1.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # Mix.res1.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # Mix.res1.m_flow_nominal_pos
   0    6000                       0                       0                
   6  1280   # Mix.res1.dp_nominal_pos
   0  2.9999999999999999E-01  9.9999999999999995E-07 1.7976931348623157E+308
   6   256   # Mix.res1.deltaM
-  0  4.5184805705753195E-01       0                       0                
+  0  3.2274861218395140E-01       0                       0                
   6   256   # Mix.res1.k
   0       0                       0                       0                
   6  1281   # Mix.res1.disableComputeFlowResistance_internal
@@ -14182,9 +14182,9 @@ double initialValue(4847,6)
   6  1280   # Mix.res1.coeff
   0       1                       0                       0                
   6   257   # Mix.res2.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # Mix.res2.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # Mix.res2.m_flow_small
   0       0                       0                       0                
   6   769   # Mix.res2.show_T
@@ -14202,7 +14202,7 @@ double initialValue(4847,6)
   6   256   # Mix.res2.dp_nominal
   0       0                       0                       0                
   6   257   # Mix.res2.linearized
-  0  1.0500000000000000E+01       0                 1.7976931348623157E+308
+  0  7.5000000000000000E+00       0                 1.7976931348623157E+308
   6   256   # Mix.res2.m_flow_turbulent
  -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
   1  1304   # Mix.res2.sta_default.p
@@ -14210,13 +14210,13 @@ double initialValue(4847,6)
   1  1304   # Mix.res2.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # Mix.res2.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # Mix.res2.m_flow_nominal_pos
   0    6000                       0                       0                
   6  1280   # Mix.res2.dp_nominal_pos
   0  2.9999999999999999E-01  9.9999999999999995E-07 1.7976931348623157E+308
   6   256   # Mix.res2.deltaM
-  0  4.5184805705753195E-01       0                       0                
+  0  3.2274861218395140E-01       0                       0                
   6   256   # Mix.res2.k
   0       0                       0                       0                
   6  1281   # Mix.res2.disableComputeFlowResistance_internal
@@ -14226,9 +14226,9 @@ double initialValue(4847,6)
   6  1280   # Mix.res2.coeff
   0       1                       0                       0                
   6   257   # Mix.res3.allowFlowReversal
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # Mix.res3.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # Mix.res3.m_flow_small
   0       0                       0                       0                
   6   769   # Mix.res3.show_T
@@ -14246,7 +14246,7 @@ double initialValue(4847,6)
   6   256   # Mix.res3.dp_nominal
   0       0                       0                       0                
   6   257   # Mix.res3.linearized
-  0  1.0500000000000000E+01       0                 1.7976931348623157E+308
+  0  7.5000000000000000E+00       0                 1.7976931348623157E+308
   6   256   # Mix.res3.m_flow_turbulent
  -1  3.0000000000000000E+05       0                  1.0000000000000000E+08
   1  1304   # Mix.res3.sta_default.p
@@ -14254,13 +14254,13 @@ double initialValue(4847,6)
   1  1304   # Mix.res3.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # Mix.res3.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # Mix.res3.m_flow_nominal_pos
   0    6000                       0                       0                
   6  1280   # Mix.res3.dp_nominal_pos
   0  2.9999999999999999E-01  9.9999999999999995E-07 1.7976931348623157E+308
   6   256   # Mix.res3.deltaM
-  0  4.5184805705753195E-01       0                       0                
+  0  3.2274861218395140E-01       0                       0                
   6   256   # Mix.res3.k
   0       0                       0                       0                
   6  1281   # Mix.res3.disableComputeFlowResistance_internal
@@ -14272,11 +14272,11 @@ double initialValue(4847,6)
   6  1281   # Mix.have_controlVolume
   0       1                       0                       0                
   6   769   # Mix.homotopyInitialization
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # Mix.m_flow_nominal[1]
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # Mix.m_flow_nominal[2]
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # Mix.m_flow_nominal[3]
   0    6000                       0                       0                
   6   256   # Mix.dp_nominal[1]
@@ -14312,11 +14312,11 @@ double initialValue(4847,6)
   6   257   # Mix.vol.prescribedHeatFlowRate
   0       1                       0                       0                
   6   257   # Mix.vol.simplify_mWat_flow
-  0      35                       0                 1.7976931348623157E+308
+  0      25                       0                 1.7976931348623157E+308
   6   256   # Mix.vol.m_flow_nominal
   0       3                       0                       0                
   6   258   # Mix.vol.nPorts
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # Mix.vol.m_flow_small
   0       1                       0                       0                
   6   257   # Mix.vol.allowFlowReversal
@@ -14444,9 +14444,9 @@ double initialValue(4847,6)
   6   257   # MixingVal.allowFlowReversal
   0  7.4134451308075659E+04 -1.0000000000000000E+10  1.0000000000000000E+10
   6   260   # MixingVal.port_b.h_outflow
-  0      35                       0                       0                
+  0      25                       0                       0                
   6   256   # MixingVal.m_flow_nominal
-  0  3.5000000000000001E-03       0                 1.7976931348623157E+308
+  0  2.5000000000000001E-03       0                 1.7976931348623157E+308
   6   256   # MixingVal.m_flow_small
   0       0                       0                       0                
   6   769   # MixingVal.show_T
@@ -14472,7 +14472,7 @@ double initialValue(4847,6)
   1  1304   # MixingVal.sta_default.T
   0  4.3837802581567966E-03       0                 1.7976931348623157E+308
   6  1280   # MixingVal.eta_default
-  0      35                       0                       0                
+  0      25                       0                       0                
   6  1280   # MixingVal.m_flow_nominal_pos
   0       0                       0                       0                
   6  1280   # MixingVal.dp_nominal_pos

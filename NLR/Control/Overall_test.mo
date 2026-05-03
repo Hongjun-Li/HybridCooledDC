@@ -115,7 +115,7 @@ package Overall_test
     Modelica.Blocks.Sources.CombiTimeTable NLRdata(
       tableOnFile=true,
       tableName="tab1",
-      fileName="E:\\NLR_DC\\NLR\\Resources\\NLR_data\\NREL_HPCDC_modelica.txt",
+      fileName="C:\\NLR_DC\\NLR\\Resources\\NLR_data\\NREL_HPCDC_modelica.txt",
       columns={2,3,4,5,6,7},
       startTime=20995200,
       shiftTime=20995200)

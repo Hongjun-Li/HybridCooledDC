@@ -12,9 +12,9 @@ model Overall_test
   parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
     "Temperature difference condenser outlet-inlet";
   parameter Real COPc_nominal=8 "Chiller COP";
-  parameter Modelica.Units.SI.MassFlowRate mCHW_flow_nominal=35 "Nominal mass flow rate at chilled water";
+  parameter Modelica.Units.SI.MassFlowRate mCHW_flow_nominal=25 "Nominal mass flow rate at chilled water";
 
-  parameter Modelica.Units.SI.MassFlowRate mCW_flow_nominal=45 "Nominal mass flow rate at condenser water";
+  parameter Modelica.Units.SI.MassFlowRate mCW_flow_nominal=35 "Nominal mass flow rate at condenser water";
 
   parameter Modelica.Units.SI.PressureDifference dp_nominal=500
     "Nominal pressure difference";
@@ -510,7 +510,7 @@ equation
     experiment(
       StartTime=20995200,
       StopTime=52531200,
-      Interval=600,
+      Interval=599.999616,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file(ensureSimulated=true) =
         "Resources/scripts/System/Overall_test/Simulate and Plot.mos"
